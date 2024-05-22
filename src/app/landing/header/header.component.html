@@ -1,0 +1,19 @@
+<div class="navbar">
+    <div class="logo">
+        <img src="/assets/LogoLanding.png" alt="PUP Connect Logo" />
+    </div>
+    <div class="nav-links">
+        <a [ngClass]="{ 
+            'active-link': (activeLinkService.activeLink$ | async) === 'home'
+         }" 
+           (click)="setActiveLink('home')">Home</a>
+        <a [ngClass]="{ 
+            'active-link': (activeLinkService.activeLink$ | async) === 'contact'
+         }" 
+           (click)="setActiveLink('contact')">Contact Us</a>
+        <a [ngClass]="{
+            'active-link': (activeLinkService.activeLink$ | async) === 'about' 
+         }" 
+           (click)="setActiveLink('about')">About Us</a>
+      </div>
+</div>     
