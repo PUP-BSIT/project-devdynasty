@@ -6,3 +6,7 @@ html, body {
     font-family: 'Poppins';
     overflow: hidden;
 }
+
+.input-group input::placeholder {
+    font-family: 'Poppins';
+}

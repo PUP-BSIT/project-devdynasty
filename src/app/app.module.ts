@@ -7,13 +7,19 @@ import { LandingComponent } from './landing/landing.component';
 import { HeaderComponent } from './landing/header/header.component';
 import { BodyComponent } from './landing/body/body.component';
 import { ActiveLinkService } from '../service/active-link.service';
+import { LoginComponent } from './login/login.component';
+import { LoginFormComponent } from './login/login-form/login-form.component';
+import { SignupSectionComponent } from './login/signup-section/signup-section.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     HeaderComponent,
-    BodyComponent
+    BodyComponent,
+    LoginComponent,
+    LoginFormComponent,
+    SignupSectionComponent
   ],
   imports: [
     BrowserModule,

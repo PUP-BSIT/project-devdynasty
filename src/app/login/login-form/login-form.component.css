@@ -1,0 +1,72 @@
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-left: 200px;
+    margin-top: 70px;
+    border-radius: 15px;
+    padding: 40px 0;
+}
+
+.input-group {
+    margin-bottom: 5px;
+    position: relative;
+    min-width: 400px;
+    max-width: 400px;
+    padding: 30px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-left: -30px;
+    background-color: #eeeeee;
+}
+
+.input-group .password-toggle {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 25px; 
+    color: #666; 
+}
+
+.forgot-password {
+    display: block;
+    margin-bottom: 40px;
+    margin-top: -30px;
+    text-align: right;
+    color: #666;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    min-width: 300px;
+    max-width: 300px;
+    padding: 25px;
+    border: none;
+    border-radius: 20px;
+    margin-left:  70px;
+    margin-bottom: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+}
+
+.login-button {
+    background-color: #fbc02d;
+}
