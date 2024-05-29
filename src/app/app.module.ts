@@ -20,6 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { DescriptionComponent } from './profile/description/description.component';
 import { HeadProfileComponent } from './profile/head-profile/head-profile.component';
 import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignupformComponent } from './sign-up/signupform/signupform.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ProfileHeaderComponent } from './profile/profile-header/profile-header.
     ProfileComponent,
     DescriptionComponent,
     HeadProfileComponent,
-    ProfileHeaderComponent
+    ProfileHeaderComponent,
+    SignUpComponent,
+    SignupformComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,57 @@
+.parent-container {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    background: url('/assets/signup-bg.png') no-repeat center center / cover;
+}
+
+.first-col {
+    width: 51%;
+    height: 100vh;
+    padding: 30px 40px;
+}
+
+.logo img {
+    height: 70px;
+}
+
+.title {
+    margin-top: 50px;
+}
+
+.title p {
+    font-size: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.app-login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+ .login-link {
+    font-size: 16px;
+}
+  
+ .login-link span {
+    margin-right: 5px;
+}
+  
+.login-link a {
+    color: #b03a2e;
+    text-decoration: none;
+}
+  
+.login-link a:hover {
+    text-decoration: underline;
+}
