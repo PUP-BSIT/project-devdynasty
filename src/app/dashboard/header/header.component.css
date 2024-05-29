@@ -1,0 +1,52 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    width: calc(100% - 410px); /* Adjusted width to account for the sidebar */
+    margin-left: 130px; 
+    position: fixed;
+    top: 25px;
+    z-index: 1000;
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+}
+
+.title-and-filter {
+    display: flex;
+    align-items: center;
+}
+
+.title-and-filter img {
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    background-color: #ffc100;
+    padding: 10px;
+}
+
+.user-info span {
+    margin-left: 10px;
+    margin-right: 40px;
+    font-size: 25px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-info img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
