@@ -1,0 +1,27 @@
+.profile-page {
+  display: flex;
+  height: 100vh;
+  background: url('/assets/Job_Page/Background_JobPage.png') 
+  no-repeat center center / cover;
+}
+
+.sidebar-container {
+  width: 250px; 
+  position: fixed; 
+  height: 100%;
+  z-index: 1;
+}
+
+.profile-content {
+  margin-left: 5;
+  margin-top: 25px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+}
+
+.profile-main {
+  width: 100%;
+  padding: 20px;
+}
