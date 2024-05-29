@@ -1,5 +1,5 @@
 .search-container {
-  margin-top: 150px; /* Ensure margin-top to push it below the header */
+  margin-top: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,7 +9,7 @@
 .search-bar {
   display: flex;
   border-radius: 30px;
-  width: 85%; /* Adjust the width to fit in the layout */
+  width: 85%;
   margin-top: 80px;
   margin-left: 150px;
   margin-bottom: 50px;

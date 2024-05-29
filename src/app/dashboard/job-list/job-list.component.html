@@ -1,5 +1,6 @@
 <div class="job-list">
-    <div class="job-item" *ngFor="let job of jobs" [ngClass]="{'highlighted': job.highlighted}">
+    <div class="job-item" *ngFor="let job of jobs" 
+        [ngClass]="{'highlighted': job.highlighted}">
         <div class="job-info">
             <h2>{{ job.title }}</h2>
             <p>{{ job.company }}</p>
@@ -9,7 +10,8 @@
                 <span>{{ job.location }}</span>
             </div>
         <div class="job-action">
-            <img src="{{ job.salaryIcon }}" alt="Salary Icon" class="salary-icon">
+            <img src="{{ job.salaryIcon }}" alt="Salary Icon" 
+                class="salary-icon">
             <span>{{ job.salary }}</span>
             <button (click)="onApplyClick($event)">APPLY NOW!</button>
         </div>

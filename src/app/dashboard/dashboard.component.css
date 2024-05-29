@@ -9,7 +9,8 @@ body, html {
 .job-details-container {
     height: 100vh;
     width: 100%;
-    background: url('/assets/Job_Page/Background_JobPage.png') no-repeat center center / cover;
+    background: url('/assets/Job_Page/Background_JobPage.png')
+     no-repeat center center / cover;
     display: flex;
 }
 
@@ -20,6 +21,6 @@ body, html {
 
 .content {
     flex-grow: 1;
-    padding-top: 100px; /* Ensure content starts below the header */
+    padding-top: 100px;
     overflow-y: auto;
 }
