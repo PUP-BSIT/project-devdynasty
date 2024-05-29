@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeaderDashboardComponent } from './dashboard/header-dashboard/header-dashboard.component';
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { JobListComponent } from './dashboard/job-list/job-list.component';
+import { SearchContentComponent } from './dashboard/search-content/search-content.component';
 import { LandingComponent } from './landing/landing.component';
 import { HeaderComponent } from './landing/header/header.component';
 import { BodyComponent } from './landing/body/body.component';
@@ -14,6 +20,11 @@ import { SignupSectionComponent } from './login/signup-section/signup-section.co
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
+    HeaderDashboardComponent,
+    SidebarComponent,
+    JobListComponent,
+    SearchContentComponent,
     LandingComponent,
     HeaderComponent,
     BodyComponent,
@@ -23,7 +34,8 @@ import { SignupSectionComponent } from './login/signup-section/signup-section.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule
   ],
   providers: [ActiveLinkService],
   bootstrap: [AppComponent]
