@@ -1,0 +1,49 @@
+.profile-description {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-left: 500px;
+    width: 68%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+  
+.profile-description h2 {
+    font-size: 2.3rem;
+    margin-bottom: 10px;
+}
+  
+.profile-description p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+  
+.profile-description ul {
+    margin-left: 20px;
+    padding: 0;
+}
+  
+.profile-description ul li {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+  
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    padding: 0; 
+}
+  
+.skills li {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-radius: 20px; 
+    margin-right: 10px; 
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+  

@@ -16,6 +16,10 @@ import { ActiveLinkService } from '../service/active-link.service';
 import { LoginComponent } from './login/login.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { SignupSectionComponent } from './login/signup-section/signup-section.component';
+import { ProfileComponent } from './profile/profile.component';
+import { DescriptionComponent } from './profile/description/description.component';
+import { HeadProfileComponent } from './profile/head-profile/head-profile.component';
+import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { SignupSectionComponent } from './login/signup-section/signup-section.co
     BodyComponent,
     LoginComponent,
     LoginFormComponent,
-    SignupSectionComponent
+    SignupSectionComponent,
+    ProfileComponent,
+    DescriptionComponent,
+    HeadProfileComponent,
+    ProfileHeaderComponent
   ],
   imports: [
     BrowserModule,
