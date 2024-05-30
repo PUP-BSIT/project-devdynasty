@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,8 @@ import { ProfileHeaderComponent } from './profile/profile-header/profile-header.
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignupformComponent } from './sign-up/signupform/signupform.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../service/user.service';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -49,9 +52,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [ActiveLinkService],
+  providers: [ActiveLinkService, UserService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

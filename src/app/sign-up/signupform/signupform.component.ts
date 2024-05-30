@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../../service/user.service';
 
 @Component({
   selector: 'app-signupform',
@@ -9,7 +11,7 @@ import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, Valid
 export class SignupformComponent implements OnInit {
   signupForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -98,7 +100,13 @@ export class SignupformComponent implements OnInit {
 
   onSubmit(): void {
     if (this.signupForm.valid) {
-      console.log('Form Submitted', this.signupForm.value);
+      const user = this.signupForm.value;
+      this.userService.signUpUser(user).subscribe(response => {
+        this._snackBar.open(response.message, 'Close', {
+          duration: 5000,
+        });
+        this.signupForm.reset();
+      })
     }
   }
 }
