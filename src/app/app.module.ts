@@ -20,6 +20,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DescriptionComponent } from './profile/description/description.component';
 import { HeadProfileComponent } from './profile/head-profile/head-profile.component';
 import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ProfileHeaderComponent } from './profile/profile-header/profile-header.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [ActiveLinkService],
   bootstrap: [AppComponent]
