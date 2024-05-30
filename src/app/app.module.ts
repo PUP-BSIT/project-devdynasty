@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { DescriptionComponent } from './profile/description/description.component';
 import { HeadProfileComponent } from './profile/head-profile/head-profile.component';
 import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignupformComponent } from './sign-up/signupform/signupform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -39,7 +42,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProfileComponent,
     DescriptionComponent,
     HeadProfileComponent,
-    ProfileHeaderComponent
+    ProfileHeaderComponent,
+    SignUpComponent,
+    SignupformComponent
   ],
   imports: [
     BrowserModule,
