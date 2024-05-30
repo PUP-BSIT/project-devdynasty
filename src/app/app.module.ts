@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,7 +48,8 @@ import { SignupformComponent } from './sign-up/signupform/signupform.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [ActiveLinkService],
   bootstrap: [AppComponent]

@@ -5,40 +5,39 @@
     margin-top: 150px;
     margin-left: 200px;
     padding: 30px 40px;
-    width: 500px;  
-  
+    width: 500px;
 }
-
+  
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
-
+  
 .login-link {
     font-size: 16px;
 }
-
+  
 .login-link span {
     margin-right: 5px;
 }
-
+  
 .login-link a {
     color: #b03a2e;
     text-decoration: none;
 }
-
+  
 .login-link a:hover {
     text-decoration: underline;
 }
-
+  
 .input-group {
     margin-bottom: 20px;
     position: relative;
     width: 100%;
 }
-
+  
 .input-group input {
     width: 100%;
     padding: 15px;
@@ -49,7 +48,7 @@
     outline: none;
     box-sizing: border-box;
 }
-
+  
 .input-group .password-toggle {
     position: absolute;
     right: 20px;
@@ -59,7 +58,7 @@
     font-size: 20px; 
     color: #666; 
 }
-
+  
 .signup-button {
     width: 40%;
     margin-top: 40px;
@@ -75,24 +74,36 @@
     transition: background-color 0.3s;
     text-align: center;
 }
-
+  
 .signup-button:hover {
     background-color: #f9a825;
 }
-
+  
+.signup-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+  
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+  
 .title {
     margin-top: 50px;
 }
-
+  
 .title p {
     font-size: 50px;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
 }
-
+  
 .app-login-form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+  

@@ -1,19 +1,90 @@
 <div class="login-form">
-    <form action="#">
-        <div class="input-group">
-            <input type="text" id="name" name="name" placeholder="Name" required>
-        </div>
-        <div class="input-group">
-            <input type="email" id="email" name="email" placeholder="Email" required>
-        </div>
-        <div class="input-group">
-            <input type="password" id="password" name="password" placeholder="Password" required>
-            <span class="password-toggle"><i class='bx bx-show'></i></span>
-        </div>
-        <div class="input-group">
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-            <span class="password-toggle"><i class='bx bx-show'></i></span>
-        </div>
-        <button type="submit" class="signup-button">SIGN UP</button>
-    </form>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <input type="text" id="name" formControlName="name" placeholder="Name" required>
+        @if(nameControl.invalid && nameControl.touched) {
+          @if(nameControl.errors?.['required']) {
+            <div class="error-message">Name is required</div>
+          }
+          @if(nameControl.errors?.['noNumbers']) {
+            <div class="error-message">Numbers are not allowed in the name</div>
+          }
+        }
+      </div>
+      <div class="input-group">
+        <input type="email" id="email" formControlName="email" placeholder="Email" required>
+        @if(emailControl.invalid && emailControl.touched) {
+          @if(emailControl.errors?.['required']) {
+            <div class="error-message">Email is required</div>
+          }
+          @if(emailControl.errors?.['email']) {
+            <div class="error-message">Invalid email address</div>
+          }
+          @if(emailControl.errors?.['emailDomain']) {
+            <div class="error-message">Email must end with &#64;iskolarngbayan.pup.edu.ph</div>
+          }
+        }
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" formControlName="password" placeholder="Password" required>
+        <span class="password-toggle"><i class='bx bx-show'></i></span>
+        @if(passwordControl.invalid && passwordControl.touched) {
+          @if(passwordControl.errors?.['required']) {
+            <div class="error-message">Password is required</div>
+          }
+          @if(passwordControl.errors?.['minlength']) {
+            <div class="error-message">
+                Password must be at least 8 characters long
+            </div>
+          }
+          @if(passwordControl.errors?.['passwordStrength']) {
+            <div class="error-message">Password must have:</div>
+            <ul class="error-message">
+              @if(!passwordControl.errors?.['passwordStrength'].hasLowerCase) {
+                <li>At least one lowercase letter</li>
+              }
+              @if(!passwordControl.errors?.['passwordStrength'].hasUpperCase) {
+                <li>At least one uppercase letter</li>
+              }
+              @if(!passwordControl.errors?.['passwordStrength'].hasNumber) {
+                <li>At least one number</li>
+              }
+              @if(!passwordControl.errors?.['passwordStrength']
+                    .hasSpecialCharacter) {
+                <li>
+                    At least one special character 
+                    (&#33;&#64;&#35;&#36;&#37;&#94;&amp;&#42;)
+                </li>
+              }
+            </ul>
+          }
+        }
+      </div>
+      <div class="input-group">
+        <input 
+            type="password" 
+            id="confirmPassword" 
+            formControlName="confirmPassword" 
+            placeholder="Confirm Password" 
+            required>
+        <span class="password-toggle"><i class='bx bx-show'></i></span>
+        @if(confirmPasswordControl.invalid && confirmPasswordControl.touched) {
+          @if(confirmPasswordControl.errors?.['required']) {
+            <div class="error-message">Confirm Password is required</div>
+          }
+        }
+        @if(confirmPasswordControl.dirty && !confirmPasswordControl.errors) {
+          @if(signupForm.hasError('mismatch')) {
+            <div class="error-message">Passwords do not match</div>
+          }
+        }
+      </div>
+      <button 
+        type="submit" 
+        class="signup-button" 
+        [disabled]="signupForm.invalid">
+        SIGN UP
+    </button>
+    </form>  
 </div>
+  
