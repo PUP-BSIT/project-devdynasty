@@ -1,4 +1,4 @@
-.login-form {
+form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,9 +7,9 @@
     background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin-left: 200px;
-    margin-top: 70px;
+    margin-top: 110px;
     border-radius: 15px;
-    padding: 40px 0;
+    padding: 20px 0;
 }
 
 .input-group {
@@ -24,10 +24,11 @@
     width: 100%;
     padding: 25px;
     border: 1px solid #ccc;
-    border-radius: 20px;
+    border-radius: 30px;
     font-size: 16px;
     margin-left: -30px;
     background-color: #eeeeee;
+    border: none;
 }
 
 .input-group .password-toggle {
@@ -58,7 +59,7 @@
     max-width: 300px;
     padding: 25px;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     margin-left:  70px;
     margin-bottom: 25px;
     font-size: 16px;
@@ -66,4 +67,9 @@
     color: white;
     font-weight: bold;
     background-color: #fbc02d;
+}
+
+.errMsg {
+    color:red;
+    font-size: 18px;
 }

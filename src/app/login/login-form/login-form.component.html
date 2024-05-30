@@ -1,23 +1,44 @@
-<div class="login-form">
-    <form action="#">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit">
+    <div class="login-form">
         <div class="input-group">
-            <input type="text" 
-            id="username" 
-            name="username" 
-            placeholder="Username" 
+            <input type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="Email" 
             required>
-        </div>
+            @if(emailControl.invalid && emailControl.touched) {
+              @if(emailControl.errors?.['required']) {
+                <div class="errMsg">Email is required</div>
+              }
+              @if(emailControl.errors?.['email']) {
+                <div class="errMsg">Invalid email address</div>
+              }
+              @if(emailControl.errors?.['emailDomain']) {
+                <div class="errMsg">
+                    Email must end with &#64;iskolarngbayan.pup.edu.ph
+                </div>
+              }
+            }
+          </div>
         <div class="input-group">
-            <input type="password" 
+            <input type="password"
+            formControlName="password" 
             id="password" 
             name="password" 
             placeholder="Password" 
             required>
+            @if (passwordControl.touched) {
+                @if (passwordControl.errors?.['required']) {
+                    <div class="errMsg">Password is required</div>
+                }
+            }
             <span class="password-toggle"><i class='bx bx-show'></i></span>
         </div>
         <div>
             <a href="#" class="forgot-password">Forgot your password?</a>
         </div>
-        <button type="submit" class="login-button">LOG IN</button>
-    </form>
-</div>
+        <button type="submit" class="login-button" (click)="onSubmit()">
+            LOG IN
+        </button>
+    </div>
+</form>
