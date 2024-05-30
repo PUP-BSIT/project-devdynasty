@@ -7,7 +7,7 @@ import { ActiveLinkService } from '../../../service/active-link.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  constructor(public activeLinkService: ActiveLinkService) {}
+  constructor(protected activeLinkService: ActiveLinkService) {}
 
   setActiveLink(link: string) {
     this.activeLinkService.setActiveLink(link);
