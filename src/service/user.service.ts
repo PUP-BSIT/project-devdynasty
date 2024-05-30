@@ -13,4 +13,8 @@ export class UserService {
   signUpUser(user: any): Observable<SignUpApiResponse> {
     return this.http.post<SignUpApiResponse>(this.apiUrl + 'signup.php', user);
   }
+
+  loginUser(user: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl + 'login.php', user);
+  }
 }
