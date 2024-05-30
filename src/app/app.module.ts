@@ -23,6 +23,7 @@ import { HeadProfileComponent } from './profile/head-profile/head-profile.compon
 import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignupformComponent } from './sign-up/signupform/signupform.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
