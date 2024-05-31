@@ -12,7 +12,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginFormComponent implements OnInit{
   loginForm!: FormGroup;
-  isLogin = false;
 
   constructor (private fb: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar, private router: Router) {}
 
@@ -65,7 +64,7 @@ export class LoginFormComponent implements OnInit{
         console.log(response);
         this.loginForm.reset();
         if (response.status === 'success') {
-          this.isLogin = true;
+          this.userService.setLoginStatus(true);
           this._snackBar.open(response.message, 'Close', {
             duration: 5000,
           });

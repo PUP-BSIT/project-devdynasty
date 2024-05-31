@@ -6,17 +6,28 @@
         <ul>
             <li class="profile">
                 <img src="assets/Job_Page/Profile_IO.png" alt="Profile Icon">
-                <span>PROFILE</span>
+                <a routerLink="/profile"><span>PROFILE</span></a>
             </li>
-            <li class="jobs-active">
+            <li>
                 <img src="assets/Job_Page/Jobs_IO.png" alt="Jobs Icon">
-                <span>JOBS</span>
-                <img src="assets/Job_Page/dropdown_icon.png"
-                    class="dropdown-icon" alt="Dropdown Icon">
+                <span>FIND JOB</span>
+                <img 
+                    src="assets/Job_Page/dropdown_icon.png"
+                    class="dropdown-icon"
+                    alt="Dropdown Icon"
+                    (click)="toggleDropdown();">
             </li>
+            @if (isToggle) {
+            <li>
+                <a routerLink="/dashboard"><span>JOB FEED</span></a>
+            </li>
+            <li>
+                <a routerLink="/applied"><span>APPLIED</span></a>
+            </li>
+            }
             <li class="client">
                 <img src="assets/Job_Page/Client_IO.png" alt="Client Icon">
-                <span>CLIENT</span>
+                <span>POST JOB</span>
             </li>
         </ul>
     </nav>
