@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  selector: 'app-applied-page',
+  templateUrl: './applied-page.component.html',
+  styleUrl: './applied-page.component.css'
 })
-export class ProfileComponent implements OnInit {
+export class AppliedPageComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {

@@ -9,6 +9,8 @@
     top: 25px;
     z-index: 1000;
     box-sizing: border-box;
+    background-color: #F3F3F3;
+    backdrop-filter: blur(10px);
 }
 
 .title-and-filter {

@@ -5,9 +5,11 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AppliedPageComponent } from './applied-page/applied-page.component';
 
 
 const routes: Routes = [
+  { path: 'applied', component: AppliedPageComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'signup', component: SignUpComponent },

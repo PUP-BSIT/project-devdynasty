@@ -5,6 +5,7 @@ import { SignUpApiResponse } from '../model/signup_api_response';
 
 @Injectable()
 export class UserService {
+  private isLogin: boolean = false;
 
   private apiUrl = 'http://localhost/pup_connect_backend/';
 
@@ -16,5 +17,13 @@ export class UserService {
 
   loginUser(user: any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'login.php', user);
+  }
+
+  setLoginStatus(status: boolean): void {
+    this.isLogin = status;
+  }
+
+  isLoggedIn(): boolean {
+    return this.isLogin;
   }
 }

@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import { 
+  Router, 
+  NavigationStart, 
+  NavigationEnd, 
+  NavigationCancel, 
+  NavigationError } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +12,19 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'pup-connect';
+  isLoading: boolean = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.isLoading = true;
+      } else if (event instanceof NavigationEnd ||
+                 event instanceof NavigationCancel || 
+                 event instanceof NavigationError) {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
+      }
+    });
+  }
 }

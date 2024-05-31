@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { SignupformComponent } from './sign-up/signupform/signupform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppliedPageComponent } from './applied-page/applied-page.component';
+import { AppliedJobListComponent } from './applied-page/applied-job-list/applied-job-list.component';
 
 @NgModule({
   declarations: [
@@ -46,14 +49,17 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     HeadProfileComponent,
     ProfileHeaderComponent,
     SignUpComponent,
-    SignupformComponent
+    SignupformComponent,
+    AppliedPageComponent,
+    AppliedJobListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers: [ActiveLinkService, UserService, provideAnimationsAsync()],
   bootstrap: [AppComponent]
