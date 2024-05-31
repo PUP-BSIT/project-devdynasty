@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, ValidatorFn } from '@angular/forms';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { UserService } from '../../../service/user.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-form',
@@ -9,8 +12,9 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 })
 export class LoginFormComponent implements OnInit{
   loginForm!: FormGroup;
+  isLogin = false;
 
-  constructor (private fb: FormBuilder) {}
+  constructor (private fb: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -56,6 +60,24 @@ export class LoginFormComponent implements OnInit{
   onSubmit(): void {
     if (this.loginForm.valid) {
       console.log('Form Submitted', this.loginForm.value);
+      const user = this.loginForm.value;
+      this.userService.loginUser(user).subscribe(response => {
+        console.log(response);
+        this.loginForm.reset();
+        if (response.status === 'success') {
+          this.isLogin = true;
+          this._snackBar.open(response.message, 'Close', {
+            duration: 5000,
+          });
+          this.router.navigate(['/profile']);
+        }
+        else {
+          this._snackBar.open(response.message, 'Close', {
+            duration: 5000,
+          });
+          this.router.navigate(['/login']);
+        }
+      })
     }
   }
 }
