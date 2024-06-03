@@ -68,7 +68,7 @@ export class LoginFormComponent implements OnInit{
           this._snackBar.open(response.message, 'Close', {
             duration: 5000,
           });
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/profile-setup']);
         }
         else {
           this._snackBar.open(response.message, 'Close', {

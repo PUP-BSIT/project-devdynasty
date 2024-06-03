@@ -6,9 +6,11 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AppliedPageComponent } from './applied-page/applied-page.component';
+import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 
 
 const routes: Routes = [
+  { path: 'profile-setup/:token', component: ProfileSetupPageComponent },
   { path: 'applied', component: AppliedPageComponent },
   { path: 'landing', component: LandingComponent },
   { path: 'dashboard', component: DashboardComponent },

@@ -1,9 +1,9 @@
 <?php
-session_start(); // Start session
+session_start();
 
 require_once 'config.php';
 
-header("Access-Control-Allow-Origin: *"); // Allow requests from any origin
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
@@ -25,10 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_num_rows($result) == 1) {
                 $row = mysqli_fetch_assoc($result);
                 if ($password == $row['password']) {
-                    // Set session variables
-                    $_SESSION['user_id'] = $row['userID'];
-                    $_SESSION['username'] = $row['name'];
-                    echo json_encode(["status" => "success", "message" => "Login successful."]);
+                    if ($row['verified']) {
+                        $_SESSION['user_id'] = $row['userID'];
+                        $_SESSION['username'] = $row['name'];
+                        echo json_encode(["status" => "success", "message" => "Login successful."]);
+                    } else {
+                        echo json_encode(["status" => "error", "message" => "Your email address has not been verified. Please check your email for the verification link.."]);
+                    }
                 } else {
                     echo json_encode(["status" => "error", "message" => "Incorrect password."]);
                 }

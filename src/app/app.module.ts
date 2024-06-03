@@ -29,6 +29,7 @@ import { UserService } from '../service/user.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppliedPageComponent } from './applied-page/applied-page.component';
 import { AppliedJobListComponent } from './applied-page/applied-job-list/applied-job-list.component';
+import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AppliedJobListComponent } from './applied-page/applied-job-list/applied
     SignUpComponent,
     SignupformComponent,
     AppliedPageComponent,
-    AppliedJobListComponent
+    AppliedJobListComponent,
+    ProfileSetupPageComponent
   ],
   imports: [
     BrowserModule,
