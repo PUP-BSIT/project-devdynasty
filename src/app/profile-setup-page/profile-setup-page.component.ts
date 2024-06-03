@@ -20,9 +20,10 @@ export class ProfileSetupPageComponent implements OnInit {
   }
 
   verifyToken(token: string): void {
-    this.http.get(`http://localhost/pup_connect_backend/verify_user.php?token=${token}`).subscribe(response => {
-      console.log(response);
-      
+    this.http
+      .get(`http://localhost/pup_connect_backend/verify_user.php?token=${token}`)
+      .subscribe(response => {
+        console.log(response);
     });
   }
 }
