@@ -1,7 +1,14 @@
 <?php
 require_once 'config.php';
 
-header("Access-Control-Allow-Origin: *"); 
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
@@ -9,10 +16,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 function validate_input($data)
 {
-    $data = trim($data);             
-    $data = stripslashes($data);     
-    $data = htmlspecialchars($data); 
-    return $data;                    
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
 function is_email_registered($email)
@@ -28,9 +35,9 @@ function is_email_registered($email)
             mysqli_stmt_store_result($stmt);
 
             if (mysqli_stmt_num_rows($stmt) > 0) {
-                return true; 
+                return true;
             } else {
-                return false; 
+                return false;
             }
         }
 
@@ -41,25 +48,53 @@ function is_email_registered($email)
     return false;
 }
 
-function register_user($name, $email, $password)
+function register_user($name, $email, $password, $token)
 {
     $conn = db_connect();
 
-    $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO users (name, email, password, token, verified) VALUES (?, ?, ?, ?, 0)";
 
     if ($stmt = mysqli_prepare($conn, $sql)) {
-        mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_email, $param_password);
+        mysqli_stmt_bind_param($stmt, "ssss", $param_name, $param_email, $param_password, $param_token);
 
         $param_name = $name;
         $param_email = $email;
-        $param_password = $password; 
+        $param_password = $password;
+        $param_token = $token;
 
-        if (mysqli_stmt_execute($stmt)) {
-            echo json_encode(["status" => "success", "message" => "Registration successful."]);
-        } else {
-            echo json_encode(["status" => "error", "message" => "Something went wrong. Please try again later."]);
+        $mail = new PHPMailer(true);
+        try {
+
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'devdynasty5@gmail.com';
+            $mail->Password   = 'futstycgkntxuldm';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port       = 587;
+
+
+            $mail->setFrom('devdynasty5@gmail.com');
+            $mail->addAddress($param_email);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Email Verification';
+            $mail->Body    = "Please click the link below to verify your email address:<br>";
+            $mail->Body   .= "<a href='http://localhost:4200/profile-setup/$token'>Set up your profile</a>";
+
+            if ($mail->send()) {
+                if (mysqli_stmt_execute($stmt)) {
+                    echo json_encode(["status" => "success", "message" => "We've sent a verification to your email"]);
+                } else {
+                    echo json_encode(["status" => "error", "message" => "Something went wrong. Please try again later."]);
+                }
+            } else {
+                echo json_encode(["status" => "error", "message" => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
+            }
+        } catch (Exception $e) {
+            echo json_encode(["status" => "error", "message" => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
         }
-
         mysqli_stmt_close($stmt);
     } else {
         echo json_encode(["status" => "error", "message" => "Could not prepare statement."]);
@@ -70,6 +105,8 @@ function register_user($name, $email, $password)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input = json_decode(file_get_contents("php://input"), true);
+
+    $token = bin2hex(random_bytes(16));
 
     if (isset($input['name']) && isset($input['email']) && isset($input['password']) && isset($input['confirmPassword'])) {
         $name = validate_input($input['name']);
@@ -87,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
-        register_user($name, $email, $password);
+        register_user($name, $email, $password, $token);
     } else {
         echo json_encode(["status" => "error", "message" => "Invalid input."]);
     }
