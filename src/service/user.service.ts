@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SignUpApiResponse } from '../model/signup_api_response';
+import { LogInApiResponse } from '../model/login_api_response';
+import { SetUpProfileApiResponse} from '../model/setup_profile_api_response';
+import { UserDetailsResponse } from '../model/user_details_api_response';
 
 @Injectable()
 export class UserService {
@@ -15,8 +18,13 @@ export class UserService {
     return this.http.post<SignUpApiResponse>(this.apiUrl + 'signup.php', user);
   }
 
-  loginUser(user: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl + 'login.php', user);
+  setupProfile(formData: FormData): Observable<SetUpProfileApiResponse> {
+    return this.http.post<SetUpProfileApiResponse>(this.apiUrl 
+                                    + 'setup_profile.php', formData);
+  }
+
+  loginUser(user: any): Observable<LogInApiResponse> {
+    return this.http.post<LogInApiResponse>(this.apiUrl + 'login.php', user);
   }
 
   setLoginStatus(status: boolean): void {
@@ -25,5 +33,9 @@ export class UserService {
 
   isLoggedIn(): boolean {
     return this.isLogin;
+  }
+
+  getUserDetails(): Observable<UserDetailsResponse> {
+    return this.http.get<UserDetailsResponse>(this.apiUrl + 'user_details.php');
   }
 }

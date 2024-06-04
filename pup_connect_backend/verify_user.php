@@ -8,7 +8,6 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-
 if (isset($_GET['token'])) {
     $token = $_GET['token'];
 
@@ -26,6 +25,7 @@ if (isset($_GET['token'])) {
             if ($stmt = mysqli_prepare($conn, $sql)) {
                 mysqli_stmt_bind_param($stmt, "s", $token);
                 mysqli_stmt_execute($stmt);
+
                 echo json_encode(["status" => "success", "message" => "Email verified successfully."]);
                 exit();
             }

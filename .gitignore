@@ -42,3 +42,4 @@ testem.log
 Thumbs.db
 
 /pup_connect_backend/phpmailer
+/pup_connect_backend/profile_img_uploads
