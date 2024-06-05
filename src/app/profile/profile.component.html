@@ -5,8 +5,14 @@
     <div class="profile-content">
         <app-profile-header></app-profile-header>
         <div class="profile-main">
-          <app-head-profile></app-head-profile>
-          <app-description></app-description>
+          @if (userDetails) {
+            <app-head-profile [dataFromParent]="userDetails">
+            </app-head-profile>
+          }
+          @if (userDetails) {
+            <app-description [dataFromParent]="userDetails">
+            </app-description>
+          }
         </div>
     </div>
 </div>

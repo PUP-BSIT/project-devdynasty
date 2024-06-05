@@ -9,7 +9,7 @@ import { UserDetailsResponse } from '../../model/user_details_api_response';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  userDetails!: UserDetailsResponse;
+  userDetails?: UserDetailsResponse;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -17,18 +17,12 @@ export class ProfileComponent implements OnInit {
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
     } else {
-      // Call the service to fetch user details
-      this.userService.getUserDetails().subscribe(
-        (response: UserDetailsResponse) => {
-          // Handle the response
-          this.userDetails = response;
-          console.log('User details:', this.userDetails);
-        },
-        error => {
-          // Handle errors
-          console.error('Error fetching user details:', error);
-        }
-      );
+      const userid = this.userService.userID;
+      this.userService.getUserDetails(userid).subscribe((response) => {
+        this.userDetails = response;
+        console.log(this.userDetails);
+        
+      });
     }
   }
 }

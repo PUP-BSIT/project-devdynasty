@@ -9,6 +9,7 @@ import { UserDetailsResponse } from '../model/user_details_api_response';
 @Injectable()
 export class UserService {
   private isLogin: boolean = false;
+  userID!: number;
 
   private apiUrl = 'http://localhost/pup_connect_backend/';
 
@@ -35,7 +36,8 @@ export class UserService {
     return this.isLogin;
   }
 
-  getUserDetails(): Observable<UserDetailsResponse> {
-    return this.http.get<UserDetailsResponse>(this.apiUrl + 'user_details.php');
+  getUserDetails(userid: number): Observable<UserDetailsResponse> {
+    return this.http.post<UserDetailsResponse>
+      (this.apiUrl + 'user_details.php', { user_id: userid });
   }
 }

@@ -1,19 +1,14 @@
 <div class="profile-description">
     <h2>DESCRIPTION</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
-      tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>{{ dataFromParent.data?.description }}</p>
     <h2>SKILLS</h2>
     <ul class="skills">
-      <li>JavaScript</li>
-      <li>Angular</li>
-      <li>HTML & CSS</li>
-      <li>TypeScript</li>
-      <li>Web Development</li>
+      @for (skill of skills; track skill) {
+        <li>{{ skill }}</li>
+      }
     </ul>
     <h2>CONTACT</h2>
-    <p>Email: <a href="mailto:jonneltocmo@gmail.com">jonneltocmo</a></p>
-    <p>Mobile: 09999999999</p>
-    <h2>LOCATION</h2>
-    <p>Pasay City</p>
+    <p>Email: <a href="{{ dataFromParent.data?.email }}">jonneltocmo</a></p>
+    <p>Mobile: {{ dataFromParent.data?.phone_number }}</p>
 </div>
   
