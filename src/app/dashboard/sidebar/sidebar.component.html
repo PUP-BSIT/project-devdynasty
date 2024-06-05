@@ -8,14 +8,13 @@
                 <img src="assets/Job_Page/Profile_IO.png" alt="Profile Icon">
                 <a routerLink="/profile"><span>PROFILE</span></a>
             </li>
-            <li>
+            <li (click)="toggleDropdown();">
                 <img src="assets/Job_Page/Jobs_IO.png" alt="Jobs Icon">
                 <span>FIND JOB</span>
                 <img 
                     src="assets/Job_Page/dropdown_icon.png"
                     class="dropdown-icon"
-                    alt="Dropdown Icon"
-                    (click)="toggleDropdown();">
+                    alt="Dropdown Icon">
             </li>
             @if (isToggle) {
             <li>

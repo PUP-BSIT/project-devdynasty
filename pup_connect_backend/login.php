@@ -3,11 +3,12 @@ session_start();
 
 require_once 'config.php';
 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Credentials: true");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input = json_decode(file_get_contents("php://input"), true);
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if ($row['verified']) {
                         $_SESSION['user_id'] = $row['userID'];
                         $_SESSION['username'] = $row['name'];
-                        echo json_encode(["status" => "success", "message" => "Login successful."]);
+                        echo json_encode(["status" => "success", "message" => "Login successful.", "id" =>  $_SESSION['user_id']]);
                     } else {
                         echo json_encode(["status" => "error", "message" => "Your email address has not been verified. Please check your email for the verification link.."]);
                     }
@@ -49,3 +50,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
 }
+
+session_destroy();
