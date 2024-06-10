@@ -1,0 +1,104 @@
+<div class="job-post-form">
+  <h2>ADD JOB POST FORM</h2>
+  <form [formGroup]="jobPostForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="clientName">Client Name:</label>
+        <input type="text" id="clientName" formControlName="clientName">
+        @if (clientName!.invalid && (clientName!.dirty 
+          || clientName!.touched)) {
+          @if (clientName!.errors?.['required']) {
+            <small>Client name is required.</small>
+          }
+          @if (clientName!.errors?.['maxlength']) {}
+          <small>Client name cannot exceed 50 characters.</small>
+        }
+      </div>
+      <div class="form-group">
+        <label for="jobType">Job Type:</label>
+        <select id="jobType" formControlName="jobType">
+          <option value="" disabled selected>Select Job Type</option>
+          <option value="tutor">Tutor</option>
+          <option value="videography">Videography</option>
+          <option value="editing">Editing</option>
+          <option value="programming">Programming</option>
+          <option value="writing">Writing</option>
+          <option value="accounting">Accounting</option>
+          <option value="engineering">Engineering</option>
+          <option value="others">Others</option>
+        </select>
+        @if (jobType!.invalid && (jobType!.dirty || jobType!.touched)) {
+          @if (jobType!.errors?.['required']) {
+            <small>Job type is required.</small>
+          }
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="jobTitle">Job Title:</label>
+        <input type="text" id="jobTitle" formControlName="jobTitle">
+        @if (jobTitle!.invalid && (jobTitle!.dirty || jobTitle!.touched)) {
+          @if (jobTitle!.errors?.['required']) {
+            <small>Job title is required.</small>
+          }
+          @if (jobTitle!.errors?.['maxlength']) {
+            <small>Job title cannot exceed 100 characters.</small>
+          }
+        }
+      </div>
+      <div class="form-group">
+        <label for="rate">Rate:</label>
+        <input type="text" id="rate" formControlName="rate">
+        @if (rate!.invalid && (rate!.dirty || rate!.touched)) {
+          @if (rate!.errors?.['required']) {
+            <small>Rate is required.</small>
+          }
+          @if (rate!.errors?.['pattern']) {
+            <small @if="">Rate must be a number.</small>
+          }
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="jobDescription">Job Description:</label>
+        <textarea id="jobDescription" formControlName="jobDescription" rows="4"></textarea>
+        @if (jobDescription!.invalid && (jobDescription!.dirty || jobDescription!.touched)) {
+          @if (jobDescription!.errors?.['required']) {
+            <small>Job description is required.</small>
+          }
+          @if (jobDescription!.errors?.['maxlength']) {
+            <small>Job description cannot exceed 500 characters.</small>
+          }
+        }
+      </div>
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" id="date" formControlName="date">
+        @if (date!.invalid && (date!.dirty || date!.touched)) {
+          @if (date!.errors?.['required']) {
+            <small>Date is required.</small>
+          }
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" formControlName="location">
+        @if (location!.invalid && (location!.dirty || location!.touched)) {
+          @if (location!.errors?.['required']) {
+            <small>Location is required.</small>
+          }
+          @if (location!.errors?.['maxlength']) {
+            <small>Location cannot exceed 100 characters.</small>
+          }
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <button type="submit" class="post-btn">POST NOW</button>
+    </div>
+  </form>
+</div>
