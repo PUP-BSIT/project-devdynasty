@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,12 +29,13 @@ import { HeadProfileComponent } from './profile/head-profile/head-profile.compon
 import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignupformComponent } from './sign-up/signupform/signupform.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../service/user.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppliedPageComponent } from './applied-page/applied-page.component';
 import { AppliedJobListComponent } from './applied-page/applied-job-list/applied-job-list.component';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
+import { ClientPageComponent } from './client-page/client-page.component';
+import { JobPostFormComponent } from './client-page/job-post-form/job-post-form.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-pa
     SignupformComponent,
     AppliedPageComponent,
     AppliedJobListComponent,
-    ProfileSetupPageComponent
+    ProfileSetupPageComponent,
+    ClientPageComponent,
+    JobPostFormComponent
   ],
   imports: [
     BrowserModule,
