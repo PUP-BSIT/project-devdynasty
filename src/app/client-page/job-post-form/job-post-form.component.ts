@@ -1,59 +1,67 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { JobApiResponse } from '../../../model/job_form_api_response';
+import { UserService } from '../../../service/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-job-post-form',
   templateUrl: './job-post-form.component.html',
   styleUrl: './job-post-form.component.css'
 })
-export class JobPostFormComponent {
+export class JobPostFormComponent{
   jobPostForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private userService: UserService, 
+      private _snackBar: MatSnackBar) {
     this.jobPostForm = this.fb.group({
-      clientName: ['', [Validators.required, Validators.maxLength(50)]],
-      jobType: ['', Validators.required],
-      jobTitle: ['', [Validators.required, Validators.maxLength(100)]],
-      rate: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      jobDescription: ['', [Validators.required, Validators.maxLength(500)]],
-      date: ['', Validators.required],
-      location: ['', [Validators.required, Validators.maxLength(100)]]
+      JobType: ['', Validators.required],
+      Title: ['', [Validators.required, Validators.maxLength(100)]],
+      Rate: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      Description: ['', [Validators.required, Validators.maxLength(500)]],
+      Date: ['', Validators.required],
+      Location: ['', [Validators.required, Validators.maxLength(100)]]
     });
   }
 
-  get clientName() {
-    return this.jobPostForm.get('clientName');
-  }
-
   get jobType() {
-    return this.jobPostForm.get('jobType');
+    return this.jobPostForm.get('JobType');
   }
 
   get jobTitle() {
-    return this.jobPostForm.get('jobTitle');
+    return this.jobPostForm.get('Title');
   }
 
   get rate() {
-    return this.jobPostForm.get('rate');
+    return this.jobPostForm.get('Rate');
   }
 
   get jobDescription() {
-    return this.jobPostForm.get('jobDescription');
+    return this.jobPostForm.get('Description');
   }
 
   get date() {
-    return this.jobPostForm.get('date');
+    return this.jobPostForm.get('Date');
   }
 
   get location() {
-    return this.jobPostForm.get('location');
+    return this.jobPostForm.get('Location');
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.jobPostForm.valid) {
-      console.log(this.jobPostForm.value);
-    } else {
-      this.jobPostForm.markAllAsTouched();
+      const UserID = this.userService.userID;
+
+      const newJob: JobApiResponse = {
+        ...this.jobPostForm.value,
+        UserID
+      };
+      console.log(newJob);
+      this.userService.addJob(newJob).subscribe(response => {
+        this._snackBar.open(response.message, 'Close', {
+          duration: 5000,
+        });
+      })
     }
   }
 }

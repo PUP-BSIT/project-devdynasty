@@ -5,6 +5,7 @@ import { SignUpApiResponse } from '../model/signup_api_response';
 import { LogInApiResponse } from '../model/login_api_response';
 import { SetUpProfileApiResponse} from '../model/setup_profile_api_response';
 import { UserDetailsResponse } from '../model/user_details_api_response';
+import { JobApiResponse } from '../model/job_form_api_response';
 
 @Injectable()
 export class UserService {
@@ -39,5 +40,13 @@ export class UserService {
   getUserDetails(userid: number): Observable<UserDetailsResponse> {
     return this.http.post<UserDetailsResponse>
       (this.apiUrl + 'user_details.php', { user_id: userid });
+  }
+
+  getJobs(): Observable<JobApiResponse[]> {
+    return this.http.get<JobApiResponse[]>(this.apiUrl + 'get_jobs.php');
+  }
+
+  addJob(job: any): Observable<JobApiResponse> {
+    return this.http.post<JobApiResponse>(this.apiUrl + 'add_job.php', job);
   }
 }
