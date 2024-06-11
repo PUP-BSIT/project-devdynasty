@@ -1,0 +1,46 @@
+<form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()" class="profile-form">
+    <div class="form-title">Complete your Information</div>
+    <mat-form-field class="profile-field">
+        <div class="file-upload">
+            <label for="file_input" class="file-label">
+              <mat-icon class="upload-icon">cloud_upload</mat-icon>
+              Upload Profile Picture
+            </label>
+            <input 
+              id="file_input" 
+              type="file" 
+              formControlName="profilePicture" 
+              (change)="onFileSelected($event)" 
+              accept="image/*">
+            <input 
+              matInput 
+              [value]="selectedFile?.name" 
+              readonly placeholder="No file chosen" 
+              class="file-name">
+        </div>
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <textarea 
+        matInput 
+        formControlName="description" 
+        placeholder="Description">
+      </textarea>
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <input matInput formControlName="location" placeholder="Location">
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <input matInput formControlName="phoneNumber" placeholder="Phone Number">
+    </mat-form-field>
+    <mat-form-field class="profile-field">
+      <input 
+        matInput 
+        formControlName="skills" 
+        placeholder="Skills (comma-separated)">
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-raised-button>Cancel</button>
+      <button mat-raised-button type="submit">Save</button>
+    </div>
+</form>
+  

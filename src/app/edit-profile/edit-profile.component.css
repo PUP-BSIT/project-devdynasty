@@ -1,0 +1,51 @@
+.profile-form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+  
+.profile-field {
+    width: 100%;
+}
+  
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-container button {
+    background-color: #fbc02d;
+}  
+
+.form-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+}
+  
+.file-upload {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.file-label {
+    background-color: #fbc02d;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.upload-icon {
+    margin-right: 5px;
+}
+
+.file-name {
+    margin-top: 10px;
+}
+  
