@@ -6,12 +6,12 @@
             <p>{{ job.Description }}</p>
         </div>
             <div class="job-location">
-                <!-- <img src="{{ job.icon }}" alt="Location Icon"> -->
+                <img src="assets/Job_Page/globe_icon.png" alt="Location Icon">
                 <span>{{ job.Location }}</span>
             </div>
         <div class="job-action">
-            <!-- <img src="{{ job.salaryIcon }}" alt="Salary Icon" 
-                class="salary-icon"> -->
+            <img src="assets/Job_Page/money_icon.png" alt="Salary Icon" 
+                class="salary-icon">
             <span>{{ job.Rate }}</span>
             <button (click)="onApplyClick($event)">APPLY NOW!</button>
         </div>

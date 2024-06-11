@@ -62,6 +62,7 @@ export class JobPostFormComponent{
           duration: 5000,
         });
       })
+      this.jobPostForm.reset();
     }
   }
 }

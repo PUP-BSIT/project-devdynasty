@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { JobApiResponse } from '../../../model/job_form_api_response';
 import { UserService } from '../../../service/user.service';
 
 @Component({
@@ -19,8 +18,6 @@ export class JobListComponent implements OnInit{
   fetchJobs(): void {
     this.userService.getJobs().subscribe(data => {
       this.jobs = data;
-    }, error => {
-      console.error('Error fetching jobs:', error);
     });
   }
 
