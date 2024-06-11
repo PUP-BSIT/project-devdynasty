@@ -36,6 +36,7 @@ import { AppliedJobListComponent } from './applied-page/applied-job-list/applied
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 import { ClientPageComponent } from './client-page/client-page.component';
 import { JobPostFormComponent } from './client-page/job-post-form/job-post-form.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { JobPostFormComponent } from './client-page/job-post-form/job-post-form.
     AppliedJobListComponent,
     ProfileSetupPageComponent,
     ClientPageComponent,
-    JobPostFormComponent
+    JobPostFormComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
