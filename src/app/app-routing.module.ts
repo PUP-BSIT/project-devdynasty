@@ -8,9 +8,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { AppliedPageComponent } from './applied-page/applied-page.component';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 import { ClientPageComponent } from './client-page/client-page.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 const routes: Routes = [
+  { path: 'edit-profile', component: EditProfileComponent },
   { path: 'client-page', component: ClientPageComponent },
   { path: 'profile-setup/:token', component: ProfileSetupPageComponent },
   { path: 'applied', component: AppliedPageComponent },

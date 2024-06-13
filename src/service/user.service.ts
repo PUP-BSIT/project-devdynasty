@@ -6,6 +6,7 @@ import { LogInApiResponse } from '../model/login_api_response';
 import { SetUpProfileApiResponse} from '../model/setup_profile_api_response';
 import { UserDetailsResponse } from '../model/user_details_api_response';
 import { JobApiResponse } from '../model/job_form_api_response';
+import { UpdateProfileApiResponse } from '../model/update_profile_api_response';
 
 @Injectable()
 export class UserService {
@@ -23,6 +24,10 @@ export class UserService {
   setupProfile(formData: FormData): Observable<SetUpProfileApiResponse> {
     return this.http.post<SetUpProfileApiResponse>(this.apiUrl 
                                     + 'setup_profile.php', formData);
+  }
+
+  editProfile(formData: FormData): Observable<UpdateProfileApiResponse> {
+    return this.http.post<UpdateProfileApiResponse>(this.apiUrl + 'edit_profile.php', formData);
   }
 
   loginUser(user: any): Observable<LogInApiResponse> {
