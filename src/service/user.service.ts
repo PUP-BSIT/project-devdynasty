@@ -51,6 +51,11 @@ export class UserService {
     return this.http.get<JobApiResponse[]>(this.apiUrl + 'get_jobs.php');
   }
 
+  getJobsByUser(userID: number): Observable<JobApiResponse[]> {
+    return this.http.post<JobApiResponse[]>(this.apiUrl + 
+      'get_jobs_by_user.php', { UserID: userID });
+  }
+
   addJob(job: any): Observable<JobApiResponse> {
     return this.http.post<JobApiResponse>(this.apiUrl + 'add_job.php', job);
   }

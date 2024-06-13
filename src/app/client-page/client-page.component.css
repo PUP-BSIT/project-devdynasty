@@ -12,3 +12,19 @@
 .job-post-form-container {
     margin-left: 460px;
 }
+
+.job-post-form-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.job-post-feed-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+app-job-post-form, app-job-post-feed {
+    width: 100%;
+    margin-bottom: 20px;
+}
