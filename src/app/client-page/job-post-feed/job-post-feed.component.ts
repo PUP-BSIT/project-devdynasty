@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../service/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-job-post-feed',
@@ -8,9 +9,9 @@ import { UserService } from '../../../service/user.service';
 })
 export class JobPostFeedComponent implements OnInit {
   jobs: any = [];
-  userID: number = this.userService.userID; // Replace with the actual user ID, possibly obtained from authentication context
+  userID: number = this.userService.userID; 
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchJobsByUser(this.userID);
@@ -18,10 +19,21 @@ export class JobPostFeedComponent implements OnInit {
 
   fetchJobsByUser(userID: number): void {
     this.userService.getJobsByUser(userID).subscribe(data => {
-      this.jobs = data;
-      console.log(this.jobs); // Debugging line to check the fetched jobs
-    }, error => {
-      console.error('Error fetching jobs:', error);
+      if (Array.isArray(data)) {
+        this.jobs = data;
+      } else {
+        console.error('Expected an array of jobs but got:', data);
+      }
+      console.log(this.jobs);  
+    });
+  }
+
+  deleteJob(jobId: number): void {
+    this.userService.deleteJob(jobId).subscribe(response => {
+      this._snackBar.open(response.message, 'Close', {
+        duration: 5000,
+      });
+      this.fetchJobsByUser(this.userID);  
     });
   }
 }

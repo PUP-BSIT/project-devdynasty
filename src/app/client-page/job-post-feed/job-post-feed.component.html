@@ -6,6 +6,6 @@
     <p><strong>Rate:</strong> {{ job.Rate }}</p>
     <p><strong>Date:</strong> {{ job.Date }}</p>
     <button>Edit</button>
-    <button>Delete</button>
+    <button (click)="deleteJob(job.JobID)">Delete</button>
 </div>
   

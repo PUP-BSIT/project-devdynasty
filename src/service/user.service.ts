@@ -76,4 +76,10 @@ export class UserService {
     }
     return this.http.get<any>(url);
   }
+
+  deleteJob(jobId: number): Observable<any> {
+    return this.http.delete<any>(
+      `${this.apiUrl}/delete_job.php?JobID=${jobId}`
+    );
+  }
 }
