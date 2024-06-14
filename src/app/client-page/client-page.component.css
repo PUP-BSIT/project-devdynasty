@@ -21,7 +21,7 @@
 .job-post-feed-container {
     width: 100%;
     max-width: 800px;
-    margin-top: 20px;
+    margin-top: 20px
 }
 
 app-job-post-form, app-job-post-feed {
