@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { SignUpApiResponse } from '../model/signup_api_response';
 import { LogInApiResponse } from '../model/login_api_response';
 import { SetUpProfileApiResponse} from '../model/setup_profile_api_response';
@@ -12,6 +12,11 @@ import { UpdateProfileApiResponse } from '../model/update_profile_api_response';
 export class UserService {
   private isLogin: boolean = false;
   userID!: number;
+
+  private searchTermSubject = new BehaviorSubject<{ 
+    term: string, jobType: string }>({ term: '', jobType: '' });
+
+  searchTerm$ = this.searchTermSubject.asObservable();
 
   private apiUrl = 'http://localhost/pup_connect_backend/';
 
@@ -58,5 +63,17 @@ export class UserService {
 
   addJob(job: any): Observable<JobApiResponse> {
     return this.http.post<JobApiResponse>(this.apiUrl + 'add_job.php', job);
+  }
+
+  setSearchTerm(term: string, jobType: string): void {
+    this.searchTermSubject.next({ term, jobType });
+  }
+
+  searchJobs(term: string, jobType: string): Observable<any> {
+    let url = `${this.apiUrl}/search_jobs.php?term=${term}`;
+    if (jobType) {
+      url += `&jobType=${jobType}`;
+    }
+    return this.http.get<any>(url);
   }
 }
