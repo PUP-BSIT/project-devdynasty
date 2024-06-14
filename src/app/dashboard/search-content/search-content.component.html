@@ -1,10 +1,17 @@
 <div class="search-bar">
     <div class="search-input">
         <img src="assets/Job_Page/search_icon.png" alt="Search Icon">
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" (input)="onSearch($event)">
     </div>
-    <button class="filter-btn">
-        <img src="assets/Job_Page/filter_icon.png" alt="Filter Icon">
-        <span>Filter</span>
-    </button>
+    <select class="filter-btn" (change)="onFilterChange($event)">
+        <option value="">All Job Types</option>
+        <option value="programming">Programming</option>
+        <option value="accounting">Accounting</option>
+        <option value="tutor">Tutor</option>
+        <option value="videography">Videography</option>
+        <option value="editing">Editing</option>
+        <option value="writing">Writing</option>
+        <option value="engineering">Engineering</option>
+        <option value="others">Others</option>
+      </select>
 </div>

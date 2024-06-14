@@ -49,7 +49,7 @@
   background: none;
 }
 
-.filter-btn img {
+img {
   width: 40px;
   height: 35px;
   margin-right: 10px;
@@ -65,4 +65,9 @@
 .filter-btn:hover {
   background-color: #ccc;
   border-radius: 15px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
 }
