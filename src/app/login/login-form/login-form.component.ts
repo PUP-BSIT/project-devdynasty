@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginFormComponent implements OnInit{
   loginForm!: FormGroup;
+  showPassword = false;
 
   constructor (private fb: FormBuilder, private userService: UserService, 
     private _snackBar: MatSnackBar, private router: Router) {}
@@ -80,5 +81,9 @@ export class LoginFormComponent implements OnInit{
         }
       })
     }
+  }
+  
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 }
