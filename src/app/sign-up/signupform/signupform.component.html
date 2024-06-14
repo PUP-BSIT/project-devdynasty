@@ -26,8 +26,14 @@
         }
       </div>
       <div class="input-group">
-        <input type="password" id="password" formControlName="password" placeholder="Password" required>
-        <span class="password-toggle"><i class='bx bx-show'></i></span>
+        <input 
+          [type]="showPassword ? 'text' : 'password'"
+          id="password" 
+          formControlName="password" 
+          placeholder="Password" required>
+          <span class="password-toggle" (click)="togglePassword()">
+            <i [class]="showPassword ? 'bx bx-show' : 'bx bx-hide'"></i>
+          </span>
         @if(passwordControl.invalid && passwordControl.touched) {
           @if(passwordControl.errors?.['required']) {
             <div class="error-message">Password is required</div>
@@ -62,12 +68,14 @@
       </div>
       <div class="input-group">
         <input 
-            type="password" 
-            id="confirmPassword" 
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            id="confirmPassword"
             formControlName="confirmPassword" 
             placeholder="Confirm Password" 
             required>
-        <span class="password-toggle"><i class='bx bx-show'></i></span>
+          <span class="password-toggle" (click)="toggleConfirmPassword()">
+              <i [class]="showPassword ? 'bx bx-show' : 'bx bx-hide'"></i>
+          </span>
         @if(confirmPasswordControl.invalid && confirmPasswordControl.touched) {
           @if(confirmPasswordControl.errors?.['required']) {
             <div class="error-message">Confirm Password is required</div>

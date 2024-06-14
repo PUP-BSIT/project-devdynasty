@@ -10,6 +10,8 @@ import { UserService } from '../../../service/user.service';
 })
 export class SignupformComponent implements OnInit {
   signupForm!: FormGroup;
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(private fb: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar) {}
 
@@ -108,5 +110,13 @@ export class SignupformComponent implements OnInit {
         this.signupForm.reset();
       })
     }
+  }
+  
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPassword(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }
