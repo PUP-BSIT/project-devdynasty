@@ -38,6 +38,7 @@ import { ClientPageComponent } from './client-page/client-page.component';
 import { JobPostFormComponent } from './client-page/job-post-form/job-post-form.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { JobPostFeedComponent } from './client-page/job-post-feed/job-post-feed.component';
+import { EditJobModalComponent } from './client-page/edit-job-modal/edit-job-modal.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { JobPostFeedComponent } from './client-page/job-post-feed/job-post-feed.
     ClientPageComponent,
     JobPostFormComponent,
     EditProfileComponent,
-    JobPostFeedComponent
+    JobPostFeedComponent,
+    EditJobModalComponent
   ],
   imports: [
     BrowserModule,

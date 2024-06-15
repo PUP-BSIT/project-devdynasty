@@ -1,0 +1,42 @@
+<div class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="onClose()">&times;</span>
+    <h2>Edit Job</h2>
+    <form [formGroup]="jobForm" (ngSubmit)="onSave()">
+      <div class="form-group">
+        <label for="Title">Title</label>
+        <input id="Title" formControlName="Title" />
+      </div>
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea id="Description" formControlName="Description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="Location">Location</label>
+        <input id="Location" formControlName="Location" />
+      </div>
+      <div class="form-group">
+        <label for="JobType">Job Type</label>
+        <select id="JobType" formControlName="JobType">
+          <option value="Tutor">Tutor</option>
+          <option value="Videography">Videography</option>
+          <option value="Editing">Editing</option>
+          <option value="Programming">Programming</option>
+          <option value="Writing">Writing</option>
+          <option value="Accounting">Accounting</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="Rate">Rate</label>
+        <input id="Rate" formControlName="Rate" />
+      </div>
+      <div class="form-group">
+        <label for="Date">Date</label>
+        <input type="date" id="Date" formControlName="Date" />
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>

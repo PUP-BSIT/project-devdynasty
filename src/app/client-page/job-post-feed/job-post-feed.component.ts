@@ -9,9 +9,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class JobPostFeedComponent implements OnInit {
   jobs: any = [];
-  userID: number = this.userService.userID; 
+  selectedJob: any = null;
+  userID: number = this.userService.userID;
 
-  constructor(private userService: UserService, private _snackBar: MatSnackBar) {}
+  constructor(private userService: UserService, 
+    private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchJobsByUser(this.userID);
@@ -24,8 +26,34 @@ export class JobPostFeedComponent implements OnInit {
       } else {
         console.error('Expected an array of jobs but got:', data);
       }
-      console.log(this.jobs);  
+      console.log(this.jobs);
     });
+  }
+
+  openEditModal(job: any): void {
+    this.selectedJob = job;
+  }
+
+  closeEditModal(): void {
+    this.selectedJob = null;
+  }
+
+  updateJob(updatedJob: any): void {
+    this.userService.updateJob(updatedJob.JobID, updatedJob).subscribe(
+      () => {
+        this.fetchJobsByUser(this.userID);
+        this.closeEditModal();
+        this._snackBar.open('Job updated successfully', 'Close', {
+          duration: 5000,
+        });
+      },
+      error => {
+        console.error('Error updating job:', error);
+        this._snackBar.open('Failed to update job', 'Close', {
+          duration: 5000,
+        });
+      }
+    );
   }
 
   deleteJob(jobId: number): void {
@@ -33,7 +61,7 @@ export class JobPostFeedComponent implements OnInit {
       this._snackBar.open(response.message, 'Close', {
         duration: 5000,
       });
-      this.fetchJobsByUser(this.userID);  
+      this.fetchJobsByUser(this.userID);
     });
   }
 }
