@@ -32,7 +32,8 @@ export class UserService {
   }
 
   editProfile(formData: FormData): Observable<UpdateProfileApiResponse> {
-    return this.http.post<UpdateProfileApiResponse>(this.apiUrl + 'edit_profile.php', formData);
+    return this.http.post<UpdateProfileApiResponse>(this.apiUrl + 
+      'edit_profile.php', formData);
   }
 
   loginUser(user: any): Observable<LogInApiResponse> {
@@ -75,6 +76,10 @@ export class UserService {
       url += `&jobType=${jobType}`;
     }
     return this.http.get<any>(url);
+  }
+
+  updateJob(jobID: number, jobData: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}update_job.php?id=${jobID}`, jobData);
   }
 
   deleteJob(jobId: number): Observable<any> {
