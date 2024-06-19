@@ -7,6 +7,7 @@ import { SetUpProfileApiResponse} from '../model/setup_profile_api_response';
 import { UserDetailsResponse } from '../model/user_details_api_response';
 import { JobApiResponse } from '../model/job_form_api_response';
 import { UpdateProfileApiResponse } from '../model/update_profile_api_response';
+import { ApplicationResponse } from '../model/create_application_api_response'
 
 @Injectable()
 export class UserService {
@@ -86,5 +87,14 @@ export class UserService {
     return this.http.delete<any>(
       `${this.apiUrl}/delete_job.php?JobID=${jobId}`
     );
+  }
+
+  createApplication(jobId: number, userId: number): Observable<ApplicationResponse> {
+    const applicationData = {
+      JobID: jobId,
+      UserID: userId
+    };
+    return this.http.post<ApplicationResponse>(
+      `${this.apiUrl}create_application.php`, applicationData);
   }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { UserService } from '../../../service/user.service';
 import { Subscription } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-job-list',
@@ -9,9 +11,14 @@ import { Subscription } from 'rxjs';
 })
 export class JobListComponent implements OnInit, OnDestroy{
   jobs: any = [];
+  //jobId!: number;
   searchTermSubscription: Subscription = new Subscription();
 
-  constructor(private userService: UserService) {}
+  @ViewChild('jobDialogTemplate') jobDialogTemplate!: TemplateRef<any>;
+  dialogRef!: MatDialogRef<any>;
+
+  constructor(private userService: UserService, public dialog: MatDialog, 
+    private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.searchTermSubscription = this.userService.searchTerm$.subscribe(
@@ -30,9 +37,35 @@ export class JobListComponent implements OnInit, OnDestroy{
     });
   }
 
-  onApplyClick(event: Event): void {
-    const button = event.target as HTMLElement;
-    button.classList.add('clicked');
+  openJobPostDialog(target: EventTarget | null): void {
+    if (target instanceof HTMLButtonElement) {
+      target.classList.add('clicked');
+    }
+    this.dialogRef = this.dialog.open(this.jobDialogTemplate, {
+      width: '400px',
+      height: '300px'
+    });
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
+
+  onApplyClick(jobid: number): void {
+    const jobId = jobid;
+    const userId = this.userService.userID;
+
+    this.userService.createApplication(jobId, userId).subscribe(response => {
+      if (response.status === 'success') {
+        this._snackBar.open("Application Sent", 'Close', {
+          duration: 5000,
+        });
+      } else {
+        this._snackBar.open("There's something wrong", 'Close', {
+          duration: 5000,
+        });
+      }
+    })
   }
 
   ngOnDestroy(): void {
