@@ -13,7 +13,36 @@
             <img src="assets/Job_Page/money_icon.png" alt="Salary Icon" 
                 class="salary-icon">
             <span>{{ job.Rate }}</span>
-            <button (click)="onApplyClick($event)">APPLY NOW!</button>
+            <button (click)="openJobPostDialog($event.target)">
+                APPLY NOW!
+            </button>
         </div>
     </div>
 </div>
+
+<ng-template #jobDialogTemplate *ngFor="let job of jobs">
+    <h2 mat-dialog-title></h2>
+    <div mat-dialog-content>
+      <h3>Job ID</h3>
+      <p>{{ job.JobID }}</p>
+      <h3>Client</h3>
+      <p>{{ job.name }}</p>
+      <h3>Job Title</h3>
+      <p>{{ job.Title }}</p>
+      <h3>Job Type</h3>
+      <p>{{ job.JobType }}</p>
+      <h3>Description</h3>
+      <p>{{ job.Description }}</p>
+      <h3>Location</h3>
+      <p>{{ job.Location }}</p>
+      <h3>Rate</h3>
+      <p>{{ job.Rate }}</p>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button (click)="closeDialog()">Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial
+        (click)="onApplyClick(job.JobID)">
+        Confirm
+      </button>
+    </div>
+</ng-template>
