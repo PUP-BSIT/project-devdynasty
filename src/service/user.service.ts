@@ -79,6 +79,14 @@ export class UserService {
     return this.http.get<any>(url);
   }
 
+  searchAppliedJobs(userID: number, term: string, jobType: string): Observable<any> {
+    let url = `${this.apiUrl}/search_applied_jobs.php?userID=${userID}&term=${term}`;
+    if (jobType) {
+      url += `&jobType=${jobType}`;
+    }
+    return this.http.get<any>(url);
+  }
+  
   updateJob(jobID: number, jobData: any): Observable<any> {
     return this.http.put(`${this.apiUrl}update_job.php?id=${jobID}`, jobData);
   }

@@ -16,6 +16,26 @@ export class AppliedJobListComponent implements OnInit, OnDestroy{
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.searchTermSubscription = this.userService.searchTerm$.subscribe(
+      ({ term, jobType }) => {
+        this.userService.searchAppliedJobs(this.userID, term, jobType).subscribe(data => {
+          if (Array.isArray(data)) {
+            this.jobs = data.map(job => ({
+              title: job.Title,
+              company: job.Description,  
+              location: job.Location,
+              salary: `$ ${job.Rate}`,
+              highlighted: false,  
+              icon: 'assets/Job_Page/globe_icon.png',
+              salaryIcon: 'assets/Job_Page/money_icon.png'
+            }));
+            this.filteredJobs = [...this.jobs];  
+          } else {
+            console.error('Expected an array of applied jobs but got:', data);
+          }
+        });
+      }
+    );
     this.fetchAppliedJobs(this.userID);
   }
 
