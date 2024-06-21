@@ -13,14 +13,14 @@
             <img src="assets/Job_Page/money_icon.png" alt="Salary Icon" 
                 class="salary-icon">
             <span>{{ job.Rate }}</span>
-            <button (click)="openJobPostDialog($event.target)">
+            <button (click)="openJobPostDialog(job, $event.target)">
                 APPLY NOW!
             </button>
         </div>
     </div>
 </div>
 
-<ng-template #jobDialogTemplate *ngFor="let job of jobs">
+<ng-template #jobDialogTemplate [job]="job">
     <h2 mat-dialog-title></h2>
     <div mat-dialog-content>
       <h3>Job ID</h3>
