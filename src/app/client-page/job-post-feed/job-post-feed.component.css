@@ -37,4 +37,19 @@
   button:hover {
     background: #d03e27;
   }
-  
+
+  a {
+    padding: 5px 10px;
+    color: black;
+    background-color: #ffc300 ;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+
+  a:hover {
+    background-color: #f04e30;
+    color: white;
+  }

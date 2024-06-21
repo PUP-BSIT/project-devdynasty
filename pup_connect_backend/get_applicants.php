@@ -10,7 +10,7 @@ $conn = db_connect();
 
 $jobId = intval($_GET['jobId']);
 
-$sql = "SELECT applications.ApplicationID, applications.UserID, applications.ApplicationDate, users.name
+$sql = "SELECT applications.ApplicationID, applications.UserID, applications.ApplicationDate, users.name, users.email
         FROM applications
         JOIN users ON applications.UserID = users.UserID
         WHERE applications.JobID = ?";
