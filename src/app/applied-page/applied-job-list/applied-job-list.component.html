@@ -13,7 +13,7 @@
             <img src="{{ job.salaryIcon }}" alt="Salary Icon" 
                 class="salary-icon">
             <span>{{ job.salary }}</span>
-            <button>WITHDRAW</button>
+            <button (click)="withdrawJob(job.JobID)">Withdraw</button>
         </div>
     </div>
 </div>

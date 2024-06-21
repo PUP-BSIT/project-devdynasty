@@ -113,4 +113,9 @@ export class UserService {
   getApplicantsByJob(jobID: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/get_applicants.php?jobId=${jobID}`);
   }
+
+  withdrawJob(userID: number, jobID: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/withdraw_job.php`, 
+      { UserID: userID, JobID: jobID });
+  }
 }
