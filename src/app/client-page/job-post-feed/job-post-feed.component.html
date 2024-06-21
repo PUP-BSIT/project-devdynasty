@@ -5,6 +5,7 @@
   <p><strong>Job Type:</strong> {{ job.JobType }}</p>
   <p><strong>Rate:</strong> {{ job.Rate }}</p>
   <p><strong>Date:</strong> {{ job.Date }}</p>
+  <button (click)="viewApplicants(job.JobID)">View Applicants</button>
   <button (click)="openEditModal(job)">Edit</button>
   <button (click)="deleteJob(job.JobID)">Delete</button>
 </div>
@@ -15,3 +16,12 @@
   (close)="closeEditModal()"
   (save)="updateJob($event)">
 </app-edit-job-modal>
+
+<div *ngIf="applicants.length > 0" class="applicants-display">
+  <h3>Applicants</h3>
+  <div *ngFor="let applicant of applicants" class="applicant">
+    <h4>{{ applicant.name }}</h4>
+    <p>{{ applicant.position }}</p>
+    <p>Application Date: {{ applicant.ApplicationDate }}</p>
+  </div>
+</div>

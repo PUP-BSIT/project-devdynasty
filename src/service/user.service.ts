@@ -101,4 +101,8 @@ export class UserService {
   getAppliedJobsByUser(userID: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/get_applied_jobs.php?userID=${userID}`);
   }
+  
+  getApplicantsByJob(jobID: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/get_applicants.php?jobId=${jobID}`);
+  }
 }

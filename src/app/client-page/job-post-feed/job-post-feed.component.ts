@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class JobPostFeedComponent implements OnInit {
   jobs: any = [];
   selectedJob: any = null;
+  applicants: any = [];
   userID: number = this.userService.userID;
 
   constructor(private userService: UserService, 
@@ -27,6 +28,17 @@ export class JobPostFeedComponent implements OnInit {
         console.error('Expected an array of jobs but got:', data);
       }
       console.log(this.jobs);
+    });
+  }
+
+  fetchApplicantsByJob(jobID: number): void {
+    this.userService.getApplicantsByJob(jobID).subscribe(data => {
+      if (Array.isArray(data)) {
+        this.applicants = data;
+      } else {
+        console.error('Expected an array of applicants but got:', data);
+      }
+      console.log(this.applicants);
     });
   }
 
@@ -63,5 +75,10 @@ export class JobPostFeedComponent implements OnInit {
       });
       this.fetchJobsByUser(this.userID);
     });
+  }
+
+  viewApplicants(jobID: number): void {
+    this.fetchApplicantsByJob(jobID);
+
   }
 }
