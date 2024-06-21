@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class JobListComponent implements OnInit, OnDestroy{
   jobs: any = [];
-  //jobId!: number;
+  job: any;
   searchTermSubscription: Subscription = new Subscription();
 
   @ViewChild('jobDialogTemplate') jobDialogTemplate!: TemplateRef<any>;
@@ -37,7 +37,7 @@ export class JobListComponent implements OnInit, OnDestroy{
     });
   }
 
-  openJobPostDialog(target: EventTarget | null): void {
+  openJobPostDialog(job: any, target: EventTarget | null): void {
     if (target instanceof HTMLButtonElement) {
       target.classList.add('clicked');
     }
@@ -45,6 +45,7 @@ export class JobListComponent implements OnInit, OnDestroy{
       width: '400px',
       height: '300px'
     });
+    this.job = job;
   }
 
   closeDialog(): void {
