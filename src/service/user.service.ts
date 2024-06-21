@@ -97,4 +97,8 @@ export class UserService {
     return this.http.post<ApplicationResponse>(
       `${this.apiUrl}create_application.php`, applicationData);
   }
+
+  getAppliedJobsByUser(userID: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/get_applied_jobs.php?userID=${userID}`);
+  }
 }

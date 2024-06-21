@@ -1,38 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { UserService } from '../../../service/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-applied-job-list',
   templateUrl: './applied-job-list.component.html',
   styleUrl: './applied-job-list.component.css'
 })
-export class AppliedJobListComponent {
-  jobs = [
-    {
-      title: 'SOFTWARE DEVELOPER', 
-      company: 'Microsoft Philippines', 
-      location: 'BGC, Philippines', 
-      salary: '$ 1,000', 
-      highlighted: false, 
-      icon: 'assets/Job_Page/globe_icon.png', 
-      salaryIcon: 'assets/Job_Page/money_icon.png' 
-    },
-    { 
-      title: 'SYSTEM ANALYST', 
-      company: 'DTI Philippines', 
-      location: 'Pasay City, Philippines', 
-      salary: '$ 1,000', 
-      highlighted: false, 
-      icon: 'assets/Job_Page/globe_icon.png', 
-      salaryIcon: 'assets/Job_Page/money_icon.png' 
-    },
-    {
-       title: 'WEB DEVELOPER', 
-       company: 'Google Operations, USA', 
-       location: 'Taguig City, Philippines', 
-       salary: '$ 1,000', 
-       highlighted: true, 
-       icon: 'assets/Job_Page/globe_icon.png', 
-       salaryIcon: 'assets/Job_Page/money_icon.png' 
-    }
-  ];
+export class AppliedJobListComponent implements OnInit, OnDestroy{
+  jobs: any[] = [];
+  userID: number = this.userService.userID;
+  filteredJobs: any[] = [];
+  searchTermSubscription: Subscription = new Subscription();
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.fetchAppliedJobs(this.userID);
+  }
+
+  fetchAppliedJobs(userID: number): void {
+    this.userService.getAppliedJobsByUser(userID).subscribe(data => {
+      if (Array.isArray(data)) {
+        this.jobs = data.map(job => ({
+          title: job.Title,
+          company: job.Description,  
+          location: job.Location,
+          salary: `$ ${job.Rate}`,
+          highlighted: false,  
+          icon: 'assets/Job_Page/globe_icon.png',
+          salaryIcon: 'assets/Job_Page/money_icon.png'
+        }));
+        this.filteredJobs = [...this.jobs];
+      } else {
+        console.error('Expected an array of applied jobs but got:', data);
+      }
+      console.log(this.jobs);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.searchTermSubscription.unsubscribe();
+  }
 }
