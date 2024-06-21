@@ -35,6 +35,7 @@ export class JobPostFeedComponent implements OnInit {
     this.userService.getApplicantsByJob(jobID).subscribe(data => {
       if (Array.isArray(data)) {
         this.applicants = data;
+        console.log(this.applicants);
       } else {
         console.error('Expected an array of applicants but got:', data);
       }
