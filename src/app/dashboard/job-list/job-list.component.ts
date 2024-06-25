@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class JobListComponent implements OnInit, OnDestroy{
   jobs: any = [];
-  job: any;
+  userId!: number;
   searchTermSubscription: Subscription = new Subscription();
 
   @ViewChild('jobDialogTemplate') jobDialogTemplate!: TemplateRef<any>;
@@ -23,7 +23,8 @@ export class JobListComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.searchTermSubscription = this.userService.searchTerm$.subscribe(
       ({ term, jobType }) => {
-      this.userService.searchJobs(term, jobType).subscribe(data => {
+      this.userService.searchJobs(term, jobType, this.userService.userID)
+      .subscribe(data => {
         this.jobs = data;
       });
     });
@@ -32,7 +33,7 @@ export class JobListComponent implements OnInit, OnDestroy{
   }
 
   fetchJobs(): void {
-    this.userService.getJobs().subscribe(data => {
+    this.userService.getJobs(this.userService.userID).subscribe(data => {
       this.jobs = data;
     });
   }
@@ -43,9 +44,9 @@ export class JobListComponent implements OnInit, OnDestroy{
     }
     this.dialogRef = this.dialog.open(this.jobDialogTemplate, {
       width: '400px',
-      height: '300px'
+      height: '300px',
+      data: { job }
     });
-    this.job = job;
   }
 
   closeDialog(): void {

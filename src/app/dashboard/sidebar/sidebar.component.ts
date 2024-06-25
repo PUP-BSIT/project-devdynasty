@@ -10,6 +10,5 @@ export class SidebarComponent {
 
   toggleDropdown(): void {
     this.isToggle = !this.isToggle;
-    console.log(this.isToggle);
   }
 }

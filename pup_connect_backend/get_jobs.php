@@ -4,6 +4,13 @@ header('Content-Type: application/json');
 
 include 'config.php';
 
+if (!isset($_GET['userId'])) {
+    echo json_encode(array('message' => 'User ID parameter is required.'));
+    exit();
+}
+
+$userID = intval($_GET['userId']);
+
 $conn = db_connect();
 
 if (!$conn) {
@@ -13,15 +20,22 @@ if (!$conn) {
 
 $sql = "SELECT jobposts.*, users.name
         FROM jobposts 
-        JOIN users ON jobposts.UserID = users.userID";
-$result = $conn->query($sql);
+        JOIN users ON jobposts.UserID = users.userID
+        WHERE jobposts.UserID != ?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userID);
+
+$stmt->execute();
+
+$result = $stmt->get_result();
 
 $jobs = array();
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $jobs[] = $row;
-    }
+while ($row = $result->fetch_assoc()) {
+    $jobs[] = $row;
 }
 
-echo json_encode($jobs);
+$stmt->close();
 $conn->close();
+
+echo json_encode($jobs);

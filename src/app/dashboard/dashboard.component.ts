@@ -8,11 +8,17 @@ import { UserService } from '../../service/user.service';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {
+  userName!: string | undefined;
+  userPhoto!: string | undefined
+
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
     }
+    this.userName = this.userService.userName;
+    this.userPhoto = 
+      `http://localhost/pup_connect_backend/${this.userService.userPhoto}`;
   }
 }

@@ -1,47 +1,52 @@
 <div class="job-list">
+    @if (jobs.length) {
     <div class="job-item" *ngFor="let job of jobs"
         [ngClass]="{'highlighted': job.UserID}">
         <div class="job-info">
             <h2>{{ job.Title }}</h2>
             <p>{{ job.Description }}</p>
         </div>
-            <div class="job-location">
-                <img src="assets/Job_Page/globe_icon.png" alt="Location Icon">
-                <span>{{ job.Location }}</span>
-            </div>
+        <div class="job-location">
+            <img src="assets/Job_Page/globe_icon.png" alt="Location Icon">
+            <span>{{ job.Location }}</span>
+        </div>
         <div class="job-action">
-            <img src="assets/Job_Page/money_icon.png" alt="Salary Icon" 
+            <img src="assets/Job_Page/money_icon.png" alt="Salary Icon"
                 class="salary-icon">
             <span>{{ job.Rate }}</span>
             <button (click)="openJobPostDialog(job, $event.target)">
                 APPLY NOW!
             </button>
         </div>
-    </div>
+    </div>    
+    }
+    @else {
+    <div>No Jobs Available</div>
+    }
 </div>
 
-<ng-template #jobDialogTemplate [job]="job">
+<ng-template #jobDialogTemplate let-data>
     <h2 mat-dialog-title></h2>
     <div mat-dialog-content>
       <h3>Job ID</h3>
-      <p>{{ job.JobID }}</p>
+      <p>{{ data.job.JobID }}</p>
       <h3>Client</h3>
-      <p>{{ job.name }}</p>
+      <p>{{ data.job.name }}</p>
       <h3>Job Title</h3>
-      <p>{{ job.Title }}</p>
+      <p>{{ data.job.Title }}</p>
       <h3>Job Type</h3>
-      <p>{{ job.JobType }}</p>
+      <p>{{ data.job.JobType }}</p>
       <h3>Description</h3>
-      <p>{{ job.Description }}</p>
+      <p>{{ data.job.Description }}</p>
       <h3>Location</h3>
-      <p>{{ job.Location }}</p>
+      <p>{{ data.job.Location }}</p>
       <h3>Rate</h3>
-      <p>{{ job.Rate }}</p>
+      <p>{{ data.job.Rate }}</p>
     </div>
     <div mat-dialog-actions align="end">
       <button mat-button (click)="closeDialog()">Cancel</button>
       <button mat-button [mat-dialog-close]="true" cdkFocusInitial
-        (click)="onApplyClick(job.JobID)">
+        (click)="onApplyClick(data.job.JobID)">
         Confirm
       </button>
     </div>

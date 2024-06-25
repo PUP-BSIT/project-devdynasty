@@ -28,3 +28,18 @@ app-job-post-form, app-job-post-feed {
     width: 100%;
     margin-bottom: 20px;
 }
+
+span {
+    margin-left: 10px;
+    margin-right: 40px;
+    font-size: 25px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
+
+img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
