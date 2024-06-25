@@ -1,18 +1,26 @@
 <div class="login-form">
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div class="input-group">
-        <input type="text" id="name" formControlName="name" placeholder="Name" required>
+        <input type="text" 
+          id="name" 
+          formControlName="name" 
+          placeholder="Name" required>
         @if(nameControl.invalid && nameControl.touched) {
           @if(nameControl.errors?.['required']) {
             <div class="error-message">Name is required</div>
           }
           @if(nameControl.errors?.['noNumbers']) {
-            <div class="error-message">Numbers are not allowed in the name</div>
+            <div class="error-message">
+              Numbers are not allowed in the name
+            </div>
           }
         }
       </div>
       <div class="input-group">
-        <input type="email" id="email" formControlName="email" placeholder="Email" required>
+        <input type="email" 
+          id="email" 
+          formControlName="email" 
+          placeholder="Email" required>
         @if(emailControl.invalid && emailControl.touched) {
           @if(emailControl.errors?.['required']) {
             <div class="error-message">Email is required</div>
@@ -21,7 +29,9 @@
             <div class="error-message">Invalid email address</div>
           }
           @if(emailControl.errors?.['emailDomain']) {
-            <div class="error-message">Email must end with &#64;iskolarngbayan.pup.edu.ph</div>
+            <div class="error-message">
+              Email must end with &#64;iskolarngbayan.pup.edu.ph
+            </div>
           }
         }
       </div>
@@ -71,8 +81,7 @@
             [type]="showConfirmPassword ? 'text' : 'password'"
             id="confirmPassword"
             formControlName="confirmPassword" 
-            placeholder="Confirm Password" 
-            required>
+            placeholder="Confirm Password" required>
           <span class="password-toggle" (click)="toggleConfirmPassword()">
               <i [class]="showPassword ? 'bx bx-show' : 'bx bx-hide'"></i>
           </span>
