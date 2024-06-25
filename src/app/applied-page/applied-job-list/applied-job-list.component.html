@@ -1,4 +1,5 @@
 <div class="job-list">
+    @if (jobs.length) {
     <div class="job-item" *ngFor="let job of jobs"
         [ngClass]="{'highlighted': job.highlighted}">
         <div class="job-info">
@@ -16,4 +17,11 @@
             <button (click)="withdrawJob(job.JobID)">Withdraw</button>
         </div>
     </div>
+    }
+    @else {
+    <div>
+        You haven't applied to any jobs yet. Start exploring opportunities 
+        and apply to jobs that match your skills and interests.
+    </div>
+    }
 </div>

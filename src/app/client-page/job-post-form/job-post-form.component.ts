@@ -56,7 +56,6 @@ export class JobPostFormComponent{
         ...this.jobPostForm.value,
         UserID
       };
-      console.log(newJob);
       this.userService.addJob(newJob).subscribe(response => {
         this._snackBar.open(response.message, 'Close', {
           duration: 5000,

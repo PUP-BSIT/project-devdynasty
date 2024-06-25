@@ -37,18 +37,3 @@ h1 {
     background-color: #ffc100;
     padding: 10px;
 }
-
-.user-info span {
-    margin-left: 10px;
-    margin-right: 40px;
-    font-size: 25px;
-    color: #ffffff;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-}
-
-.user-info img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-}

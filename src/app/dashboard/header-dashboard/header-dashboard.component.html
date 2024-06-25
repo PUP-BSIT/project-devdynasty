@@ -5,7 +5,7 @@
         <ng-content></ng-content>
     </div>  
     <div class="user-info">
-        <span>Hi, John Doe!</span>
-        <img src="assets/Job_Page/user_profile.jpg" alt="User Image">
+        <ng-content select="[welcome]"></ng-content>
+        <ng-content select="[profile_picture]"></ng-content>
     </div>
 </div>

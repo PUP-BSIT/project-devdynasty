@@ -5,6 +5,10 @@
     <div class="content">
         <app-header-dashboard>
             <h1>APPLIED</h1>
+            <span welcome>Hi {{ userName }}</span>
+            <img profile_picture 
+                [src]="userPhoto" 
+                alt="User Image">
         </app-header-dashboard>
         <div class="search-container">
             <app-search-content></app-search-content>

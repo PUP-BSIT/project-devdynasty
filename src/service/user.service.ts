@@ -13,6 +13,8 @@ import { ApplicationResponse } from '../model/create_application_api_response'
 export class UserService {
   private isLogin: boolean = false;
   userID!: number;
+  userName!: string | undefined;
+  userPhoto!: string | undefined;
 
   private searchTermSubject = new BehaviorSubject<{ 
     term: string, jobType: string }>({ term: '', jobType: '' });
@@ -54,8 +56,10 @@ export class UserService {
       (this.apiUrl + 'user_details.php', { user_id: userid });
   }
 
-  getJobs(): Observable<JobApiResponse[]> {
-    return this.http.get<JobApiResponse[]>(this.apiUrl + 'get_jobs.php');
+  getJobs(userId?: number): Observable<JobApiResponse[]> {
+    return this.http.get<JobApiResponse[]>(
+      this.apiUrl + `get_jobs.php?userId=${userId}`
+    );
   }
 
   getJobsByUser(userID: number): Observable<JobApiResponse[]> {
@@ -71,11 +75,17 @@ export class UserService {
     this.searchTermSubject.next({ term, jobType });
   }
 
-  searchJobs(term: string, jobType: string): Observable<any> {
+  searchJobs(term: string, jobType: string, userId: number): Observable<any> {
     let url = `${this.apiUrl}/search_jobs.php?term=${term}`;
+
     if (jobType) {
       url += `&jobType=${jobType}`;
     }
+
+    if (userId) {
+      url += `&userId=${userId}`;
+    }
+
     return this.http.get<any>(url);
   }
 
