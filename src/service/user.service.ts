@@ -51,6 +51,10 @@ export class UserService {
     return this.isLogin;
   }
 
+  logout(): void {
+    this.isLogin = false;
+  }
+
   getUserDetails(userid: number): Observable<UserDetailsResponse> {
     return this.http.post<UserDetailsResponse>
       (this.apiUrl + 'user_details.php', { user_id: userid });
