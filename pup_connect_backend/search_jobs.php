@@ -10,7 +10,6 @@ if (!isset($_GET['userId'])) {
 }
 
 $userID = intval($_GET['userId']);
-
 $searchTerm = isset($_GET['term']) ? $_GET['term'] : '';
 $jobType = isset($_GET['jobType']) ? $_GET['jobType'] : '';
 
@@ -25,24 +24,42 @@ $query = "SELECT * FROM jobposts
           WHERE (title LIKE ? OR Description LIKE ? OR Location LIKE ?)
           AND UserID NOT IN (?)";
 
+$searchTermPattern = "%{$searchTerm}%";
+$paramTypes = "ssis";
+$params = [$searchTermPattern, $searchTermPattern, $searchTermPattern, $userID];
+
 if (!empty($jobType)) {
     $query .= " AND JobType = ?";
+    $paramTypes .= "s";
+    $params[] = $jobType;
 }
 
 $stmt = $conn->prepare($query);
 
-$searchTermPattern = "%{$searchTerm}%";
-$stmt->bind_param("ssis", $searchTermPattern, $searchTermPattern, $searchTermPattern, $userID);
-
-if (!empty($jobType)) {
-    $stmt->bind_param("s", $jobType);
+if ($stmt === false) {
+    echo json_encode(array('message' => 'Statement preparation failed.'));
+    exit();
 }
+
+function refValues($arr)
+{
+    $refs = [];
+    foreach ($arr as $key => $value) {
+        $refs[$key] = &$arr[$key];
+    }
+    return $refs;
+}
+
+$paramsRefs = refValues($params);
+array_unshift($paramsRefs, $paramTypes);
+
+call_user_func_array([$stmt, 'bind_param'], $paramsRefs);
 
 $stmt->execute();
 
 $result = $stmt->get_result();
 
-$jobs = array();
+$jobs = [];
 while ($row = $result->fetch_assoc()) {
     $jobs[] = $row;
 }
