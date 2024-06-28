@@ -48,6 +48,7 @@ form{
     text-align: right;
     color: #666;
     text-decoration: none;
+    margin-top: 20px;
 }
 
 .forgot-password:hover {
@@ -71,5 +72,12 @@ form{
 
 .errMsg {
     color:red;
+    width: 200px; 
+    position: fixed;
     font-size: 18px;
+}
+
+#err{
+    margin-left: 25px;
+    margin-top: -30px;
 }
