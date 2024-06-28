@@ -4,9 +4,9 @@
     </div>
     <nav>
         <ul>
-            <li class="profile">
+            <li  routerLink="/profile" class="profile">
                 <img src="assets/Job_Page/Profile_IO.png" alt="Profile Icon">
-                <a routerLink="/profile"><span>PROFILE</span></a>
+                <a><span>PROFILE</span></a>
             </li>
             <li (click)="toggleDropdown();">
                 <img src="assets/Job_Page/Jobs_IO.png" alt="Jobs Icon">
@@ -17,16 +17,16 @@
                     alt="Dropdown Icon">
             </li>
             @if (isToggle) {
-            <li>
-                <a routerLink="/dashboard"><span>JOB FEED</span></a>
+            <li routerLink="/dashboard">
+                <a><span>JOB FEED</span></a>
             </li>
-            <li>
-                <a routerLink="/applied"><span>APPLIED</span></a>
+            <li routerLink="/applied">
+                <a><span>APPLIED</span></a>
             </li>
             }
-            <li class="client">
+            <li  routerLink="/client-page" class="client">
                 <img src="assets/Job_Page/Client_IO.png" alt="Client Icon">
-                <a routerLink="/client-page"><span>POST JOB</span></a>
+                <a><span>POST JOB</span></a>
             </li>
         </ul>
     </nav>

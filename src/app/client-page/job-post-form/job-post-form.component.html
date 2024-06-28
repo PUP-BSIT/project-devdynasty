@@ -36,14 +36,14 @@
         }
       </div>
       <div class="form-group">
-        <label for="rate">Rate:</label>
+        <label for="rate">Salary:</label>
         <input type="text" id="rate" formControlName="Rate">
         @if (rate!.invalid && (rate!.dirty || rate!.touched)) {
           @if (rate!.errors?.['required']) {
-            <small>Rate is required.</small>
+            <small>Salary is required.</small>
           }
           @if (rate!.errors?.['pattern']) {
-            <small @if="">Rate must be a number.</small>
+            <small @if="">Salary must be a number.</small>
           }
         }
       </div>
