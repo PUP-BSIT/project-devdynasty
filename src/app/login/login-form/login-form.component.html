@@ -28,18 +28,22 @@
             name="password" 
             placeholder="Password" 
             required>
-            @if (passwordControl.touched) {
-                @if (passwordControl.errors?.['required']) {
-                    <div class="errMsg">Password is required</div>
-                }
-            }
             <span class="password-toggle" (click)="togglePassword()">
               <i [class]="showPassword ? 'bx bx-show' : 'bx bx-hide'"></i>
             </span>
         </div>
-        <div>
-            <a href="#" class="forgot-password">Forgot your password?</a>
+
+        <div class="validator">
+          @if (passwordControl.touched) {
+            @if (passwordControl.errors?.['required']) {
+                <div class="errMsg" id="err">Password is required</div>
+            }
+        }
         </div>
+        <div>
+          <a href="#" class="forgot-password">Forgot your password?</a>
+      </div>
+
         <button type="submit" class="login-button" (click)="onSubmit()">
             LOG IN
         </button>
