@@ -9,6 +9,7 @@ import { AppliedPageComponent } from './applied-page/applied-page.component';
 import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-page.component';
 import { ClientPageComponent } from './client-page/client-page.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { HistoryComponent } from './history/history.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'history', component: HistoryComponent },
   { path: '', redirectTo: '/landing', pathMatch: 'full' }
 ];
 

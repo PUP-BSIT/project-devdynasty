@@ -1,0 +1,80 @@
+.history-content {
+    width: calc(100% - 200px);
+    margin-left: 150px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.job-item {
+    background: #f0f0f0;
+    color: black;
+    padding: 20px;
+    margin: 30px;
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.job-item:hover {
+    background: #b93f3e;
+    color: white;
+}
+
+.job-info {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    margin-left: 70px;
+    flex: 2;
+}
+
+.job-info h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.job-info p {
+    display: flex;
+    margin: 5px 0;
+}
+
+.job-location {
+    display: flex;
+    align-items: center;
+    flex: 2;
+}
+
+.job-location img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+.job-action {
+    display: flex;
+    align-items: center;
+    flex: 1.5;
+}
+
+.job-action span {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.job-action img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.results {
+    text-align: center;
+}

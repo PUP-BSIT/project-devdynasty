@@ -132,4 +132,8 @@ export class UserService {
     return this.http.post<any>(`${this.apiUrl}/withdraw_job.php`, 
       { UserID: userID, JobID: jobID });
   }
+
+  getWithdrawnJobs(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost/pup_connect_backend/get_withdrawn_jobs.php');
+  }  
 }
