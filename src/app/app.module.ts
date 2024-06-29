@@ -42,6 +42,8 @@ import { JobPostFeedComponent } from './client-page/job-post-feed/job-post-feed.
 import { EditJobModalComponent } from './client-page/edit-job-modal/edit-job-modal.component';
 import { HistoryComponent } from './history/history.component';
 import { WithdrawnJobsListComponent } from './history/withdrawn-jobs-list/withdrawn-jobs-list.component';
+import { ApplicantsSidebarComponent } from './client-page/applicants-sidebar/applicants-sidebar.component';
+import { ApplicantProfileModalComponent } from './client-page/applicant-profile-modal/applicant-profile-modal.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { WithdrawnJobsListComponent } from './history/withdrawn-jobs-list/withdr
     JobPostFeedComponent,
     EditJobModalComponent,
     HistoryComponent,
-    WithdrawnJobsListComponent
+    WithdrawnJobsListComponent,
+    ApplicantsSidebarComponent,
+    ApplicantProfileModalComponent
   ],
   imports: [
     BrowserModule,
