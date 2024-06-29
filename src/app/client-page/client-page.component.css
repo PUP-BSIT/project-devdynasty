@@ -15,7 +15,7 @@
 
 .job-post-form-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
 }
 
 .job-post-feed-container {
@@ -42,4 +42,12 @@ img {
     border-radius: 50%;
     width: 60px;
     height: 60px;
+}
+
+.main-content {
+    display: flex;
+    width: calc(50% - 200px);
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
 }

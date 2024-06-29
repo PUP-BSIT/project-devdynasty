@@ -9,6 +9,8 @@ import { UserService } from '../../service/user.service';
 export class ClientPageComponent implements OnInit {
   userName!: string | undefined;
   userPhoto!: string | undefined
+  selectedJob: any = null;
+  applicants: any[] = [];
 
   constructor(private userService: UserService) {}
 
@@ -16,5 +18,18 @@ export class ClientPageComponent implements OnInit {
     this.userName = this.userService.userName;
     this.userPhoto = 
       `http://localhost/pup_connect_backend/${this.userService.userPhoto}`;
+  }
+  
+  handleJobSelection(job: any): void {
+    this.selectedJob = job;
+    this.fetchApplicants(job.JobID);
+  }
+
+  fetchApplicants(jobID: number): void {
+    this.userService.getApplicantsByJob(jobID).subscribe(data => {
+      if (Array.isArray(data)) {
+        this.applicants = data;
+      }
+    });
   }
 }

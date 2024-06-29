@@ -9,10 +9,14 @@
                 alt="User Image">
         </app-header-dashboard>
     </div>
-    <div class="job-post-form-container">
-        <app-job-post-form></app-job-post-form>
-        <div class="job-post-feed-container">
-            <app-job-post-feed></app-job-post-feed>
-        </div>
-    </div> 
+    <div class="main-content">
+        <div class="job-post-form-container">
+            <app-job-post-form></app-job-post-form>
+            <div class="job-post-feed-container">
+                <app-job-post-feed
+                (selectJob)="handleJobSelection($event)">
+                </app-job-post-feed>>        
+            </div>
+        </div> 
+    </div>
 </div>
