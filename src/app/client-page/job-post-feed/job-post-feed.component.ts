@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { UserService } from '../../../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -12,6 +12,10 @@ export class JobPostFeedComponent implements OnInit {
   selectedJob: any = null;
   applicants: any = [];
   userID: number = this.userService.userID;
+  selectedJobId: number | null = null;
+  selectedJobTitle: string = '';
+
+  @Output() selectJob = new EventEmitter<any>();
 
   constructor(private userService: UserService, 
     private _snackBar: MatSnackBar) {}
@@ -24,22 +28,8 @@ export class JobPostFeedComponent implements OnInit {
     this.userService.getJobsByUser(userID).subscribe(data => {
       if (Array.isArray(data)) {
         this.jobs = data;
-      } else {
-        console.error('Expected an array of jobs but got:', data);
-      }
+      } 
       console.log(this.jobs);
-    });
-  }
-
-  fetchApplicantsByJob(jobID: number): void {
-    this.userService.getApplicantsByJob(jobID).subscribe(data => {
-      if (Array.isArray(data)) {
-        this.applicants = data;
-        console.log(this.applicants);
-      } else {
-        console.error('Expected an array of applicants but got:', data);
-      }
-      console.log(this.applicants);
     });
   }
 
@@ -78,8 +68,7 @@ export class JobPostFeedComponent implements OnInit {
     });
   }
 
-  viewApplicants(jobID: number): void {
-    this.fetchApplicantsByJob(jobID);
-
+  viewApplicants(job: any): void {
+    this.selectJob.emit(job);
   }
 }
