@@ -10,9 +10,11 @@ import { ProfileSetupPageComponent } from './profile-setup-page/profile-setup-pa
 import { ClientPageComponent } from './client-page/client-page.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { HistoryComponent } from './history/history.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
+  { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'edit-profile', component: EditProfileComponent },
   { path: 'client-page', component: ClientPageComponent },
   { path: 'profile-setup/:token', component: ProfileSetupPageComponent },
