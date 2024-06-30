@@ -87,16 +87,14 @@
               <i [class]="showPassword ? 'bx bx-show' : 'bx bx-hide'"></i>
           </span>
       </div>
-      @if(confirmPasswordControl.invalid && confirmPasswordControl.touched) {
-        @if(confirmPasswordControl.errors?.['required']) {
+        @if(confirmPasswordControl.invalid && confirmPasswordControl.touched 
+            && confirmPasswordControl.errors?.['required']) {
           <div class="error-message">Confirm Password is required</div>
         }
-      }
-      @if(confirmPasswordControl.dirty && !confirmPasswordControl.errors) {
-        @if(signupForm.hasError('mismatch')) {
+        @if(confirmPasswordControl.dirty && !confirmPasswordControl.errors 
+              && signupForm.hasError('mismatch')) {
           <div class="error-message">Passwords do not match</div>
         }
-      }
       <button 
         type="submit" 
         class="signup-button" 

@@ -34,11 +34,10 @@
         </div>
 
         <div class="validator">
-          @if (passwordControl.touched) {
-            @if (passwordControl.errors?.['required']) {
-                <div class="errMsg" id="err">Password is required</div>
-            }
-        }
+          @if(passwordControl.touched 
+                && passwordControl.errors?.['required']) {
+              <div class="errMsg" id="err">Password is required</div>
+          }
         </div>
         <button type="submit" class="login-button" (click)="onSubmit()">
             LOG IN
