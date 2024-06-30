@@ -2,7 +2,7 @@
     <app-sidebar></app-sidebar>
     <div class="client-header-container">
         <app-header-dashboard>
-            <h1>RECRUITMENT</h1>
+            <h1>POST JOB</h1>
             <span welcome>Hi, {{ userName }}</span>
             <img profile_picture 
                 [src]="userPhoto" 
@@ -18,5 +18,9 @@
                 </app-job-post-feed>>        
             </div>
         </div> 
+        <app-applicants-sidebar
+            [applicants]="applicants"
+            [jobTitle]="selectedJob?.Title">
+        </app-applicants-sidebar>
     </div>
 </div>

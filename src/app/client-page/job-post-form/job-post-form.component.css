@@ -1,8 +1,8 @@
 .job-post-form {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-top: -500px;
+    border-radius: 30px;
+    margin-top: -540px;
     margin-left: 40px;
     padding: 15px 40px;
     min-width: 760px;
@@ -12,7 +12,7 @@
 }
 
 .job-post-form h2 {
-    margin-top: 80px;
+    margin-top: 20px;
     margin-bottom: 30px;
     text-align: center;
     font-weight: bold;
@@ -42,7 +42,6 @@
 .form-group input {
     width: 100%;
     padding: 11px;
-    border: 1px solid #ddd;
     border-radius: 18px;
     background-color: #e9ecef;
     font-size: 1.5cap;
@@ -62,6 +61,7 @@
     padding: 12px;
     border: none;
     border-radius: 18px;
+    background-color: #e9ecef;
     width: 100%;
     font-size: 1.5cap;
 }

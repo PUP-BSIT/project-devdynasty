@@ -1,0 +1,18 @@
+<div class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="close()">&times;</span>
+    <h2>{{ applicant.name }}</h2>
+    <div class="profile-photo-container">
+      <img [src]="applicantProfilePhoto" 
+        alt="{{ applicant.name }}'s Photo" 
+        class="profile-photo">
+    </div>
+    <div class="applicant-details">
+      <p><strong>Email: </strong>{{ applicant.email }}</p>
+      <p><strong>Location: </strong>{{ applicant.location }}</p>
+      <p><strong>Phone Number: </strong>{{ applicant.phone_number }}</p>
+      <p><strong>Description: </strong>{{ applicant.description }}</p>
+      <p><strong>Skills: </strong>{{ applicant.skills }}</p>
+    </div>
+  </div>
+</div>

@@ -10,9 +10,12 @@ $conn = db_connect();
 
 $jobId = intval($_GET['jobId']);
 
-$sql = "SELECT applications.ApplicationID, applications.UserID, applications.ApplicationDate, users.name, users.email
+$sql = "SELECT applications.ApplicationID, applications.UserID, applications.ApplicationDate, 
+                users.name, users.email,
+                profiles.profile_picture, profiles.location, profiles.phone_number, profiles.description, profiles.skills
         FROM applications
         JOIN users ON applications.UserID = users.UserID
+        JOIN profiles ON users.UserID = profiles.UserID
         WHERE applications.JobID = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $jobId);
