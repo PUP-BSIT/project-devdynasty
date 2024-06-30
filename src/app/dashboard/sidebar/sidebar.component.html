@@ -1,37 +1,47 @@
 <div class="sidebar">
-    <div class="logo">
-        <img src="assets/Job_Page/logo_for_jobpage.png" alt="PUPconnect Logo">
-    </div>
+  <div class="logo">
+    <img src="assets/Job_Page/logo_for_jobpage.png" alt="PUPconnect Logo">
+  </div>
+  <div class="sidebar-content">
     <nav>
-        <ul>
-            <li  routerLink="/profile" class="profile">
-                <img src="assets/Job_Page/Profile_IO.png" alt="Profile Icon">
-                <a><span>PROFILE</span></a>
-            </li>
-            <li (click)="toggleDropdown();">
-                <img src="assets/Job_Page/Jobs_IO.png" alt="Jobs Icon">
-                <span>FIND JOB</span>
-                <img 
-                    src="assets/Job_Page/dropdown_icon.png"
-                    class="dropdown-icon"
-                    alt="Dropdown Icon">
-            </li>
-            @if (isToggle) {
-            <li routerLink="/dashboard">
-                <a><span>JOB FEED</span></a>
-            </li>
-            <li routerLink="/applied">
-                <a><span>APPLIED</span></a>
-            </li>
-            }
-            <li  routerLink="/client-page" class="client">
-                <img src="assets/Job_Page/Client_IO.png" alt="Client Icon">
-                <a><span>POST JOB</span></a>
-            </li>
-            <li routerLink="/history" class="history">
-                <img src="assets/Job_Page/History_IO.png" alt="History Icon">
-                <a><span>HISTORY</span></a>
-            </li>
-        </ul>
+      <ul>
+        <li routerLink="/profile" class="profile">
+          <img src="assets/Job_Page/Profile_IO.png" alt="Profile Icon">
+          <a><span>PROFILE</span></a>
+        </li>
+        <li (click)="toggleDropdown();" class="find-job">
+          <img src="assets/Job_Page/Jobs_IO.png" alt="Jobs Icon">
+          <span>FIND JOB</span>
+          <img 
+            src="assets/Job_Page/dropdown_icon.png"
+            class="dropdown-icon"
+            alt="Dropdown Icon">
+        </li>
+        <div [class.active]="isToggle" class="dropdown-menu">
+          <li routerLink="/dashboard">
+            <span>JOB FEED</span>
+          </li>
+          <li routerLink="/applied">
+            <span>APPLIED</span>
+          </li>
+        </div>
+        <li routerLink="/client-page" class="client">
+          <img src="assets/Job_Page/Client_IO.png" alt="Client Icon">
+          <a><span>POST JOB</span></a>
+        </li>
+        <li routerLink="/history" class="history">
+          <img src="assets/Job_Page/History_IO.png" alt="History Icon">
+          <a><span>HISTORY</span></a>
+        </li>
+      </ul>
     </nav>
+  </div>
+  <nav class="logout-nav">
+    <ul>
+      <li (click)="logout()" class="logout">
+        <img src="assets/Job_Page/Logout_IO.png" alt="Logout Icon">
+        <a><span>LOGOUT</span></a>
+      </li>
+    </ul>
+  </nav>
 </div>
