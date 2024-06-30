@@ -8,6 +8,7 @@ import { UserDetailsResponse } from '../model/user_details_api_response';
 import { JobApiResponse } from '../model/job_form_api_response';
 import { UpdateProfileApiResponse } from '../model/update_profile_api_response';
 import { ApplicationResponse } from '../model/create_application_api_response'
+import { ForgotPasswordResponse } from '../model/forgot_password_api_response';
 
 @Injectable()
 export class UserService {
@@ -136,4 +137,10 @@ export class UserService {
   getWithdrawnJobs(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost/pup_connect_backend/get_withdrawn_jobs.php');
   }  
+  
+  sendVerificationCode(email: string): Observable<ForgotPasswordResponse> {
+    return this.http.post<ForgotPasswordResponse>(
+      `${this.apiUrl}/forgot_password.php`, { email }
+    );
+  }
 }
