@@ -22,7 +22,7 @@ export class HistoryComponent implements OnInit {
       this.userPhoto = 
         `http://localhost/pup_connect_backend/${this.userService.userPhoto}`;
       
-      this.userService.getWithdrawnJobs().subscribe(data => {
+      this.userService.getWithdrawnJobs(this.userService.userID).subscribe(data => {
         this.withdrawnJobs = data;
       });
     }
