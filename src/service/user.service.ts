@@ -151,9 +151,9 @@ export class UserService {
       { UserID: userID, JobID: jobID });
   }
 
-  getWithdrawnJobs(): Observable<WithdrawnJobsApiResponse[]> {
-    return this.http.get<WithdrawnJobsApiResponse[]>('http://localhost/pup_connect_backend/get_withdrawn_jobs.php');
-  }  
+  getWithdrawnJobs(userID: number): Observable<WithdrawnJobsApiResponse[]> {
+    return this.http.get<WithdrawnJobsApiResponse[]>(`${this.apiUrl}get_withdrawn_jobs.php?userID=${userID}`);
+  } 
   
   sendVerificationCode(email: string): Observable<ForgotPasswordResponse> {
     return this.http.post<ForgotPasswordResponse>(
