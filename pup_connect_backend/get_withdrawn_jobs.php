@@ -8,11 +8,23 @@ require 'config.php';
 
 $conn = db_connect();
 
+// Check if userID is provided
+if (isset($_GET['userID'])) {
+    $userID = intval($_GET['userID']);
+} else {
+    echo json_encode(["error" => "UserID not provided"]);
+    exit();
+}
+
 $sql = "SELECT w.JobID, w.UserID, w.WithdrawnDate, j.Title, j.Description, j.Location, j.JobType, j.Rate, j.Date 
         FROM withdrawn_jobs w 
-        JOIN jobposts j ON w.JobID = j.JobID";
+        JOIN jobposts j ON w.JobID = j.JobID
+        WHERE w.UserID = ?";
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userID);
+$stmt->execute();
+$result = $stmt->get_result();
 
 $withdrawn_jobs = array();
 
@@ -22,7 +34,7 @@ if ($result) {
             $withdrawn_jobs[] = $row;
         }
     } else {
-        echo json_encode(["message" => "No withdrawn jobs found"]);
+        echo json_encode(["message" => "No withdrawn jobs found for the given user ID"]);
         exit();
     }
 } else {

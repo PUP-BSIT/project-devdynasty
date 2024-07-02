@@ -12,7 +12,8 @@ export class WithdrawnJobsListComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.getWithdrawnJobs().subscribe(data => {
+    const userID = this.userService.userID;
+    this.userService.getWithdrawnJobs(userID).subscribe(data => {
       this.withdrawnJobs = data;
     });
   }
