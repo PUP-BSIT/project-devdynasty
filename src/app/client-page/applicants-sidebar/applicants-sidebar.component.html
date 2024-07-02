@@ -1,20 +1,25 @@
 <div class="applicants-sidebar">
   <h3>Applicants for {{ jobTitle }}:</h3>
-  <div *ngIf="groupedApplicants && groupedApplicants.length > 0; 
-        else noApplicantsTemplate">
-      <div *ngFor="let group of groupedApplicants" class="applicant-group">
-          <h4><strong>Application Date: </strong>{{ group.date }}</h4>
-          <div *ngFor="let applicant of group.applicants" class="applicant">
-              <h5>{{ applicant.name }}</h5>
-              <a href="mailto:{{ applicant.email }}">
-                <strong>Email Applicant</strong></a>
-              <button (click)="viewProfile(applicant)">View Profile</button>
-          </div>
+  @if (groupedApplicants && groupedApplicants.length > 0) {
+  <div>
+    @for (group of groupedApplicants; track $index) {
+    <div class="applicant-group">
+      <h4><strong>Application Date: </strong>{{ group.date }}</h4>
+      @for (applicant of group.applicants; track $index) {
+        <div class="applicant">
+          <h5>{{ applicant.name }}</h5>
+          <a href="mailto:{{ applicant.email }}">
+            <strong>Email Applicant</strong></a>
+          <button (click)="viewProfile(applicant)">View Profile</button>
       </div>
+      }
+    </div>
+    }
   </div>
-  <ng-template #noApplicantsTemplate>
-      <p>No applicants.</p>
-  </ng-template>
+  }
+  @else {
+    <p>No applicants.</p>
+  }
 
   <app-applicant-profile-modal
   *ngIf="selectedApplicant"

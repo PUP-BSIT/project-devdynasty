@@ -11,10 +11,10 @@ export class DescriptionComponent implements OnChanges {
   skills: string[] = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['dataFromParent'] && changes['dataFromParent'].currentValue) {
-      this.dataFromParent = changes['dataFromParent'].currentValue;
-
-      this.skills = this.dataFromParent.data!.skills.split(', ');
+    if (!changes['dataFromParent'] || !changes['dataFromParent'].currentValue) {
+      return;
     }
-  }
+    this.dataFromParent = changes['dataFromParent'].currentValue;
+    this.skills = this.dataFromParent.data!.skills.split(', ');
+  }  
 }

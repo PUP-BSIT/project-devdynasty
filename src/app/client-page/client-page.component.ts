@@ -29,6 +29,7 @@ export class ClientPageComponent implements OnInit {
     this.userService.getApplicantsByJob(jobID).subscribe(data => {
       if (Array.isArray(data)) {
         this.applicants = data;
+        return;
       }
     });
   }

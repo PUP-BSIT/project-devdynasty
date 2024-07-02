@@ -11,10 +11,11 @@ export class HeadProfileComponent implements OnChanges {
   profileImageUrl!: string;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['dataFromParent'] && changes['dataFromParent'].currentValue) {
-      this.dataFromParent = changes['dataFromParent'].currentValue;
-      this.profileImageUrl = `http://localhost/pup_connect_backend/${
-        this.dataFromParent.data?.profile_picture}`
+    if (!changes['dataFromParent'] || !changes['dataFromParent'].currentValue) {
+      return;
     }
+    this.dataFromParent = changes['dataFromParent'].currentValue;
+    this.profileImageUrl = `http://localhost/pup_connect_backend/${
+      this.dataFromParent.data?.profile_picture}`;
   }
 }

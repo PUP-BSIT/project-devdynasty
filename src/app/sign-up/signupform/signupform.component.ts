@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, ValidatorFn, AbstractControl, 
+          ValidationErrors } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from '../../../service/user.service';
 
@@ -13,7 +14,8 @@ export class SignupformComponent implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private userService: UserService, 
+                private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({

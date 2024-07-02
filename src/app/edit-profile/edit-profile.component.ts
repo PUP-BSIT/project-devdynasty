@@ -1,23 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
+import { fileSizeValidator } from '../../shared_functions/file_size_validator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserDetailsResponse } from '../../model/user_details_api_response'; 
-
-export function fileSizeValidator(maxSize: number): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const file = control.value as File;
-    if (file) {
-      const fileSize = file.size / (1024 * 1024);
-      if (fileSize > maxSize) {
-        return { 'fileSizeExceeded': { value: control.value } };
-      }
-    }
-    return null;
-  };
-}
-
 
 @Component({
   selector: 'app-edit-profile',
@@ -43,8 +30,6 @@ export class EditProfileComponent implements OnInit {
         phoneNumber: [''],
         skills: ['']
       });
-
-      console.log(this.editProfileForm);
       
       const userid = this.userService.userID;
       this.userService.getUserDetails(userid).subscribe((response) => {
@@ -53,7 +38,6 @@ export class EditProfileComponent implements OnInit {
           this.userDetails?.data?.profile_picture);
         this.setFormValues();
         this.editProfileForm.updateValueAndValidity();
-        console.log(this.userDetails);
       });
     }
 
@@ -74,7 +58,6 @@ export class EditProfileComponent implements OnInit {
 
         this.editProfileForm.updateValueAndValidity();
       }
-      console.log(this.editProfileForm.value);
     }
 
     getProfileImageUrl(profilePicture: string | undefined): string {
@@ -87,8 +70,8 @@ export class EditProfileComponent implements OnInit {
       this.editProfileForm.get('profilePicture')?.updateValueAndValidity();
     }
 
-    formDataToObject(formData: FormData): any {
-      const obj: any = {};
+    formDataToObject(formData: FormData): {[key: string]: FormDataEntryValue} {
+      const obj: {[key: string]: FormDataEntryValue} = {};
       formData.forEach((value, key) => {
         obj[key] = value;
       });
@@ -109,8 +92,6 @@ export class EditProfileComponent implements OnInit {
         formData.append('location', this.editProfileForm.value.location);
         formData.append('phoneNumber', this.editProfileForm.value.phoneNumber);
         formData.append('skills', this.editProfileForm.value.skills);
-
-        console.log(this.formDataToObject(formData));
 
         this.userService.editProfile(formData).subscribe(response => {
           console.log(response);

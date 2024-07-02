@@ -16,9 +16,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
+      return;
     }
     this.userName = this.userService.userName;
     this.userPhoto = 
       `http://localhost/pup_connect_backend/${this.userService.userPhoto}`;
-  }
+  }  
 }

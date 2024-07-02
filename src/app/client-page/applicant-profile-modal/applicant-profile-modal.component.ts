@@ -11,7 +11,8 @@ export class ApplicantProfileModalComponent implements OnInit{
   applicantProfilePhoto!: string | undefined;
 
   ngOnInit(){
-    this.applicantProfilePhoto = `http://localhost/pup_connect_backend/${this.applicant.profile_picture}`;
+    this.applicantProfilePhoto = 
+      `http://localhost/pup_connect_backend/${this.applicant.profile_picture}`;
   }
 
   close() {
