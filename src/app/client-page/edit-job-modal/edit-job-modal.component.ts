@@ -26,6 +26,7 @@ export class EditJobModalComponent implements OnInit {
   ngOnInit(): void {
     if (this.job) {
       this.jobForm.patchValue(this.job);
+      return;
     }
   }
 
@@ -33,6 +34,7 @@ export class EditJobModalComponent implements OnInit {
     if (this.jobForm.valid) {
       const updatedJob = { ...this.job, ...this.jobForm.value };
       this.save.emit(updatedJob);
+      return;
     }
   }
 

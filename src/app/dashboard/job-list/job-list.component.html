@@ -1,24 +1,26 @@
 <div class="job-list">
     @if (jobs.length) {
-    <div class="job-item" *ngFor="let job of jobs"
-        [ngClass]="{'highlighted': job.UserID}">
-        <div class="job-info">
-            <h2>{{ job.Title }}</h2>
-            <p>{{ job.Description }}</p>
+        @for (job of jobs; track $index) {
+        <div class="job-item"
+            [ngClass]="{'highlighted': job.UserID}">
+            <div class="job-info">
+                <h2>{{ job.Title }}</h2>
+                <p>{{ job.Description }}</p>
+            </div>
+            <div class="job-location">
+                <img src="assets/Job_Page/globe_icon.png" alt="Location Icon">
+                <span>{{ job.Location }}</span>
+            </div>
+            <div class="job-action">
+                <img src="assets/Job_Page/money_icon.png" alt="Salary Icon"
+                    class="salary-icon">
+                <span>{{ job.Rate }}</span>
+                <button (click)="openJobPostDialog(job, $event.target)">
+                    APPLY NOW!
+                </button>
+            </div>
         </div>
-        <div class="job-location">
-            <img src="assets/Job_Page/globe_icon.png" alt="Location Icon">
-            <span>{{ job.Location }}</span>
-        </div>
-        <div class="job-action">
-            <img src="assets/Job_Page/money_icon.png" alt="Salary Icon"
-                class="salary-icon">
-            <span>{{ job.Rate }}</span>
-            <button (click)="openJobPostDialog(job, $event.target)">
-                APPLY NOW!
-            </button>
-        </div>
-    </div>    
+        }    
     }
     @else {
     <div class="results">No Jobs Available</div>

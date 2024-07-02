@@ -9,8 +9,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
+import { UserService } from '../service/user.service';
+import { ActiveLinkService } from '../service/active-link.service';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderDashboardComponent } from './dashboard/header-dashboard/header-dashboard.component';
@@ -20,7 +22,6 @@ import { SearchContentComponent } from './dashboard/search-content/search-conten
 import { LandingComponent } from './landing/landing.component';
 import { HeaderComponent } from './landing/header/header.component';
 import { BodyComponent } from './landing/body/body.component';
-import { ActiveLinkService } from '../service/active-link.service';
 import { LoginComponent } from './login/login.component';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { SignupSectionComponent } from './login/signup-section/signup-section.component';
@@ -30,7 +31,6 @@ import { HeadProfileComponent } from './profile/head-profile/head-profile.compon
 import { ProfileHeaderComponent } from './profile/profile-header/profile-header.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignupformComponent } from './sign-up/signupform/signupform.component';
-import { UserService } from '../service/user.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppliedPageComponent } from './applied-page/applied-page.component';
 import { AppliedJobListComponent } from './applied-page/applied-job-list/applied-job-list.component';

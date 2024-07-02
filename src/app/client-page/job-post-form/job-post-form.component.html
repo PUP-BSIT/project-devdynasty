@@ -51,8 +51,11 @@
     <div class="form-row">
       <div class="form-group">
         <label for="jobDescription">Job Description:</label>
-        <textarea id="jobDescription" formControlName="Description" rows="4"></textarea>
-        @if (jobDescription!.invalid && (jobDescription!.dirty || jobDescription!.touched)) {
+        <textarea 
+          id="jobDescription" formControlName="Description" rows="4">
+        </textarea>
+        @if (jobDescription!.invalid && (jobDescription!.dirty 
+              || jobDescription!.touched)) {
           @if (jobDescription!.errors?.['required']) {
             <small>Job description is required.</small>
           }

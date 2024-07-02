@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+
 import { SignUpApiResponse } from '../model/signup_api_response';
 import { LogInApiResponse } from '../model/login_api_response';
 import { SetUpProfileApiResponse} from '../model/setup_profile_api_response';
@@ -9,6 +10,15 @@ import { JobApiResponse } from '../model/job_form_api_response';
 import { UpdateProfileApiResponse } from '../model/update_profile_api_response';
 import { ApplicationResponse } from '../model/create_application_api_response'
 import { ForgotPasswordResponse } from '../model/forgot_password_api_response';
+import { VerifyUserApiResponse } from '../model/verify_user_api_response';
+import { SearchJobsApiResponse } from '../model/search_jobs_api_response';
+import { SearchAppliedJobsApiResponse } from '../model/search_applied_jobs_api_response';
+import { UpdateJobApiResponse } from '../model/update_job_api_response';
+import { DeleteJobApiResponse } from '../model/delete_job_api_response';
+import { AppliedJobsApiResponse } from '../model/applied_jobs_by_user_api_response';
+import { ApplicantsApiResponse } from '../model/applicants_by_jobs_api_response';
+import { WithdrawJobApiResponse } from '../model/withdraw_job_api_response';
+import { WithdrawnJobsApiResponse } from '../model/withdrawn_jobs_api_response';
 
 @Injectable()
 export class UserService {
@@ -33,6 +43,11 @@ export class UserService {
   setupProfile(formData: FormData): Observable<SetUpProfileApiResponse> {
     return this.http.post<SetUpProfileApiResponse>(this.apiUrl 
                                     + 'setup_profile.php', formData);
+  }
+
+  verifyUser(token: string): Observable<VerifyUserApiResponse> {
+    return this.http.get<VerifyUserApiResponse>(this.apiUrl + 
+      `verify_user.php?token=${token}`);
   }
 
   editProfile(formData: FormData): Observable<UpdateProfileApiResponse> {
@@ -80,7 +95,8 @@ export class UserService {
     this.searchTermSubject.next({ term, jobType });
   }
 
-  searchJobs(term: string, jobType: string, userId: number): Observable<any> {
+  searchJobs(term: string, jobType: string, userId: number): 
+                        Observable<SearchJobsApiResponse> {
     let url = `${this.apiUrl}/search_jobs.php?term=${term}`;
 
     if (jobType) {
@@ -94,7 +110,8 @@ export class UserService {
     return this.http.get<any>(url);
   }
 
-  searchAppliedJobs(userID: number, term: string, jobType: string): Observable<any> {
+  searchAppliedJobs(userID: number, term: string, jobType: string): 
+                                Observable<SearchAppliedJobsApiResponse> {
     let url = `${this.apiUrl}/search_applied_jobs.php?userID=${userID}&term=${term}`;
     if (jobType) {
       url += `&jobType=${jobType}`;
@@ -102,12 +119,12 @@ export class UserService {
     return this.http.get<any>(url);
   }
   
-  updateJob(jobID: number, jobData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}update_job.php?id=${jobID}`, jobData);
+  updateJob(jobID: number, jobData: any): Observable<UpdateJobApiResponse> {
+    return this.http.put<UpdateJobApiResponse>(`${this.apiUrl}update_job.php?id=${jobID}`, jobData);
   }
 
-  deleteJob(jobId: number): Observable<any> {
-    return this.http.delete<any>(
+  deleteJob(jobId: number): Observable<DeleteJobApiResponse> {
+    return this.http.delete<DeleteJobApiResponse>(
       `${this.apiUrl}/delete_job.php?JobID=${jobId}`
     );
   }
@@ -121,21 +138,21 @@ export class UserService {
       `${this.apiUrl}create_application.php`, applicationData);
   }
 
-  getAppliedJobsByUser(userID: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/get_applied_jobs.php?userID=${userID}`);
+  getAppliedJobsByUser(userID: number): Observable<AppliedJobsApiResponse> {
+    return this.http.get<AppliedJobsApiResponse>(`${this.apiUrl}/get_applied_jobs.php?userID=${userID}`);
   }
   
-  getApplicantsByJob(jobID: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/get_applicants.php?jobId=${jobID}`);
+  getApplicantsByJob(jobID: number): Observable<ApplicantsApiResponse> {
+    return this.http.get<ApplicantsApiResponse>(`${this.apiUrl}/get_applicants.php?jobId=${jobID}`);
   }
 
-  withdrawJob(userID: number, jobID: number): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/withdraw_job.php`, 
+  withdrawJob(userID: number, jobID: number): Observable<WithdrawJobApiResponse> {
+    return this.http.post<WithdrawJobApiResponse>(`${this.apiUrl}/withdraw_job.php`, 
       { UserID: userID, JobID: jobID });
   }
 
-  getWithdrawnJobs(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost/pup_connect_backend/get_withdrawn_jobs.php');
+  getWithdrawnJobs(): Observable<WithdrawnJobsApiResponse[]> {
+    return this.http.get<WithdrawnJobsApiResponse[]>('http://localhost/pup_connect_backend/get_withdrawn_jobs.php');
   }  
   
   sendVerificationCode(email: string): Observable<ForgotPasswordResponse> {

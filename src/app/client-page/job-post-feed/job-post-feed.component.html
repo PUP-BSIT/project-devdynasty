@@ -1,4 +1,5 @@
-<div *ngFor="let job of jobs" class="job-post">
+@for (job of jobs; track $index) {
+<div class="job-post">
   <h3>{{ job.Title }}</h3>
   <p><strong>Description:</strong> {{ job.Description }}</p>
   <p><strong>Location:</strong> {{ job.Location }}</p>
@@ -9,11 +10,14 @@
   <button (click)="openEditModal(job)">Edit</button>
   <button (click)="deleteJob(job.JobID)">Delete</button>
 </div>
+}
 
+@if (selectedJob) {
 <app-edit-job-modal
-  *ngIf="selectedJob"
   [job]="selectedJob"
   (close)="closeEditModal()"
   (save)="updateJob($event)">
 </app-edit-job-modal>
+}
+
 

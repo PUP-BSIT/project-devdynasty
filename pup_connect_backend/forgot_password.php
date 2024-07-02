@@ -19,7 +19,6 @@ function sendVerificationCode($email, $code)
 {
     $mail = new PHPMailer(true);
     try {
-        // Server settings
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -28,11 +27,9 @@ function sendVerificationCode($email, $code)
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        // Recipients
-        $mail->setFrom('devdynasty5@gmail.com', 'DevDynasty Team'); // Use your email and custom name
+        $mail->setFrom('devdynasty5@gmail.com', 'DevDynasty Team');
         $mail->addAddress($email);
 
-        // Content
         $mail->isHTML(true);
         $mail->Subject = 'Password Reset Verification Code';
         $mail->Body    = "Your verification code is: <b>$code</b>";
@@ -58,13 +55,6 @@ function saveVerificationCode($email, $code)
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Delete expired codes for the user
-    // $stmt = $conn->prepare("DELETE FROM users WHERE email = ? AND code_expiry < NOW()");
-    // $stmt->bind_param('s', $email);
-    // $stmt->execute();
-    // $stmt->close();
-
-    // Insert new verification code
     $stmt = $conn->prepare("UPDATE users SET verification_code = ?, code_expiry = ? WHERE email = ?");
     $expiry_time = date('Y-m-d H:i:s', strtotime('+1 hour'));
     $stmt->bind_param('sss', $code, $expiry_time, $email);
@@ -82,17 +72,14 @@ function verifyCode($email, $code)
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Check if the code is valid and not expired
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? AND verification_code = ? AND code_expiry > NOW()");
     $stmt->bind_param('ss', $email, $code);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Code is valid
         $stmt->close();
 
-        // Optionally remove the code after successful verification
         $stmt = $conn->prepare("UPDATE users SET verification_code = NULL, code_expiry = NULL WHERE email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -101,7 +88,6 @@ function verifyCode($email, $code)
         $conn->close();
         return true;
     } else {
-        // Code is invalid or expired
         $stmt->close();
         $conn->close();
         return false;
