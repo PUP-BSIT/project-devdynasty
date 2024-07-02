@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../../service/user.service';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { WithdrawConfirmMessageComponent } from '../withdraw-confirm-message/withdraw-confirm-message.component';
 
 @Component({
   selector: 'app-applied-job-list',
@@ -13,7 +15,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
   filteredJobs: any[] = [];
   searchTermSubscription: Subscription = new Subscription();
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.searchTermSubscription = this.userService.searchTerm$.subscribe(
@@ -60,6 +62,18 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
     }));
   }
 
+  confirmWithdrawJob(jobID: number): void {
+    const dialogRef = this.dialog.open(WithdrawConfirmMessageComponent, {
+      width: '450px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.withdrawJob(jobID);
+      }
+    });
+  }
+  
   withdrawJob(jobID: number): void {
     this.userService.withdrawJob(this.userID, jobID).subscribe(
       response => {

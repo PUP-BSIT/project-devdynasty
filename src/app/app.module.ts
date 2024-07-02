@@ -46,6 +46,7 @@ import { ApplicantsSidebarComponent } from './client-page/applicants-sidebar/app
 import { ApplicantProfileModalComponent } from './client-page/applicant-profile-modal/applicant-profile-modal.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DeleteConfirmMessageComponent } from './client-page/delete-confirm-message/delete-confirm-message.component';
+import { WithdrawConfirmMessageComponent } from './applied-page/withdraw-confirm-message/withdraw-confirm-message.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { DeleteConfirmMessageComponent } from './client-page/delete-confirm-mess
     ApplicantsSidebarComponent,
     ApplicantProfileModalComponent,
     ForgotPasswordComponent,
-    DeleteConfirmMessageComponent
+    DeleteConfirmMessageComponent,
+    WithdrawConfirmMessageComponent
   ],
   imports: [
     BrowserModule,

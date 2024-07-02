@@ -14,7 +14,9 @@
             <img src="{{ job.salaryIcon }}" alt="Salary Icon" 
                 class="salary-icon">
             <span>{{ job.salary }}</span>
-            <button (click)="withdrawJob(job.JobID)">Withdraw</button>
+            <button mat-button color="warn" 
+                (click)="confirmWithdrawJob(job.JobID)">Withdraw
+            </button>
         </div>
     </div>
     }
