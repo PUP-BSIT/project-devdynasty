@@ -44,7 +44,7 @@ export class JobListComponent implements OnInit, OnDestroy{
     }
     this.dialogRef = this.dialog.open(this.jobDialogTemplate, {
       width: '400px',
-      height: '300px',
+      height: '470px',
       data: { job }
     });
   }
