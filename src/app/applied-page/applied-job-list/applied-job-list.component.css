@@ -96,3 +96,7 @@
 .results {
     text-align: center;
 }
+
+.expired-message {
+    color: #b93f3e;
+}

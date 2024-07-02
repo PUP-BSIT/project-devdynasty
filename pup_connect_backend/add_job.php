@@ -15,16 +15,19 @@ if (!$conn) {
 
 $data = json_decode(file_get_contents("php://input"));
 
+date_default_timezone_set('Asia/Manila');
+$currentDateTime = date('Y-m-d H:i:s');
+
 if (!empty($data->UserID) && !empty($data->Title) && !empty($data->Description) 
         && !empty($data->Location) && !empty($data->JobType) && !empty($data->Rate) 
         && !empty($data->Date)) {
-    $sql = "INSERT INTO jobposts (UserID, Title, Description, Location, JobType, Rate, Date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO jobposts (UserID, Title, Description, Location, JobType, Rate, Date, Posted_Date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         echo json_encode(array('message' => 'Failed to prepare statement.'));
         exit();
     }
-    $stmt->bind_param("issssis", $data->UserID, $data->Title, $data->Description, $data->Location, $data->JobType, $data->Rate, $data->Date);
+    $stmt->bind_param("issssiss", $data->UserID, $data->Title, $data->Description, $data->Location, $data->JobType, $data->Rate, $data->Date, $currentDateTime);
 
     if ($stmt->execute()) {
         echo json_encode(array('message' => 'Job added successfully.'));
