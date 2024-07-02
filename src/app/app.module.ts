@@ -45,6 +45,7 @@ import { WithdrawnJobsListComponent } from './history/withdrawn-jobs-list/withdr
 import { ApplicantsSidebarComponent } from './client-page/applicants-sidebar/applicants-sidebar.component';
 import { ApplicantProfileModalComponent } from './client-page/applicant-profile-modal/applicant-profile-modal.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DeleteConfirmMessageComponent } from './client-page/delete-confirm-message/delete-confirm-message.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     WithdrawnJobsListComponent,
     ApplicantsSidebarComponent,
     ApplicantProfileModalComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    DeleteConfirmMessageComponent
   ],
   imports: [
     BrowserModule,
