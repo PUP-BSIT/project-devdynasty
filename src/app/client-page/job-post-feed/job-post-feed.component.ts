@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter  } from '@angular/core';
 import { UserService } from '../../../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmMessageComponent } from '../delete-confirm-message/delete-confirm-message.component';
 
 @Component({
   selector: 'app-job-post-feed',
@@ -18,7 +20,7 @@ export class JobPostFeedComponent implements OnInit {
   @Output() selectJob = new EventEmitter<any>();
 
   constructor(private userService: UserService, 
-    private _snackBar: MatSnackBar) {}
+    private _snackBar: MatSnackBar, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.fetchJobsByUser(this.userID);
@@ -57,6 +59,18 @@ export class JobPostFeedComponent implements OnInit {
         });
       }
     );
+  }
+
+  confirmDeleteJob(jobId: number): void {
+    const dialogRef = this.dialog.open(DeleteConfirmMessageComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteJob(jobId);
+      }
+    });
   }
 
   deleteJob(jobId: number): void {
