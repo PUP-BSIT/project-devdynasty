@@ -19,6 +19,7 @@ import { AppliedJobsApiResponse } from '../model/applied_jobs_by_user_api_respon
 import { ApplicantsApiResponse } from '../model/applicants_by_jobs_api_response';
 import { WithdrawJobApiResponse } from '../model/withdraw_job_api_response';
 import { WithdrawnJobsApiResponse } from '../model/withdrawn_jobs_api_response';
+import { VerifyCodeApiResponse } from '../model/verify_code_api_response';
 
 @Injectable()
 export class UserService {
@@ -158,6 +159,12 @@ export class UserService {
   sendVerificationCode(email: string): Observable<ForgotPasswordResponse> {
     return this.http.post<ForgotPasswordResponse>(
       `${this.apiUrl}/forgot_password.php`, { email }
+    );
+  }
+
+  verifyVerificationCode(code: string): Observable<VerifyCodeApiResponse> {
+    return this.http.post<VerifyCodeApiResponse>(
+      `${this.apiUrl}/verify_code.php`, { code }
     );
   }
 }
