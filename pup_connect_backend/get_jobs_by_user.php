@@ -29,11 +29,11 @@ if (!empty($data->UserID)) {
         while($row = $result->fetch_assoc()) {
             $jobs[] = $row;
         }
+        echo json_encode($jobs);
     } else {
         echo json_encode(array('message' => 'No jobs found for this UserID.'));
     }
-
-    echo json_encode($jobs);
+    
     $stmt->close();
 } else {
     echo json_encode(array('message' => 'UserID is required.'));

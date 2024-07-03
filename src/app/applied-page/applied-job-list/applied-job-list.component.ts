@@ -14,6 +14,14 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
   userID: number = this.userService.userID;
   filteredJobs: any[] = [];
   searchTermSubscription: Subscription = new Subscription();
+  now = new Date();
+  offset = this.now.getTimezoneOffset() * 60000;
+  philippinesTime = new Date(this.now.getTime() + this.offset + (8 * 3600000));
+  year = this.philippinesTime.getFullYear();
+  month = String(this.philippinesTime.getMonth() + 1).padStart(2, '0');
+  day = String(this.philippinesTime.getDate()).padStart(2, '0');
+
+  formattedDate = `${this.year}-${this.month}-${this.day}`;
 
   constructor(private userService: UserService, public dialog: MatDialog) {}
 
@@ -55,6 +63,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
       company: job.Description,
       location: job.Location,
       salary: `$ ${job.Rate}`,
+      date: job.Date,
       highlighted: false,
       icon: 'assets/Job_Page/globe_icon.png',
       salaryIcon: 'assets/Job_Page/money_icon.png',

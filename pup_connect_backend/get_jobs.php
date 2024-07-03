@@ -18,13 +18,27 @@ if (!$conn) {
     exit();
 }
 
+date_default_timezone_set('Asia/Manila');
+$currentDate = date('Y-m-d H:i:s');
+
 $sql = "SELECT jobposts.*, users.name
         FROM jobposts 
         JOIN users ON jobposts.UserID = users.userID
-        WHERE jobposts.UserID != ?";
+        WHERE jobposts.UserID != ?
+        AND jobposts.JobID NOT IN (
+            SELECT JobID 
+            FROM applications 
+            WHERE UserID = ?
+        ) AND jobposts.Date >= ?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $userID);
+
+if ($stmt === false) {
+    echo json_encode(array('message' => 'Statement preparation failed.', 'error' => $conn->error));
+    exit();
+}
+
+$stmt->bind_param("iis", $userID, $userID, $currentDate);
 
 $stmt->execute();
 
@@ -39,3 +53,4 @@ $stmt->close();
 $conn->close();
 
 echo json_encode($jobs);
+?>

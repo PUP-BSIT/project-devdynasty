@@ -8,7 +8,8 @@ export type JobApiResponse = {
     Rate: number;
     UserID: number;
     JobID: number;
-    name: string
+    name: string;
+    Posted_Date: string;
   }    
   message: string;     
 };
