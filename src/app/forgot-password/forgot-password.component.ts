@@ -11,8 +11,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm!: FormGroup;
+  otpForm!: FormGroup;
 
   isButtonDisabled: boolean = false;
+  isModalVisible: boolean = false;
   countdown: number = 0;
   readonly cooldownTime: number = 60;
   hasAttemptedToSend: boolean = false;
@@ -30,6 +32,15 @@ export class ForgotPasswordComponent implements OnInit {
           this.emailDomainValidator('@iskolarngbayan.pup.edu.ph')
         ]
       ]
+    });
+
+    this.otpForm = this.fb.group({
+      otp1: ['', [Validators.required, Validators.maxLength(1)]],
+      otp2: ['', [Validators.required, Validators.maxLength(1)]],
+      otp3: ['', [Validators.required, Validators.maxLength(1)]],
+      otp4: ['', [Validators.required, Validators.maxLength(1)]],
+      otp5: ['', [Validators.required, Validators.maxLength(1)]],
+      otp6: ['', [Validators.required, Validators.maxLength(1)]]
     });
   }
 
@@ -63,16 +74,17 @@ export class ForgotPasswordComponent implements OnInit {
       if (response.status === 'success') {
         this.startCountdown();
         this.hasAttemptedToSend = true;
+        this.isModalVisible = true;
         this._snackBar.open(response.message, 'Close', {
           duration: 5000,
         });
-        return
+        return;
       }
       if (response.message === 'Email address not found') {
         this._snackBar.open(response.message, 'Close', {
           duration: 5000,
         });
-        return
+        return;
       }
       this._snackBar.open('Something went wrong.', 'Close', {
         duration: 5000,
@@ -90,5 +102,38 @@ export class ForgotPasswordComponent implements OnInit {
         this.isButtonDisabled = false;
       }
     }, 1000);
+  }
+
+  limitInputLength(event: KeyboardEvent, nextControlName: string | null) {
+    const input = event.target as HTMLInputElement;
+    if (input.value.length === 1 && nextControlName) {
+      const nextInput = document.querySelector(`[formControlName="${nextControlName}"]`) as HTMLInputElement;
+      if (nextInput) {
+        nextInput.focus();
+      }
+    }
+  }
+
+  onOtpSubmit() {
+    if (!this.otpForm.valid) {
+      return;
+    }
+
+    const otp = Object.values(this.otpForm.value).join('');
+    console.log(otp);
+    
+    this.userService.verifyVerificationCode(otp).subscribe(response => {
+      if (response.status === 'error') {
+        this._snackBar.open(response.message, 'Close', {
+          duration: 5000,
+        });
+        this.otpForm.reset();
+        return;
+      }
+      this._snackBar.open(response.message, 'Close', {
+        duration: 5000,
+      });
+      this.otpForm.reset();
+    })
   }
 }
