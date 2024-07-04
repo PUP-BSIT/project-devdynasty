@@ -36,7 +36,10 @@ export class ProfileSetupPageComponent implements OnInit {
 
   verifyToken(token: string): void {
     this.userService.verifyUser(token).subscribe(response => {
-      console.log(response);
+      this._snackBar.open(`${response.message}. Please complete your 
+      information`, 'Close', {
+        duration: 5000,
+      });
     });
   }
 
@@ -46,7 +49,9 @@ export class ProfileSetupPageComponent implements OnInit {
 
   onSubmit(): void {
     if (!this.profileForm.valid || !this.selectedFile) {
-      console.error('Form is invalid or no file selected');
+      this._snackBar.open('Please fill up the form properly.', 'Close', {
+        duration: 5000,
+      });
       return;
     }
 

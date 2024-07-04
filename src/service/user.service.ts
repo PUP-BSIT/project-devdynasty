@@ -33,7 +33,7 @@ export class UserService {
 
   searchTerm$ = this.searchTermSubject.asObservable();
 
-  private apiUrl = 'http://localhost/pup_connect_backend/';
+  private apiUrl = 'https://pupconnect.online/pup_connect_backend/';
 
   constructor(private http: HttpClient) { }
 

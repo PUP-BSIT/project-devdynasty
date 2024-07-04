@@ -20,6 +20,6 @@ export class DashboardComponent implements OnInit {
     }
     this.userName = this.userService.userName;
     this.userPhoto = 
-      `http://localhost/pup_connect_backend/${this.userService.userPhoto}`;
+      `https://pupconnect.online/pup_connect_backend/${this.userService.userPhoto}`;
   }  
 }

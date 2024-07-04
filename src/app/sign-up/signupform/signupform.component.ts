@@ -104,6 +104,9 @@ export class SignupformComponent implements OnInit {
 
   onSubmit(): void {
     if (this.signupForm.valid) {
+      this._snackBar.open('Please wait...', 'Close', {
+        duration: 5000,
+      });
       const user = this.signupForm.value;
       this.userService.signUpUser(user).subscribe(response => {
         this._snackBar.open(response.message, 'Close', {

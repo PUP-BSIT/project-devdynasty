@@ -1,9 +1,9 @@
 <?php
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'pup_connect');
+define('DB_SERVER', '127.0.0.1:3306');
+define('DB_USERNAME', 'u659407534_pup_connect');
+define('DB_PASSWORD', 'PUPConnect05');
+define('DB_NAME', 'u659407534_pupconnect');
 
 function db_connect()
 {

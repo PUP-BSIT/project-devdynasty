@@ -12,7 +12,7 @@ export class ApplicantProfileModalComponent implements OnInit{
 
   ngOnInit(){
     this.applicantProfilePhoto = 
-      `http://localhost/pup_connect_backend/${this.applicant.profile_picture}`;
+      `https://pupconnect.online/pup_connect_backend/${this.applicant.profile_picture}`;
   }
 
   close() {

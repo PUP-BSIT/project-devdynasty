@@ -15,7 +15,7 @@ export class HeadProfileComponent implements OnChanges {
       return;
     }
     this.dataFromParent = changes['dataFromParent'].currentValue;
-    this.profileImageUrl = `http://localhost/pup_connect_backend/${
+    this.profileImageUrl = `https://pupconnect.online/pup_connect_backend/${
       this.dataFromParent.data?.profile_picture}`;
   }
 }
