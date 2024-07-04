@@ -61,7 +61,7 @@ export class EditProfileComponent implements OnInit {
     }
 
     getProfileImageUrl(profilePicture: string | undefined): string {
-      return `http://localhost/pup_connect_backend/${profilePicture}`;
+      return `https://pupconnect.online/pup_connect_backend/${profilePicture}`;
     }
 
     onFileSelected(event: any) {
@@ -94,7 +94,6 @@ export class EditProfileComponent implements OnInit {
         formData.append('skills', this.editProfileForm.value.skills);
 
         this.userService.editProfile(formData).subscribe(response => {
-          console.log(response);
           const message = response.message;
           if (message === 'Profile updated successfully.') {
             this.router.navigate(['/profile'])

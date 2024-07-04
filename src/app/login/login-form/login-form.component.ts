@@ -60,10 +60,8 @@ export class LoginFormComponent implements OnInit{
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      console.log('Form Submitted', this.loginForm.value);
       const user = this.loginForm.value;
       this.userService.loginUser(user).subscribe(response => {
-        console.log(response);
         this.loginForm.reset();
         if (response.status === 'success') {
           this.userService.setLoginStatus(true);
