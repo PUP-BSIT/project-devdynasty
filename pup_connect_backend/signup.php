@@ -81,7 +81,7 @@ function register_user($name, $email, $password, $token)
             $mail->isHTML(true);
             $mail->Subject = 'Email Verification';
             $mail->Body    = "Please click the link below to verify your email address:<br>";
-            $mail->Body   .= "<a href='http://localhost:4200/profile-setup/$token'>Set up your profile</a>";
+            $mail->Body   .= "<a href='https://pupconnect.online/profile-setup/$token'>Set up your profile</a>";
 
             if ($mail->send()) {
                 if (mysqli_stmt_execute($stmt)) {
