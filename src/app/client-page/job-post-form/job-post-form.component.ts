@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { JobApiResponse } from '../../../model/job_form_api_response';
 import { UserService } from '../../../service/user.service';
@@ -11,6 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class JobPostFormComponent{
   jobPostForm: FormGroup;
+
+  @Output() jobPosted = new EventEmitter<void>();
 
   constructor(private fb: FormBuilder, private userService: UserService, 
       private _snackBar: MatSnackBar) {
@@ -60,6 +62,7 @@ export class JobPostFormComponent{
         this._snackBar.open(response.message, 'Close', {
           duration: 5000,
         });
+        this.jobPosted.emit();
       })
       this.jobPostForm.reset();
     }

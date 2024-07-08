@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../../service/user.service';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { WithdrawConfirmMessageComponent } from '../withdraw-confirm-message/withdraw-confirm-message.component';
 
 @Component({
@@ -23,7 +24,8 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
 
   formattedDate = `${this.year}-${this.month}-${this.day}`;
 
-  constructor(private userService: UserService, public dialog: MatDialog) {}
+  constructor(private userService: UserService, public dialog: MatDialog,
+                private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.searchTermSubscription = this.userService.searchTerm$.subscribe(
@@ -49,6 +51,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
       if (Array.isArray(data)) {
         this.jobs = this.mapJobData(data);
         this.filteredJobs = [...this.jobs];
+        console.log(this.jobs);
       } else {
         console.error('Expected an array of applied jobs but got:', data);
       }
@@ -86,9 +89,11 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
   withdrawJob(jobID: number): void {
     this.userService.withdrawJob(this.userID, jobID).subscribe(
       response => {
-        console.log('Job withdrawn successfully:', response);
-        this.filteredJobs = this.filteredJobs
-          .filter(job => job.JobID !== jobID);
+        this._snackBar.open("Job withdrawn successfully", 'Close', {
+          duration: 5000,
+        });
+        this.jobs = this.jobs.filter(job => job.JobID !== jobID);
+        this.filteredJobs = this.filteredJobs.filter(job => job.JobID !== jobID);
       },
       error => {
         console.error('Error withdrawing job:', error);
