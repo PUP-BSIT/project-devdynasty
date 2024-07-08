@@ -35,6 +35,7 @@ export class JobListComponent implements OnInit, OnDestroy{
   fetchJobs(): void {
     this.userService.getJobs(this.userService.userID).subscribe(data => {
       this.jobs = data;
+      console.log(this.jobs);
     });
   }
 
@@ -62,6 +63,7 @@ export class JobListComponent implements OnInit, OnDestroy{
         this._snackBar.open("Application Sent", 'Close', {
           duration: 5000,
         });
+        this.fetchJobs();
       } else {
         this._snackBar.open("There's something wrong", 'Close', {
           duration: 5000,

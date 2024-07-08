@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../service/user.service';
+import { JobPostFeedComponent } from './job-post-feed/job-post-feed.component';
 
 @Component({
   selector: 'app-client-page',
@@ -13,6 +14,8 @@ export class ClientPageComponent implements OnInit {
   applicants: any[] = [];
 
   constructor(private userService: UserService) {}
+
+  @ViewChild(JobPostFeedComponent) jobPostFeedComponent!: JobPostFeedComponent;
 
   ngOnInit(): void {
     this.userName = this.userService.userName;
@@ -32,5 +35,9 @@ export class ClientPageComponent implements OnInit {
         return;
       }
     });
+  }
+
+  onJobPosted() {
+    this.jobPostFeedComponent.fetchJobsByUser(this.jobPostFeedComponent.userID);
   }
 }

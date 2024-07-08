@@ -11,7 +11,7 @@
     </div>
     <div class="main-content">
         <div class="job-post-form-container">
-            <app-job-post-form></app-job-post-form>
+            <app-job-post-form (jobPosted)="onJobPosted()"></app-job-post-form>
             <div class="job-post-feed-container">
                 <app-job-post-feed
                 (selectJob)="handleJobSelection($event)">
