@@ -30,12 +30,12 @@ export class EditProfileComponent implements OnInit {
         phoneNumber: [''],
         skills: ['']
       });
-      
-      const userid = this.userService.userID;
+      this.userService.getSessionUserId();
+      const userid = this.userService.userID; 
       this.userService.getUserDetails(userid).subscribe((response) => {
         this.userDetails = response;
         this.profileImageUrl = this.getProfileImageUrl(
-          this.userDetails?.data?.profile_picture);
+        this.userDetails?.data?.profile_picture);
         this.setFormValues();
         this.editProfileForm.updateValueAndValidity();
       });

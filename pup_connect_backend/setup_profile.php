@@ -37,11 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $uploadOk = 0;
         }
 
-        if (file_exists($target_file)) {
-            echo json_encode(["error" => "Sorry, file already exists."]);
-            $uploadOk = 0;
-        }
-
         if ($_FILES["profilePicture"]["size"] > 5000000) {
             echo json_encode(["error" => "Sorry, your file is too large."]);
             $uploadOk = 0;

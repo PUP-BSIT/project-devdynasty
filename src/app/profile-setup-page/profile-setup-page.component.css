@@ -6,11 +6,11 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-  
+
 .profile-field {
     width: 100%;
 }
-  
+
 .button-container {
     text-align: center;
     margin-top: 20px;
@@ -18,7 +18,7 @@
 
 .button-container button {
     background-color: #fbc02d;
-}  
+}
 
 .form-title {
     font-size: 1.5em;
@@ -26,11 +26,11 @@
     text-align: center;
     margin: 20px 0;
 }
-  
+
 .file-upload {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .file-label {
@@ -47,5 +47,5 @@
 
 .file-name {
     margin-top: 10px;
+    text-align: center;
 }
-  

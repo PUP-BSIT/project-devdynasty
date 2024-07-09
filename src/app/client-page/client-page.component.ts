@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { JobPostFeedComponent } from './job-post-feed/job-post-feed.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-page',
@@ -13,11 +14,17 @@ export class ClientPageComponent implements OnInit {
   selectedJob: any = null;
   applicants: any[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   @ViewChild(JobPostFeedComponent) jobPostFeedComponent!: JobPostFeedComponent;
 
   ngOnInit(): void {
+    this.userService.getSessionUserId();
+    if (!this.userService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    this.userService.getSessionUserDetails();
     this.userName = this.userService.userName;
     this.userPhoto = 
       `https://pupconnect.online/pup_connect_backend/${this.userService.userPhoto}`;
@@ -38,6 +45,6 @@ export class ClientPageComponent implements OnInit {
   }
 
   onJobPosted() {
-    this.jobPostFeedComponent.fetchJobsByUser(this.jobPostFeedComponent.userID);
+    this.jobPostFeedComponent.fetchJobsByUser(this.userService.userID);
   }
 }

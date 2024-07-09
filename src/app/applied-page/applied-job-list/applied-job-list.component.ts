@@ -12,7 +12,6 @@ import { WithdrawConfirmMessageComponent } from '../withdraw-confirm-message/wit
 })
 export class AppliedJobListComponent implements OnInit, OnDestroy {
   jobs: any[] = [];
-  userID: number = this.userService.userID;
   filteredJobs: any[] = [];
   searchTermSubscription: Subscription = new Subscription();
   now = new Date();
@@ -30,7 +29,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchTermSubscription = this.userService.searchTerm$.subscribe(
       ({ term, jobType }) => {
-        this.userService.searchAppliedJobs(this.userID, term, jobType)
+        this.userService.searchAppliedJobs(this.userService.userID, term, jobType)
           .subscribe(data => {
             if (Array.isArray(data)) {
               this.jobs = this.mapJobData(data);
@@ -43,7 +42,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
           });
         }
     );
-    this.fetchAppliedJobs(this.userID);
+    this.fetchAppliedJobs(this.userService.userID);
   }
 
   fetchAppliedJobs(userID: number): void {
@@ -87,7 +86,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
   }
   
   withdrawJob(jobID: number): void {
-    this.userService.withdrawJob(this.userID, jobID).subscribe(
+    this.userService.withdrawJob(this.userService.userID, jobID).subscribe(
       response => {
         this._snackBar.open("Job withdrawn successfully", 'Close', {
           duration: 5000,

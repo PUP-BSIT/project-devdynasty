@@ -8,8 +8,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.css'
+  styleUrl: './login-form.component.css',
 })
+
 export class LoginFormComponent implements OnInit{
   loginForm!: FormGroup;
   showPassword = false;
@@ -66,6 +67,7 @@ export class LoginFormComponent implements OnInit{
         if (response.status === 'success') {
           this.userService.setLoginStatus(true);
           this.userService.userID = response.id;
+          this.userService.setSessionUserId(response.id);
           this._snackBar.open(response.message, 'Close', {
             duration: 5000,
           });

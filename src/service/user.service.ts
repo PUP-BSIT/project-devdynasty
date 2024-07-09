@@ -25,6 +25,7 @@ import { VerifyCodeApiResponse } from '../model/verify_code_api_response';
 export class UserService {
   private isLogin: boolean = false;
   userID!: number;
+  userDetails!: UserDetailsResponse;
   userName!: string | undefined;
   userPhoto!: string | undefined;
 
@@ -70,6 +71,30 @@ export class UserService {
 
   logout(): void {
     this.isLogin = false;
+    sessionStorage.clear();
+  }
+
+  setSessionUserId(userId: number): void {
+    sessionStorage.setItem("userid", userId.toString());
+  }
+
+  getSessionUserId(): void{
+    this.userID = Number(sessionStorage.getItem("userid"));
+    if(!isNaN(this.userID) && this.userID != 0){
+      this.setLoginStatus(true);
+    }else{
+      this.setLoginStatus(false);
+    }
+  }
+
+  setSessionUserDetails(userDetails: UserDetailsResponse): void{
+    sessionStorage.setItem("userDetails", JSON.stringify(userDetails));
+  }
+
+  getSessionUserDetails(): void{
+    this.userDetails = JSON.parse(sessionStorage.getItem("userDetails")!);
+    this.userName = this.userDetails.data?.name;
+    this.userPhoto = this.userDetails.data?.profile_picture;
   }
 
   getUserDetails(userid: number): Observable<UserDetailsResponse> {
@@ -98,14 +123,14 @@ export class UserService {
 
   searchJobs(term: string, jobType: string, userId: number): 
                         Observable<SearchJobsApiResponse> {
-    let url = `${this.apiUrl}/search_jobs.php?term=${term}`;
+    let url = `${this.apiUrl}/search_jobs.php?userId=${userId}`;
 
     if (jobType) {
       url += `&jobType=${jobType}`;
     }
 
-    if (userId) {
-      url += `&userId=${userId}`;
+    if (term) {
+      url += `&term=${term}`;
     }
 
     return this.http.get<any>(url);

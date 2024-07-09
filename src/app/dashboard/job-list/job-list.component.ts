@@ -35,7 +35,6 @@ export class JobListComponent implements OnInit, OnDestroy{
   fetchJobs(): void {
     this.userService.getJobs(this.userService.userID).subscribe(data => {
       this.jobs = data;
-      console.log(this.jobs);
     });
   }
 
