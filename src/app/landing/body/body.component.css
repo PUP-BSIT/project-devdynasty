@@ -1,58 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+  
+.page-container {
+    background-image: url('/assets/landing-page-bg.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 150px;
+    overflow: hidden;
+}
+  
 .background-container {
-    width: 60%;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    color: white; 
-    margin-top: 150px;
-    padding-left: 30px;
+    align-items: center;
+    flex-direction: column;
 }
 
-.content h1 {
-    font-size: 70px;
-    margin-bottom: 20px;
+.content {
+    color: white;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    background-color: transparent;
+    font-size: 1.5rem;
 }
 
-.content p {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.content a,
 .content span {
-    color: #ffc300;
-    font-weight: bold;
+    color: #ffc107;
 }
 
-.button-container {
-    display: flex;
-    gap: 10px;
-}
-
-.button-container button {
-    border: none;
-    padding: 10px 30px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 25px;
-}
-
-.button-container .login-button {
+.login-btn {
     background-color: white;
     color: black;
-    border: 2px solid white;
 }
 
-.button-container .login-button:hover {
-    background-color: #f0f0f0;
-}
-
-.button-container .signup-button {
+.button-container .signup-btn {
     background-color: #ffc107;
     color: white;
 }
 
-.button-container .signup-button:hover {
-    background-color: #e0a800;
+::ng-deep mat-card {
+    border: none !important;;
+    box-shadow: none !important;;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.button-container button {
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+.fade-in {
+    animation: professionalFadeIn 1.5s ease-in-out forwards;
+  }
+  
+@keyframes professionalFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
