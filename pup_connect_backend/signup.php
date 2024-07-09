@@ -22,79 +22,88 @@ function validate_input($data)
     return $data;
 }
 
-function is_email_registered($email)
+function is_email_registered_pending($email)
 {
     $conn = db_connect();
-    $sql = "SELECT userID FROM users WHERE email = ?";
-
-    if ($stmt = mysqli_prepare($conn, $sql)) {
-        mysqli_stmt_bind_param($stmt, "s", $param_email);
-        $param_email = $email;
-
-        if (mysqli_stmt_execute($stmt)) {
-            mysqli_stmt_store_result($stmt);
-
-            if (mysqli_stmt_num_rows($stmt) > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        mysqli_stmt_close($stmt);
-    }
-
+    $sql = "SELECT userID, token FROM users WHERE email = ? AND verified = 0";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $param_email);
+    $param_email = $email;
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
+    $result = mysqli_stmt_num_rows($stmt) > 0;
+    mysqli_stmt_close($stmt);
     db_close($conn);
-    return false;
+    return $result;
 }
 
-function register_user($name, $email, $password, $token)
+function resend_verification_email($email, $new_token)
+{
+    $conn = db_connect();
+    
+    // Update the token in the database
+    $sql_update_token = "UPDATE users SET token = ? WHERE email = ?";
+    $stmt_update_token = mysqli_prepare($conn, $sql_update_token);
+    mysqli_stmt_bind_param($stmt_update_token, "ss", $param_new_token, $param_email);
+    $param_new_token = $new_token;
+    $param_email = $email;
+    mysqli_stmt_execute($stmt_update_token);
+    mysqli_stmt_close($stmt_update_token);
+    db_close($conn);
+
+    // Send verification email with the updated token
+    try {
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'devdynasty5@gmail.com';
+        $mail->Password   = 'futstycgkntxuldm';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port       = 587;
+
+        $mail->setFrom('devdynasty5@gmail.com');
+        $mail->addAddress($email);
+        $mail->isHTML(true);
+        $mail->Subject = 'Email Verification';
+        $mail->Body    = "Please click the link below to verify your email address:<br>";
+        $mail->Body   .= "<a href='https://pupconnect.online/profile-setup/$new_token'>Set up your profile</a>";
+
+        if ($mail->send()) {
+            echo json_encode(["status" => "success", "message" => "Verification email resent to your email address."]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
+        }
+    } catch (Exception $e) {
+        echo json_encode(["status" => "error", "message" => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
+    }
+}
+
+function register_user($name, $email, $password, $new_token)
 {
     $conn = db_connect();
 
+    if (is_email_registered_pending($email)) {
+        resend_verification_email($email, $new_token);
+        return;
+    }
     $sql = "INSERT INTO users (name, email, password, token, verified) VALUES (?, ?, ?, ?, 0)";
+    $stmt = mysqli_prepare($conn, $sql);
 
-    if ($stmt = mysqli_prepare($conn, $sql)) {
+    if ($stmt) {
         mysqli_stmt_bind_param($stmt, "ssss", $param_name, $param_email, $param_password, $param_token);
-
         $param_name = $name;
         $param_email = $email;
         $param_password = $password;
-        $param_token = $token;
+        $param_token = $new_token;
 
-        $mail = new PHPMailer(true);
-        try {
-
-            $mail->SMTPDebug = 0;
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'devdynasty5@gmail.com';
-            $mail->Password   = 'futstycgkntxuldm';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port       = 587;
-
-
-            $mail->setFrom('devdynasty5@gmail.com');
-            $mail->addAddress($param_email);
-
-            $mail->isHTML(true);
-            $mail->Subject = 'Email Verification';
-            $mail->Body    = "Please click the link below to verify your email address:<br>";
-            $mail->Body   .= "<a href='https://pupconnect.online/profile-setup/$token'>Set up your profile</a>";
-
-            if ($mail->send()) {
-                if (mysqli_stmt_execute($stmt)) {
-                    echo json_encode(["status" => "success", "message" => "We've sent a verification to your email"]);
-                } else {
-                    echo json_encode(["status" => "error", "message" => "Something went wrong. Please try again later."]);
-                }
-            } else {
-                echo json_encode(["status" => "error", "message" => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
-            }
-        } catch (Exception $e) {
-            echo json_encode(["status" => "error", "message" => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"]);
+        if (mysqli_stmt_execute($stmt)) {
+            resend_verification_email($email, $new_token);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Something went wrong. Please try again later."]);
         }
+
         mysqli_stmt_close($stmt);
     } else {
         echo json_encode(["status" => "error", "message" => "Could not prepare statement."]);
@@ -105,8 +114,6 @@ function register_user($name, $email, $password, $token)
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input = json_decode(file_get_contents("php://input"), true);
-
-    $token = bin2hex(random_bytes(16));
 
     if (isset($input['name']) && isset($input['email']) && isset($input['password']) && isset($input['confirmPassword'])) {
         $name = validate_input($input['name']);
@@ -119,15 +126,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
-        if (is_email_registered($email)) {
-            echo json_encode(["status" => "error", "message" => "Email is already registered."]);
-            exit;
-        }
+        $new_token = bin2hex(random_bytes(16));
 
-        register_user($name, $email, $password, $token);
+        register_user($name, $email, $password, $new_token);
     } else {
         echo json_encode(["status" => "error", "message" => "Invalid input."]);
     }
 } else {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
 }
+?>
