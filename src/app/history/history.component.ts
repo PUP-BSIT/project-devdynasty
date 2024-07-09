@@ -8,19 +8,21 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent implements OnInit {
-  userName: string = '';
-  userPhoto: string = '';
+  userName: string | undefined;
+  userPhoto: string | undefined;
   withdrawnJobs: any[] = []; 
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    this.userService.getSessionUserId();
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
     } else {
-      this.userName = this.userService.userName || 'Default User';
+      this.userService.getSessionUserDetails();
+      this.userName = this.userService.userName;
       this.userPhoto = 
-        `http://localhost/pup_connect_backend/${this.userService.userPhoto}`;
+      `https://pupconnect.online/pup_connect_backend/${this.userService.userPhoto}`;
       
       this.userService.getWithdrawnJobs(this.userService.userID).subscribe(data => {
         this.withdrawnJobs = data;

@@ -9,20 +9,22 @@ import { UserDetailsResponse } from '../../model/user_details_api_response';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit {
-  userDetails?: UserDetailsResponse;
+  userDetails?: UserDetailsResponse; 
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    this.userService.getSessionUserId();
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
       return;
-    } 
+    }
+    
     const userid = this.userService.userID;
     this.userService.getUserDetails(userid).subscribe((response) => {
-      this.userDetails = response;
-      this.userService.userName = this.userDetails.data?.name;
-      this.userService.userPhoto = this.userDetails.data?.profile_picture;
+      this.userDetails = response; 
+      this.userService.userName = this.userDetails.data?.name; 
+      this.userService.userPhoto = this.userDetails.data?.profile_picture; 
     });
   }
 }

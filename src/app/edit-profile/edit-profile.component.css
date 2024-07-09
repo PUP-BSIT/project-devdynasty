@@ -6,11 +6,12 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-  
+
 .profile-field {
     width: 100%;
+    margin-bottom: 16px;
 }
-  
+
 .button-container {
     text-align: center;
     margin-top: 20px;
@@ -19,7 +20,7 @@
 .button-container button {
     background-color: #fbc02d;
     margin: 10px;
-}  
+}
 
 .form-title {
     font-size: 1.5em;
@@ -27,11 +28,11 @@
     text-align: center;
     margin: 20px 0;
 }
-  
+
 .file-upload {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .file-label {
@@ -48,17 +49,12 @@
 
 .file-name {
     margin-top: 10px;
+    text-align: center;
 }
 
-.change-profile-btn {
-    background-color: #b93f3e;
-    margin-bottom: 20px;
-}
-
-img {
-    width: 150px;
+.profile-image {
+    max-width: 150px;
     height: 150px;
     border-radius: 50%;
     border: 3px solid #fbc02d;
 }
-  

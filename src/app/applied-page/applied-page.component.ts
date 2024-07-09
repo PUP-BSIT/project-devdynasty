@@ -13,9 +13,11 @@ export class AppliedPageComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    this.userService.getSessionUserId();
     if (!this.userService.isLoggedIn()) {
       this.router.navigate(['/login']);
     }
+    this.userService.getSessionUserDetails();
     this.userName = this.userService.userName;
     this.userPhoto = 
       `https://pupconnect.online/pup_connect_backend/${this.userService.userPhoto}`;

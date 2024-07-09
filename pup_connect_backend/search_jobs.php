@@ -20,16 +20,22 @@ if (!$conn) {
     exit();
 }
 
-$query = "SELECT * FROM jobposts 
+$query = "SELECT * FROM jobposts
+          JOIN users ON jobposts.UserID = users.userID   
           WHERE (title LIKE ? OR Description LIKE ? OR Location LIKE ?)
-          AND UserID NOT IN (?)";
+          AND jobposts.UserID NOT IN (?)
+          AND JobID NOT IN (
+              SELECT JobID 
+              FROM applications 
+              WHERE applications.UserID = (?)
+          )";
 
 $searchTermPattern = "%{$searchTerm}%";
-$paramTypes = "ssis";
-$params = [$searchTermPattern, $searchTermPattern, $searchTermPattern, $userID];
+$paramTypes = "sssii";
+$params = [$searchTermPattern, $searchTermPattern, $searchTermPattern, $userID, $userID];
 
 if (!empty($jobType)) {
-    $query .= " AND JobType = ?";
+    $query .= " AND JobType LIKE ?";
     $paramTypes .= "s";
     $params[] = $jobType;
 }

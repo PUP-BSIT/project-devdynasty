@@ -5,11 +5,11 @@
   <div class="sidebar-content">
     <nav>
       <ul>
-        <li routerLink="/profile" class="profile">
+        <li routerLink="/profile" routerLinkActive="active" class="profile">
           <img src="assets/Job_Page/Profile_IO.png" alt="Profile Icon">
           <a><span>PROFILE</span></a>
         </li>
-        <li (click)="toggleDropdown();" class="find-job">
+        <li (click)="toggleDropdown()" class="find-job" [class.jobs-active]="isToggle">
           <img src="assets/Job_Page/Jobs_IO.png" alt="Jobs Icon">
           <span>FIND JOB</span>
           <img 
@@ -18,18 +18,18 @@
             alt="Dropdown Icon">
         </li>
         <div [class.active]="isToggle" class="dropdown-menu">
-          <li routerLink="/dashboard">
+          <li routerLink="/dashboard" routerLinkActive="active">
             <span>JOB FEED</span>
           </li>
-          <li routerLink="/applied">
+          <li routerLink="/applied" routerLinkActive="active">
             <span>APPLIED</span>
           </li>
         </div>
-        <li routerLink="/client-page" class="client">
+        <li routerLink="/client-page" routerLinkActive="active" class="client">
           <img src="assets/Job_Page/Client_IO.png" alt="Client Icon">
           <a><span>POST JOB</span></a>
         </li>
-        <li routerLink="/history" class="history">
+        <li routerLink="/history" routerLinkActive="active" class="history">
           <img src="assets/Job_Page/History_IO.png" alt="History Icon">
           <a><span>HISTORY</span></a>
         </li>

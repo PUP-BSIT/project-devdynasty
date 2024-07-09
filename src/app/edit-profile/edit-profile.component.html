@@ -1,52 +1,58 @@
 <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()" class="profile-form">
-    <div class="form-title">Complete your Information</div>
+  <div class="form-title">Complete your Information</div>
+  <mat-form-field class="profile-field" appearance="fill">
     <div class="file-upload">
-        <label for="file_input" class="file-label">
-          <mat-icon class="upload-icon">cloud_upload</mat-icon>
-          Upload Profile Picture
-        </label>
-        <input  
-          id="file_input"
-          type="file"
-          (change)="onFileSelected($event)" 
-          accept="image/*">
-          @if (selectedFile) {
-            <span>{{ selectedFile.name }}</span>
-          }
-          @else {
-            <img [src]="profileImageUrl" alt="Profile mo to">
-          }
-    </div>
-    <mat-form-field class="profile-field">
-      <textarea 
-        matInput 
-        formControlName="description" 
-        placeholder="Description"
-        [value]="userDetails?.data?.description">
-      </textarea>
-    </mat-form-field>
-    <mat-form-field class="profile-field">
-      <input matInput 
-        formControlName="location" 
-        placeholder="Location"
-        [value]="userDetails?.data?.location">
-    </mat-form-field>
-    <mat-form-field class="profile-field">
-      <input matInput 
-        formControlName="phoneNumber"
-        placeholder="Phone Number"
-        [value]="userDetails?.data?.phone_number">
-    </mat-form-field>
-    <mat-form-field class="profile-field">
+      <label for="file_input" class="file-label">
+        <mat-icon class="upload-icon">cloud_upload</mat-icon>
+        Upload Profile Picture
+      </label>
+      <input  
+        id="file_input"
+        type="file"
+        (change)="onFileSelected($event)" 
+        accept="image/*"
+        style="display: none;">
       <input 
         matInput 
-        formControlName="skills" 
-        placeholder="Skills (comma-separated)"
-        [value]="userDetails?.data?.skills">
-    </mat-form-field>
-    <div class="button-container">
-      <button mat-raised-button routerLink="/profile">Cancel</button>
-      <button mat-raised-button type="submit">Save</button>
+        [value]="selectedFile ? selectedFile.name : ''" 
+        placeholder="No file chosen" 
+        readonly 
+        class="file-name">
+      <mat-hint *ngIf="!selectedFile">
+        <img [src]="profileImageUrl" alt="Profile Image" class="profile-image">
+      </mat-hint>
     </div>
+  </mat-form-field>
+  <mat-form-field class="profile-field" appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea 
+      matInput 
+      formControlName="description">
+    </textarea>
+  </mat-form-field>
+  <mat-form-field class="profile-field" appearance="fill">
+    <mat-label>Location</mat-label>
+    <input 
+      matInput 
+      formControlName="location" 
+      [value]="userDetails?.data?.location">
+  </mat-form-field>
+  <mat-form-field class="profile-field" appearance="fill">
+    <mat-label>Phone Number</mat-label>
+    <input 
+      matInput 
+      formControlName="phoneNumber"
+      [value]="userDetails?.data?.phone_number">
+  </mat-form-field>
+  <mat-form-field class="profile-field" appearance="fill">
+    <mat-label>Skills (comma-separated)</mat-label>
+    <input 
+      matInput 
+      formControlName="skills" 
+      [value]="userDetails?.data?.skills">
+  </mat-form-field>
+  <div class="button-container">
+    <button mat-raised-button routerLink="/profile">Cancel</button>
+    <button mat-raised-button type="submit">Save</button>
+  </div>
 </form>
-  

@@ -13,7 +13,6 @@ export class JobPostFeedComponent implements OnInit {
   jobs: any = [];
   selectedJob: any = null;
   applicants: any = [];
-  userID: number = this.userService.userID;
   selectedJobId: number | null = null;
   selectedJobTitle: string = '';
 
@@ -23,7 +22,7 @@ export class JobPostFeedComponent implements OnInit {
     private _snackBar: MatSnackBar, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.fetchJobsByUser(this.userID);
+    this.fetchJobsByUser(this.userService.userID);
   }
 
   fetchJobsByUser(userID: number): void {
@@ -45,7 +44,7 @@ export class JobPostFeedComponent implements OnInit {
   updateJob(updatedJob: any): void {
     this.userService.updateJob(updatedJob.JobID, updatedJob).subscribe(
       () => {
-        this.fetchJobsByUser(this.userID);
+        this.fetchJobsByUser(this.userService.userID);
         this.closeEditModal();
         this._snackBar.open('Job updated successfully', 'Close', {
           duration: 5000,
@@ -77,7 +76,7 @@ export class JobPostFeedComponent implements OnInit {
       this._snackBar.open(response.message, 'Close', {
         duration: 5000,
       });
-      this.fetchJobsByUser(this.userID);
+      this.fetchJobsByUser(this.userService.userID);
     });
   }
 
