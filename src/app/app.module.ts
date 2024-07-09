@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from '../service/user.service';
@@ -95,7 +97,9 @@ import { WithdrawConfirmMessageComponent } from './applied-page/withdraw-confirm
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule,
+    MatCardModule
   ],
   providers: [ActiveLinkService, UserService, provideAnimationsAsync()],
   bootstrap: [AppComponent]

@@ -1,53 +1,52 @@
-<ng-template #home>
+@if (activeLink) {
+  <div class="page-container" [ngClass]="{'fade-in': true}">
+    @if (activeLink === 'home') {
     <div class="background-container">
-      <div class="content">
-        <h1>Seamless Service Exchange for PUP Students</h1>
+      <mat-card class="content">
+        <h1>Seamless Service Exchange for <span>PUP</span> Students</h1>
         <p>Connect with peers for academic support, practical help, and 
-            creative services. Empower yourself and your campus community.</p>
-        <div class="button-container">
-          <button routerLink="/login" class="login-button">Log In</button>
-          <button routerLink="/signup" class="signup-button">Sign Up</button>
-        </div>
-      </div>
-    </div>
-</ng-template>
-  
-<ng-template #contact>
-    <div class="background-container">
-      <div class="content">
-        <h1>Contact Us</h1>
-        <p>
-          We would love to hear from you! Whether you have questions, 
-          feedback, or need support, feel free to reach out to us.
-          For any inquiries, contact us and our team will get back to you as 
-          soon as possible. Thank you for connecting with PUPConnect!
+          creative services. Empower yourself and your campus community.
         </p>
-        <p>Email: <a href="mailto:devdynasty5@gmail.com">DevDynasty</a></p>
-      </div>
+        <div class="button-container">
+          <button mat-raised-button class="login-btn" routerLink="/login">
+            Log In
+          </button>
+          <button mat-raised-button class="signup-btn" routerLink="/signup">
+            Sign Up
+          </button>
+        </div>
+      </mat-card>
     </div>
-</ng-template>
-  
-<ng-template #about>
+    }
+    
+    @if (activeLink === 'contact') {
     <div class="background-container">
-      <div class="content">
+      <mat-card class="content">
+        <h1>Contact Us</h1>
+        <p>We would love to hear from you! Whether you have questions, 
+            feedback, or need support, feel free to reach out to us. 
+            For any inquiries, contact us and our team will get back to you as
+            soon as possible. Thank you for connecting with PUPConnect!</p>
+        <p>Email: <a href="mailto:devdynasty5@gmail.com">DevDynasty</a></p>
+      </mat-card>
+    </div>
+    }
+    
+    @if (activeLink === 'about') {
+    <div class="background-container" *ngIf="activeLink === 'about'">
+      <mat-card class="content">
         <h1>About Us</h1>
-        <p><span>PUPConnect</span> is an application tailored to bridge 
-          the gap between students seeking assistance and those offering 
-          their expertise. Whether you need academic support like tutoring in 
-          specialized subjects, practical help such as furniture moving, or
+        <p>
+          <span>PUPConnect</span> is an application tailored to bridge 
+          the gap between students seeking assistance and those offering their 
+          expertise. Whether you need academic support like tutoring in 
+          specialized subjects, practical help such as furniture moving, or 
           services like event photography, PUPConnect is your go-to platform.
         </p>
-      </div>
+      </mat-card>
     </div>
-</ng-template>
+    }
+  </div>
+}
 
-@if (activeLink === 'home') {
-  <ng-container [ngTemplateOutlet]="home"></ng-container> 
-}
-@if (activeLink === 'contact') {
-  <ng-container [ngTemplateOutlet]="contact"></ng-container>
-}
-@if (activeLink === 'about') {
-  <ng-container [ngTemplateOutlet]="about"></ng-container>
-}
   
