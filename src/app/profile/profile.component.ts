@@ -23,8 +23,7 @@ export class ProfileComponent implements OnInit {
     const userid = this.userService.userID;
     this.userService.getUserDetails(userid).subscribe((response) => {
       this.userDetails = response; 
-      this.userService.userName = this.userDetails.data?.name; 
-      this.userService.userPhoto = this.userDetails.data?.profile_picture; 
+      this.userService.setSessionUserDetails(response);
     });
   }
 }
