@@ -11,6 +11,8 @@ import { UserDetailsResponse } from '../../model/user_details_api_response';
 export class ProfileComponent implements OnInit {
   userDetails?: UserDetailsResponse; 
 
+  isSidebarOpened: boolean = false;
+
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -25,5 +27,9 @@ export class ProfileComponent implements OnInit {
       this.userDetails = response; 
       this.userService.setSessionUserDetails(response);
     });
+  }
+
+  toggleSidebar() {
+    this.isSidebarOpened = !this.isSidebarOpened;
   }
 }

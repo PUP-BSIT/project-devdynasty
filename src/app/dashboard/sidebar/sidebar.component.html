@@ -1,47 +1,40 @@
-<div class="sidebar">
-  <div class="logo">
-    <img src="assets/Job_Page/logo_for_jobpage.png" alt="PUPconnect Logo">
+<mat-toolbar class="logo">
+  <img src="assets/Job_Page/logo_for_jobpage.png" alt="PUPconnect Logo" 
+      class="logo-img">
+</mat-toolbar>
+<mat-nav-list>
+  <mat-list-item routerLink="/profile" routerLinkActive="active" 
+      class="profile">
+    <mat-icon matListIcon>person</mat-icon>
+    <span matLine>PROFILE</span>
+  </mat-list-item>
+  <mat-list-item (click)="toggleDropdown()" class="find-job" 
+    [class.jobs-active]="isToggle">
+    <mat-icon matListIcon>work</mat-icon>
+    <span matLine>FIND JOB</span>
+  </mat-list-item>
+  <div [class.active]="isToggle" class="dropdown-menu">
+    <mat-list-item routerLink="/dashboard" routerLinkActive="active">
+      <span matLine>JOB FEED</span>
+    </mat-list-item>
+    <mat-list-item routerLink="/applied" routerLinkActive="active">
+      <span matLine>APPLIED</span>
+    </mat-list-item>
   </div>
-  <div class="sidebar-content">
-    <nav>
-      <ul>
-        <li routerLink="/profile" routerLinkActive="active" class="profile">
-          <img src="assets/Job_Page/Profile_IO.png" alt="Profile Icon">
-          <a><span>PROFILE</span></a>
-        </li>
-        <li (click)="toggleDropdown()" class="find-job" [class.jobs-active]="isToggle">
-          <img src="assets/Job_Page/Jobs_IO.png" alt="Jobs Icon">
-          <span>FIND JOB</span>
-          <img 
-            src="assets/Job_Page/dropdown_icon.png"
-            class="dropdown-icon"
-            alt="Dropdown Icon">
-        </li>
-        <div [class.active]="isToggle" class="dropdown-menu">
-          <li routerLink="/dashboard" routerLinkActive="active">
-            <span>JOB FEED</span>
-          </li>
-          <li routerLink="/applied" routerLinkActive="active">
-            <span>APPLIED</span>
-          </li>
-        </div>
-        <li routerLink="/client-page" routerLinkActive="active" class="client">
-          <img src="assets/Job_Page/Client_IO.png" alt="Client Icon">
-          <a><span>POST JOB</span></a>
-        </li>
-        <li routerLink="/history" routerLinkActive="active" class="history">
-          <img src="assets/Job_Page/History_IO.png" alt="History Icon">
-          <a><span>HISTORY</span></a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <nav class="logout-nav">
-    <ul>
-      <li (click)="logout()" class="logout">
-        <img src="assets/Job_Page/Logout_IO.png" alt="Logout Icon">
-        <a><span>LOGOUT</span></a>
-      </li>
-    </ul>
-  </nav>
-</div>
+  <mat-list-item routerLink="/client-page" routerLinkActive="active" 
+    class="client">
+    <mat-icon matListIcon>post_add</mat-icon>
+    <span matLine>POST JOB</span>
+  </mat-list-item>
+  <mat-list-item routerLink="/history" routerLinkActive="active" 
+    class="history">
+    <mat-icon matListIcon>history</mat-icon>
+    <span matLine>HISTORY</span>
+  </mat-list-item>
+</mat-nav-list>
+<mat-nav-list class="logout-nav">
+  <mat-list-item (click)="logout()" class="logout">
+    <mat-icon matListIcon>exit_to_app</mat-icon>
+    <span matLine>LOGOUT</span>
+  </mat-list-item>
+</mat-nav-list>

@@ -1,27 +1,72 @@
-.profile-page {
-  display: flex;
+mat-sidenav-container {
   height: 100vh;
-  background: url('/assets/Job_Page/Background_JobPage.png') 
-  no-repeat center center / cover;
+  display: flex;
 }
 
-.sidebar-container {
-  width: 250px; 
-  position: fixed; 
-  height: 100%;
-  z-index: 1;
+mat-sidenav {
+  width: 300px;
+  background: url('/assets/Job_Page/Background_JobPage.png') no-repeat center
+                         center;
+  background-size: cover;
+  color: white;
 }
 
-.profile-content {
-  margin-left: 5;
-  margin-top: 25px;
-  flex: 1;
+mat-sidenav-content {
   display: flex;
   flex-direction: column;
-  align-items: center;  
+  padding: 20px;
+  transition: width 0.3s ease;
 }
 
-.profile-main {
-  width: 100%;
+mat-sidenav-content.full-width {
+  width: 100% !important;
+}
+
+mat-toolbar {
+  background-color: transparent;
+  color: black;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+  width: 100%;
+}
+
+.profile-header,
+.profile-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.full-width .profile-container,
+.full-width .profile-header,
+.full-width .profile-content {
+  max-width: 100%;
+}
+
+@media (max-width: 767.98px) {
+  mat-sidenav {
+    width: 250px;
+  }
+  mat-sidenav-content {
+    width: calc(100% - 250px);
+  }
+  mat-sidenav-content.full-width {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  mat-sidenav {
+    width: 200px;
+  }
+  mat-sidenav-content {
+    width: calc(100% - 200px);
+  }
+  mat-sidenav-content.full-width {
+    width: 100% !important;
+  }
 }

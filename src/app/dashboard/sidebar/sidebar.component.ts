@@ -8,9 +8,14 @@ import { Router } from '@angular/router';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+  isSidebarOpened = true;
   isToggle = false;
 
   constructor(private userService: UserService, private router: Router) {}
+
+  toggleSidebar() {
+    this.isSidebarOpened = !this.isSidebarOpened;
+  }
 
   toggleDropdown(): void {
     this.isToggle = !this.isToggle;

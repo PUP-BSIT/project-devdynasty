@@ -1,18 +1,19 @@
-<div class="head-profile">
-    <div class="background-image">
-      <img src="/assets/Cover.png" alt="Background">
-    </div>
-    <div class="profile-content">
-      <div class="profile-picture">
-        <img [src]="profileImageUrl" alt="Profile Picture">
+<div class="profile">
+  <div class="head-profile">
+      <div class="background-image">
+        <img src="/assets/Cover.png" alt="Background">
       </div>
-      <div class="profile-details">
-        <h1>{{ dataFromParent.data?.name }}</h1>
-        <p>{{ dataFromParent.data?.location }}</p>
+      <div class="profile-content">
+        <div class="profile-picture">
+          <img [src]="profileImageUrl" alt="Profile Picture">
+        </div>
+        <div class="profile-details">
+          <h1>{{ dataFromParent.data?.name }}</h1>
+          <p>{{ dataFromParent.data?.location }}</p>
+        </div>
+        <button mat-button routerLink="/edit-profile"
+        class="edit-profile-button">EDIT PROFILE</button>
       </div>
-      <button routerLink="/edit-profile" 
-        class="edit-profile-button">EDIT PROFILE
-      </button>
-    </div>
+  </div>
 </div>
   

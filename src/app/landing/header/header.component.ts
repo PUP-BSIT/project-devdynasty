@@ -7,9 +7,15 @@ import { ActiveLinkService } from '../../../service/active-link.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  menuActive: boolean = false;
+
   constructor(protected activeLinkService: ActiveLinkService) {}
 
   setActiveLink(link: string) {
     this.activeLinkService.setActiveLink(link);
   }
+
+  toggleMenu() {
+    this.menuActive = !this.menuActive;
+}
 }

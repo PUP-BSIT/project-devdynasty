@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
 }
-  
+
 .page-container {
     background-image: url('/assets/landing-page-bg.png');
     background-size: cover;
@@ -14,7 +14,7 @@ body {
     padding-top: 150px;
     overflow: hidden;
 }
-  
+
 .background-container {
     padding: 20px;
     display: flex;
@@ -47,8 +47,8 @@ body {
 }
 
 ::ng-deep mat-card {
-    border: none !important;;
-    box-shadow: none !important;;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .button-container {
@@ -62,8 +62,8 @@ body {
 
 .fade-in {
     animation: professionalFadeIn 1.5s ease-in-out forwards;
-  }
-  
+}
+
 @keyframes professionalFadeIn {
     0% {
         opacity: 0;
@@ -76,5 +76,56 @@ body {
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .page-container {
+        padding-top: 100px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .content {
+        font-size: 1.2rem;
+    }
+    
+    .button-container button {
+        font-size: 1rem;
+        margin: 10px 5px;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 992px) {
+    .page-container {
+        padding-top: 120px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    
+    .content {
+        font-size: 1.3rem;
+    }
+
+    .button-container button {
+        font-size: 1.1rem;
+        margin: 10px 5px;
+    }
+}
+
+@media (min-width: 992px) {
+    .page-container {
+        padding-top: 150px;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    
+    .content {
+        font-size: 1.5rem;
+    }
+    
+    .button-container button {
+        font-size: 1.2rem;
+        margin: 0 10px;
     }
 }
