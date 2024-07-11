@@ -3,19 +3,21 @@
         <img src="assets/LogoLanding.png" alt="Logo" class="logo">
     </a>
     <span class="spacer"></span>
-    <span class="nav-list">
-        <a mat-button [ngClass]="{
-        'active-link': (activeLinkService.activeLink$ | async) === 'about' 
-     }" 
-       (click)="setActiveLink('about')">
-            About Us
-        </a>
-        <a mat-button [ngClass]="{
-        'active-link': (activeLinkService.activeLink$ | async) === 'contact' 
-     }" 
-       (click)="setActiveLink('contact')">
-            Contact Us
-        </a>
-    </span>
+    <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+    <div class="sidebar" [ngClass]="{'active': menuActive}">
+        <span class="nav-list">
+            <a mat-button [ngClass]="{
+            'active-link': (activeLinkService.activeLink$ | async) === 'about' 
+        }" 
+        (click)="setActiveLink('about')">
+                About Us
+            </a>
+            <a mat-button [ngClass]="{
+            'active-link': (activeLinkService.activeLink$ | async) === 'contact' 
+        }" 
+        (click)="setActiveLink('contact')">
+                Contact Us
+            </a>
+        </span>
+    </div>
 </mat-toolbar>
-  

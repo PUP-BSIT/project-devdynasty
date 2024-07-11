@@ -1,4 +1,4 @@
-<div class="profile-page">
+<!-- <div class="profile-page">
     <div class="sidebar-container">
       <app-sidebar></app-sidebar>
     </div>
@@ -15,6 +15,26 @@
           }
         </div>
     </div>
-</div>
-  
-  
+</div> -->
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [(opened)]="isSidebarOpened">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content [ngClass]="{'full-width': !isSidebarOpened}">
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <app-profile-header></app-profile-header>
+    </mat-toolbar>
+    <div class="profile-container">
+      @if (userDetails) {
+        <app-head-profile [dataFromParent]="userDetails"></app-head-profile>
+      }
+      @if (userDetails) {
+        <app-description [dataFromParent]="userDetails" [ngClass]="{'full-width': !isSidebarOpened}"></app-description>
+      }
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

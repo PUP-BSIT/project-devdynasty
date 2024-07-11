@@ -7,6 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -97,6 +99,8 @@ import { WithdrawConfirmMessageComponent } from './applied-page/withdraw-confirm
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
+    MatSidenavModule,
+    MatListModule,
     MatDialogModule,
     MatToolbarModule,
     MatCardModule
