@@ -14,6 +14,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from '../service/user.service';
@@ -108,6 +111,9 @@ import { WithdrawConfirmMessageComponent } from './applied-page/withdraw-confirm
     MatCardModule,
     MatOptionModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatGridListModule
   ],
   providers: [ActiveLinkService, UserService, provideAnimationsAsync()],
   bootstrap: [AppComponent]

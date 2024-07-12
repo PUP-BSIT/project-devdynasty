@@ -1,26 +1,40 @@
-<div class="client-page-container">
-    <app-sidebar></app-sidebar>
-    <div class="client-header-container">
-        <app-header-dashboard>
-            <h1>POST JOB</h1>
-            <span welcome>Hi, {{ userName }}</span>
-            <img profile_picture 
-                [src]="userPhoto" 
-                alt="User Image">
-        </app-header-dashboard>
-    </div>
-    <div class="main-content">
-        <div class="job-post-form-container">
-            <app-job-post-form (jobPosted)="onJobPosted()"></app-job-post-form>
-            <div class="job-post-feed-container">
-                <app-job-post-feed
-                (selectJob)="handleJobSelection($event)">
-                </app-job-post-feed>>        
+<mat-sidenav-container>
+    <mat-sidenav #sidenav mode="side" [(opened)]="isSidebarOpened">
+        <app-sidebar></app-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content [ngClass]="{'full-width': !isSidebarOpened}">
+        <mat-toolbar color="primary">
+            <button mat-icon-button (click)="toggleSidebar()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <div class="header-container">
+                <h1>POST JOB</h1>
+                <div class="user-info">
+                    <span welcome>Hi, {{ userName }}!</span>
+                    <img profile_picture [src]="userPhoto" alt="User Image">
+                </div>
             </div>
-        </div> 
-        <app-applicants-sidebar
-            [applicants]="applicants"
-            [jobTitle]="selectedJob?.Title">
-        </app-applicants-sidebar>
-    </div>
-</div>
+        </mat-toolbar>
+        <div class="main-content">
+            <div class="job-post-form-container">
+                <button mat-raised-button color="accent" 
+                        (click)="openJobPostForm()">
+                    <mat-icon>add</mat-icon>
+                    Add Job Post
+                </button>
+            </div>
+            <div class="content-wrapper">
+                <div class="job-cards-wrapper">
+                    <app-job-post-feed (selectJob)="handleJobSelection($event)">
+                    </app-job-post-feed>
+                </div>
+                <div class="applicants-wrapper" *ngIf="selectedJob">
+                    <app-applicants-sidebar
+                        [applicants]="applicants"
+                        [jobTitle]="selectedJob?.Title">
+                    </app-applicants-sidebar>
+                </div>
+            </div>
+        </div>   
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,4 +1,4 @@
-<div class="job-post-form">
+<!-- <div class="job-post-form">
   <h2>ADD JOB POST FORM</h2>
   <form [formGroup]="jobPostForm" (ngSubmit)="onSubmit()">
     <div class="form-row">
@@ -90,6 +90,81 @@
     </div>
     <div class="form-row">
       <button type="submit" class="post-btn">POST NOW</button>
+    </div>
+  </form>
+</div> -->
+
+<div class="job-post-form">
+  <h2>ADD JOB POST FORM</h2>
+  <form [formGroup]="jobPostForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Job Type</mat-label>
+          <mat-select formControlName="JobType">
+            <mat-option value="" disabled>Select Job Type</mat-option>
+            <mat-option value="tutor">Tutor</mat-option>
+            <mat-option value="videography">Videography</mat-option>
+            <mat-option value="editing">Editing</mat-option>
+            <mat-option value="programming">Programming</mat-option>
+            <mat-option value="writing">Writing</mat-option>
+            <mat-option value="accounting">Accounting</mat-option>
+            <mat-option value="engineering">Engineering</mat-option>
+            <mat-option value="others">Others</mat-option>
+          </mat-select>
+          <mat-error *ngIf="jobType!.hasError('required')">Job type is required.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Job Title</mat-label>
+          <input matInput formControlName="Title">
+          <mat-error *ngIf="jobTitle!.hasError('required')">Job title is required.</mat-error>
+          <mat-error *ngIf="jobTitle!.hasError('maxlength')">Job title cannot exceed 100 characters.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Salary</mat-label>
+          <input matInput formControlName="Rate">
+          <mat-error *ngIf="rate!.hasError('required')">Salary is required.</mat-error>
+          <mat-error *ngIf="rate!.hasError('pattern')">Salary must be a number.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Job Description</mat-label>
+          <textarea matInput formControlName="Description" rows="4"></textarea>
+          <mat-error *ngIf="jobDescription!.hasError('required')">Job description is required.</mat-error>
+          <mat-error *ngIf="jobDescription!.hasError('maxlength')">Job description cannot exceed 500 characters.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>End Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="Date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="date!.hasError('required')">Date is required.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Location</mat-label>
+          <input matInput formControlName="Location">
+          <mat-error *ngIf="location!.hasError('required')">Location is required.</mat-error>
+          <mat-error *ngIf="location!.hasError('maxlength')">Location cannot exceed 100 characters.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-row">
+      <button mat-raised-button color="primary" type="submit" class="post-btn">POST NOW</button>
     </div>
   </form>
 </div>

@@ -1,4 +1,4 @@
-@for (job of jobs; track $index) {
+<!-- @for (job of jobs; track $index) {
 <div class="job-post">
   <h5>{{ job.Posted_Date | date: 'MMM d, y h:mma' }}</h5>
   <h3>{{ job.Title }}</h3>
@@ -11,14 +11,74 @@
   <button (click)="openEditModal(job)">Edit</button>
   <button (click)="confirmDeleteJob(job.JobID)">Delete</button>
 </div>
-}
+} -->
 
-@if (selectedJob) {
+<!-- @if (selectedJob) {
 <app-edit-job-modal
   [job]="selectedJob"
   (close)="closeEditModal()"
   (save)="updateJob($event)">
 </app-edit-job-modal>
+} -->
+
+<!-- <mat-grid-list cols="1" rowHeight="fit" gutterSize="10px" *ngIf="jobs.length > 0; else noJobs">
+  <mat-grid-tile *ngFor="let job of jobs" class="job-post">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ job.Title }}</mat-card-title>
+        <mat-card-subtitle>{{ job.Posted_Date | date: 'MMM d, y h:mma' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Description:</strong> {{ job.Description }}</p>
+        <p><strong>Location:</strong> {{ job.Location }}</p>
+        <p><strong>Job Type:</strong> {{ job.JobType }}</p>
+        <p><strong>Rate:</strong> {{ job.Rate }}</p>
+        <p><strong>End Date:</strong> {{ job.Date }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="viewApplicants(job)">View Applicants</button>
+        <button mat-button color="accent" (click)="openEditModal(job)">Edit</button>
+        <button mat-button color="warn" (click)="confirmDeleteJob(job.JobID)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<ng-template #noJobs>
+  <p>No job listings available.</p>
+</ng-template> -->
+
+<!-- <div *ngIf="!jobs.length" class="no-jobs-message">
+  <p>No jobs available. Click 'Add Job Post' to create one.</p>
+</div> -->
+
+<div class="job-list">
+  @for (job of jobs; track $index; ) {
+    <mat-card class="job-post">
+      <div class="color-indicator"></div>
+      <mat-card-header>
+        <mat-card-subtitle>{{ job.Posted_Date | date: 'MMM d, y h:mma' }}</mat-card-subtitle>
+        <mat-card-title>{{ job.Title }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Description:</strong> {{ job.Description }}</p>
+        <p><strong>Location:</strong> {{ job.Location }}</p>
+        <p><strong>Job Type:</strong> {{ job.JobType }}</p>
+        <p><strong>Salary:</strong> {{ job.Rate }}</p>
+        <p><strong>End Date:</strong> {{ job.Date }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="viewApplicants(job)">View Applicants</button>
+        <button mat-button (click)="openEditModal(job)">Edit</button>
+        <button mat-button (click)="confirmDeleteJob(job.JobID)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>
+
+@if (selectedJob) {
+  <app-edit-job-modal
+    [job]="selectedJob"
+    (close)="closeEditModal()"
+    (save)="updateJob($event)">
+  </app-edit-job-modal>
 }
-
-

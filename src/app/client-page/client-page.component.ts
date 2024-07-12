@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../../service/user.service';
+import { JobPostFormComponent } from './job-post-form/job-post-form.component';
 import { JobPostFeedComponent } from './job-post-feed/job-post-feed.component';
 import { Router } from '@angular/router';
 
@@ -14,7 +16,10 @@ export class ClientPageComponent implements OnInit {
   selectedJob: any = null;
   applicants: any[] = [];
 
-  constructor(private userService: UserService, private router: Router) {}
+  isSidebarOpened: boolean = false;
+
+  constructor(private userService: UserService, private router: Router,
+      private dialog: MatDialog) {}
 
   @ViewChild(JobPostFeedComponent) jobPostFeedComponent!: JobPostFeedComponent;
 
@@ -47,4 +52,18 @@ export class ClientPageComponent implements OnInit {
   onJobPosted() {
     this.jobPostFeedComponent.fetchJobsByUser(this.userService.userID);
   }
+
+  toggleSidebar() {
+    this.isSidebarOpened = !this.isSidebarOpened;
+  }
+
+  openJobPostForm(): void {
+    const dialogRef = this.dialog.open(JobPostFormComponent);
+
+    dialogRef.componentInstance.jobPosted.subscribe(() => {
+      this.onJobPosted();
+      dialogRef.close();
+    });
+  }
+  
 }

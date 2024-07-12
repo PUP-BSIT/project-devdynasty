@@ -1,90 +1,98 @@
 .applicants-sidebar {
     background-color: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 30px;
-    position: fixed; 
+    border-radius: 15px;
+    position: fixed;
     top: 170px;
-    right: 30px; 
-    padding: 15px 40px;
-    width: 400px; 
-    height: calc(85vh - 85px); 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    right: 30px;
+    padding: 15px 20px;
+    width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    overflow-y: auto; 
+    overflow-y: auto;
+    transition: right 0.3s ease;
 }
-  
+
 .applicants-sidebar h3 {
-    margin-top: 20px;
-    text-decoration: none;
-    font-size: 2.5cap;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.applicants-sidebar h4 {
+    font-size: 1.2em;
+    color: #a93226;
     margin-bottom: 15px;
 }
 
-.applicants-sidebar p {
-    margin-top: 19cap;
-    font-size: 3cap;
-    text-align: center;
-}
-
-.applicant-group {
-    margin-bottom: 20px;
-}
-
-.applicant-group h4 {
-    font-size: 1.5em;
-    color: #a93226;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-  
 .applicant {
-    margin-bottom: 10px;
-    border: none;
-    border-radius: 18px;
-    background-color: #e9ecef;
-    padding: 15px 30px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .applicant h5 {
-    font-size: 1.5em;
+    font-size: 1.2em;
     color: #333;
-    margin: 0;
     margin-bottom: 10px;
-}
-
-.applicant p {
-    font-size: 1.5em;
-    color: #666;
-    margin: 0;
-    margin-bottom: 20px;
 }
 
 .applicant a {
     padding: 10px 15px;
-    color: black;
-    background-color: #ffc300 ;
+    color: white;
+    background-color: #ffc300;
     text-decoration: none;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
+    margin-bottom: 10px;
     transition: background-color 0.3s ease;
+    font-size: 0.9em;
 }
 
-.applicant-photo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+.applicant a:hover {
+    background-color: #ffb700;
 }
 
 .applicant button {
-    margin-left: 10px;
     padding: 10px 15px;
     color: white;
     background-color: #007bff;
     text-decoration: none;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
+    font-size: 0.9em;
+    cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 1.5cap;
+}
+
+.applicant button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 1200px) {
+    .applicants-sidebar {
+        width: 300px;
+    }
+}
+
+@media (max-width: 992px) {
+    .applicants-sidebar {
+        width: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .applicants-sidebar {
+        width: 100%;
+        position: static;
+        margin-top: 20px;
+        padding: 15px;
+    }
 }
