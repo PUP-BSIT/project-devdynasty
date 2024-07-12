@@ -5,7 +5,8 @@ mat-sidenav-container {
 
 mat-sidenav {
     width: 300px;
-    background: url('/assets/Job_Page/Background_JobPage.png') no-repeat center center;
+    background: url('/assets/Job_Page/Background_JobPage.png') 
+            no-repeat center center;
     background-size: cover;
     color: white;
 }
