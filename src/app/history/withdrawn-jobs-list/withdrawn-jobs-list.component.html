@@ -12,13 +12,17 @@
               <mat-icon>location_on</mat-icon>
               <span>{{ job.Location }}</span>
             </div>
+            <div class="job-date-inline">
+              <mat-icon>event</mat-icon>
+              <span>{{ job.EndDate }}</span>
+            </div>
             <div class="job-rate-inline">
               <img src="assets/Job_Page/money_icon.png" alt="Salary Icon"
                    class="salary-icon">
               <span>{{ job.Rate }}</span>
             </div>
             <div class="job-action-inline">
-              <span>{{ job.WithdrawnDate }}</span>
+              <span>no longer accepts applicant</span>
             </div>
           </div>
         </mat-card-content>

@@ -42,6 +42,7 @@
 }
 
 .job-location-inline,
+.job-date-inline,
 .job-rate-inline,
 .job-action-inline {
     display: flex;
@@ -52,8 +53,11 @@
     flex: 1;
 }
 
-.job-rate-inline {
+.job-date-inline {
     flex: 1;
+}
+
+.job-rate-inline {
     text-align: center;
 }
 
@@ -61,6 +65,7 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    color: #ca2213;
 }
 
 .job-location-inline mat-icon,

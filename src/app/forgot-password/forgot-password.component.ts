@@ -1,37 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors,
-               ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.css'
+  styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm!: FormGroup;
   otpForm!: FormGroup;
+  newPasswordForm!: FormGroup;
+  userEmail = '';
 
   isButtonDisabled: boolean = false;
   isModalVisible: boolean = false;
+  isForgotPasswordForm = true;
+  isResetPasswordModalVisible = false;
   countdown: number = 0;
   readonly cooldownTime: number = 60;
   hasAttemptedToSend: boolean = false;
 
-  constructor(private fb: FormBuilder, private userService: UserService,
-                private _snackBar: MatSnackBar) {}
-  
+  hideNewPassword = true;
+  hideConfirmPassword = true;
+
+  constructor(private fb: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar, private router: Router) {}
+
   ngOnInit(): void {
+    this.initializeForms();
+  }
+
+  initializeForms(): void {
     this.forgotPasswordForm = this.fb.group({
-      email: [
-        '',
-        [
-          Validators.required, 
-          Validators.email, 
-          this.emailDomainValidator('@iskolarngbayan.pup.edu.ph')
-        ]
-      ]
+      email: ['', [Validators.required, Validators.email, this.emailDomainValidator('@iskolarngbayan.pup.edu.ph')]]
     });
 
     this.otpForm = this.fb.group({
@@ -42,6 +45,12 @@ export class ForgotPasswordComponent implements OnInit {
       otp5: ['', [Validators.required, Validators.maxLength(1)]],
       otp6: ['', [Validators.required, Validators.maxLength(1)]]
     });
+
+    this.newPasswordForm = this.fb.group({
+      email: [{ value: this.userEmail, disabled: false }, [Validators.required, Validators.email]], // Allow the email field to be included in form value
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validator: this.passwordMatchValidator });
   }
 
   emailDomainValidator(domain: string): ValidatorFn {
@@ -53,6 +62,10 @@ export class ForgotPasswordComponent implements OnInit {
       }
       return null;
     };
+  }
+
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('newPassword')?.value === form.get('confirmPassword')?.value ? null : { mismatch: true };
   }
 
   get email() {
@@ -121,7 +134,7 @@ export class ForgotPasswordComponent implements OnInit {
 
     const otp = Object.values(this.otpForm.value).join('');
     console.log(otp);
-    
+
     this.userService.verifyVerificationCode(otp).subscribe(response => {
       if (response.status === 'error') {
         this._snackBar.open(response.message, 'Close', {
@@ -130,10 +143,42 @@ export class ForgotPasswordComponent implements OnInit {
         this.otpForm.reset();
         return;
       }
-      this._snackBar.open(response.message, 'Close', {
+      this._snackBar.open('Successful', 'Close', {
         duration: 5000,
       });
+      this.userEmail = response.message;
+      this.initializeForms();
       this.otpForm.reset();
-    })
+      this.isResetPasswordModalVisible = true;
+      this.isForgotPasswordForm = false;
+      this.isModalVisible = false;
+    });
+  }
+
+  onChangePasswordSubmit(): void {
+    if (!this.newPasswordForm.valid) {
+      console.log(this.newPasswordForm.value);
+      return;
+    }
+
+    const newPassword = this.newPasswordForm.get('newPassword')?.value;
+    const email = this.newPasswordForm.get('email')?.value; // Ensure email is retrieved correctly
+
+    this.userService.changeUserPassword(email, newPassword).subscribe(response => {
+      if (response.status === 'error') {
+        this._snackBar.open(response.message, 'Close', {
+          duration: 5000,
+        });
+        console.log(this.newPasswordForm.value);
+        this.newPasswordForm.reset();
+        return;
+      }
+
+      this._snackBar.open('Password Changed Successfully', 'Close', {
+        duration: 5000,
+      });
+      this.newPasswordForm.reset();
+      this.router.navigate(['/login']);
+    });
   }
 }

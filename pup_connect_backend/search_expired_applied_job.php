@@ -15,8 +15,15 @@ if (isset($_GET['userID'])) {
     exit();
 }
 
-$sql = "
-    SELECT 
+$searchTerm = isset($_GET['term']) ? $_GET['term'] : '';
+$jobType = isset($_GET['jobType']) ? $_GET['jobType'] : '';
+
+date_default_timezone_set('Asia/Manila');
+$currentDate = date('Y-m-d H:i:s');
+
+$searchTermPattern = "%{$searchTerm}%";
+
+$sql = "SELECT 
         j.JobID, 
         j.Title, 
         j.Description, 
@@ -26,12 +33,22 @@ $sql = "
         j.Date AS end_date
     FROM jobposts j
     JOIN applications a ON j.JobID = a.JobID
-    WHERE a.UserID = ? AND j.Date < NOW()
-    ORDER BY j.Date DESC
-";
+    WHERE a.UserID = ? AND j.Date < NOW() AND (j.Title LIKE ? OR j.Description LIKE ? OR j.Location LIKE ?)";
+
+if (!empty($jobType)) {
+    $sql .= " AND j.JobType = ?";
+}
+
+$sql .= " ORDER BY j.Date DESC";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $userID);
+
+if (!empty($jobType)) {
+    $stmt->bind_param("issss", $userID, $searchTermPattern, $searchTermPattern, $searchTermPattern, $jobType);
+} else {
+    $stmt->bind_param("isss", $userID, $searchTermPattern, $searchTermPattern, $searchTermPattern);
+}
+
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -43,10 +60,10 @@ if ($result) {
 
         if (strtotime($row['end_date']) < time()) {
             $job['status'] = 'No longer accepts applicants';
-            $jobs[] = $job;
+            $withdrawn_jobs[] = $job;
         }
     }
-    echo json_encode($jobs);
+    echo json_encode($withdrawn_jobs);
 } else {
     echo json_encode(["error" => $conn->error]);
 }
