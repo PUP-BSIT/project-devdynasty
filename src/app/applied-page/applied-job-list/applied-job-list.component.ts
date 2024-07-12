@@ -37,8 +37,6 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
             } else {
               console.error('Expected an array of applied jobs but got:', data);
             }
-          }, error => {
-            console.error('Error fetching applied jobs:', error);
           });
         }
     );
@@ -54,8 +52,6 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
       } else {
         console.error('Expected an array of applied jobs but got:', data);
       }
-    }, error => {
-      console.error('Error fetching applied jobs:', error);
     });
   }
 
@@ -88,7 +84,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
   withdrawJob(jobID: number): void {
     this.userService.withdrawJob(this.userService.userID, jobID).subscribe(
       response => {
-        this._snackBar.open("Job withdrawn successfully", 'Close', {
+        this._snackBar.open("Application cancel successfully", 'Close', {
           duration: 5000,
         });
         this.jobs = this.jobs.filter(job => job.JobID !== jobID);

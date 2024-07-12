@@ -9,7 +9,7 @@
   
     <mat-form-field appearance="fill" class="filter-btn">
       <mat-label>All Job Types</mat-label>
-      <mat-select (change)="onFilterChange($event)">
+      <mat-select (selectionChange)="onFilterChange($event)">
         <mat-option value="">All Job Types</mat-option>
         <mat-option value="programming">Programming</mat-option>
         <mat-option value="accounting">Accounting</mat-option>

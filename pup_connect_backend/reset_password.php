@@ -54,22 +54,18 @@ function emailExists($email)
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
-    parse_str(file_get_contents("php://input"), $input);
-    $email = $input['email'];
+    $input = json_decode(file_get_contents("php://input"), true);
+    $email = trim($input['email']);
     $newPassword = $input['new_password'];
-
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        if (emailExists($email)) {
-            if (updatePassword($email, $newPassword)) {
-                echo json_encode(['status' => 'success', 'message' => 'Password has been updated successfully']);
-            } else {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to update the password']);
-            }
+    
+    if (emailExists($email)) {
+        if (updatePassword($email, $newPassword)) {
+            echo json_encode(['status' => 'success', 'message' => 'Password has been updated successfully']);
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Email address not found']);
+            echo json_encode(['status' => 'error', 'message' => 'Failed to update the password']);
         }
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Invalid email address']);
+        echo json_encode(['status' => 'error', 'message' => 'Email address not found']);
     }
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../../service/user.service';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-search-content',
@@ -17,9 +18,8 @@ export class SearchContentComponent{
     this.userService.setSearchTerm(searchTerm, this.selectedJobType);
   }
 
-  onFilterChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    this.selectedJobType = target.value;
-    this.userService.setSearchTerm('', this.selectedJobType);
+  onFilterChange(event: MatSelectChange): void {
+    this.selectedJobType = event.value;
+    this.userService.setSearchTerm('', this.selectedJobType);   
   }
 }

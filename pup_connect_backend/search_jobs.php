@@ -19,20 +19,24 @@ if (!$conn) {
     echo json_encode(array('message' => 'Database connection failed.'));
     exit();
 }
-
-$query = "SELECT * FROM jobposts
-          JOIN users ON jobposts.UserID = users.userID   
-          WHERE (title LIKE ? OR Description LIKE ? OR Location LIKE ?)
-          AND jobposts.UserID NOT IN (?)
-          AND JobID NOT IN (
-              SELECT JobID 
-              FROM applications 
-              WHERE applications.UserID = (?)
-          )";
+date_default_timezone_set('Asia/Manila');
+$currentDate = date('Y-m-d H:i:s');
 
 $searchTermPattern = "%{$searchTerm}%";
-$paramTypes = "sssii";
-$params = [$searchTermPattern, $searchTermPattern, $searchTermPattern, $userID, $userID];
+
+$query = "SELECT jobposts.*, users.name
+          FROM jobposts 
+          JOIN users ON jobposts.UserID = users.userID   
+          WHERE (jobposts.Title LIKE ? OR jobposts.Description LIKE ? OR jobposts.Location LIKE ?)
+          AND jobposts.UserID != ?
+          AND jobposts.JobID NOT IN (
+              SELECT JobID 
+              FROM applications 
+              WHERE UserID = ?
+          ) AND jobposts.Date >= ?";
+
+$paramTypes = "sssiss";
+$params = [$searchTermPattern, $searchTermPattern, $searchTermPattern, $userID, $userID, $currentDate];
 
 if (!empty($jobType)) {
     $query .= " AND JobType LIKE ?";
@@ -74,3 +78,4 @@ echo json_encode($jobs);
 
 $stmt->close();
 $conn->close();
+?>

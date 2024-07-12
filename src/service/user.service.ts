@@ -20,6 +20,7 @@ import { ApplicantsApiResponse } from '../model/applicants_by_jobs_api_response'
 import { WithdrawJobApiResponse } from '../model/withdraw_job_api_response';
 import { WithdrawnJobsApiResponse } from '../model/withdrawn_jobs_api_response';
 import { VerifyCodeApiResponse } from '../model/verify_code_api_response';
+import { ResetPasswordApi } from '../model/reset_password_api_response';
 
 @Injectable()
 export class UserService {
@@ -144,6 +145,14 @@ export class UserService {
     }
     return this.http.get<any>(url);
   }
+
+  searchExpiredAppliedJobs(userID: number, term: string, jobType: string): Observable<any[]> {
+    let url = `${this.apiUrl}/search_expired_applied_job.php?userID=${userID}&term=${term}`;
+    if (jobType) {
+      url += `&jobType=${jobType}`;
+    }
+    return this.http.get<any[]>(url);
+  }
   
   updateJob(jobID: number, jobData: any): Observable<UpdateJobApiResponse> {
     return this.http.put<UpdateJobApiResponse>(`${this.apiUrl}update_job.php?id=${jobID}`, jobData);
@@ -190,6 +199,12 @@ export class UserService {
   verifyVerificationCode(code: string): Observable<VerifyCodeApiResponse> {
     return this.http.post<VerifyCodeApiResponse>(
       `${this.apiUrl}/verify_code.php`, { code }
+    );
+  }
+
+  changeUserPassword(email: string, new_password: string): Observable<ResetPasswordApi> {
+    return this.http.patch<ResetPasswordApi>(
+      `${this.apiUrl}/reset_password.php`, { email, new_password }
     );
   }
 }

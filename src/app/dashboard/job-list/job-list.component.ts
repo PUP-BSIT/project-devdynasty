@@ -21,22 +21,23 @@ export class JobListComponent implements OnInit, OnDestroy{
     private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.fetchJobs();
-    this.searchTermSubscription = this.userService.searchTerm$.subscribe(
-      ({ term, jobType }) => {
-      this.userService.searchJobs(term, jobType, this.userService.userID)
-      .subscribe(data => {
-        this.jobs = data;
-      });
+    this.userId = this.userService.userID;
+    this.searchTermSubscription = this.userService.searchTerm$.subscribe(({ term, jobType }) => {
+      this.searchJobs(term, jobType);
     });
     this.fetchJobs();
   }
 
   fetchJobs(): void {
-    this.userService.getJobs(this.userService.userID).subscribe(data => {
+    this.userService.getJobs(this.userId).subscribe(data => {
+      this.jobs = data;
+    });
+  }
+
+  searchJobs(term: string, jobType: string): void {
+    this.userService.searchJobs(term, jobType, this.userId).subscribe(data => {
       this.jobs = data;
       console.log(this.jobs);
-      
     });
   }
 
