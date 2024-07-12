@@ -15,12 +15,15 @@ export class WithdrawnJobsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const userID = this.userService.userID;
-    this.searchTermSubscription = this.userService.searchTerm$.subscribe(({ term, jobType }) => {
-      this.userService.searchExpiredAppliedJobs(userID, term, jobType).subscribe(data => {
+    this.searchTermSubscription = this.userService.searchTerm$
+      .subscribe(({ term, jobType }) => {
+      this.userService.searchExpiredAppliedJobs(userID, term, jobType)
+        .subscribe(data => {
         this.withdrawnJobs = data.map(job => ({
           ...job,
           isExpired: job.status === 'No longer accepts applicants',
-          EndDate: job.status === 'No longer accepts applicants' ? job.end_date : null
+          EndDate: job.status === 'No longer accepts applicants' ? 
+            job.end_date : null
         }));
       });
     });
@@ -33,7 +36,8 @@ export class WithdrawnJobsListComponent implements OnInit, OnDestroy {
       this.withdrawnJobs = data.map(job => ({
         ...job,
         isExpired: job.status === 'No longer accepts applicants',
-        EndDate: job.status === 'No longer accepts applicants' ? job.end_date : null
+        EndDate: job.status === 'No longer accepts applicants' ? 
+          job.end_date : null
       }));
     });
   }
