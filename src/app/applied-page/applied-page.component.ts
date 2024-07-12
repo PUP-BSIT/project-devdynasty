@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class AppliedPageComponent implements OnInit {
   userName!: string | undefined;
   userPhoto!: string | undefined
+
+  isSidebarOpened: boolean = false;
+
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -22,4 +25,8 @@ export class AppliedPageComponent implements OnInit {
     this.userPhoto = 
       `https://pupconnect.online/pup_connect_backend/${this.userService.userPhoto}`;
   }
+
+  toggleSidebar() {
+    this.isSidebarOpened = !this.isSidebarOpened;
+  } 
 }

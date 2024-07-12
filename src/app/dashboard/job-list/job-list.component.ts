@@ -21,6 +21,7 @@ export class JobListComponent implements OnInit, OnDestroy{
     private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
+    this.fetchJobs();
     this.searchTermSubscription = this.userService.searchTerm$.subscribe(
       ({ term, jobType }) => {
       this.userService.searchJobs(term, jobType, this.userService.userID)
@@ -28,13 +29,14 @@ export class JobListComponent implements OnInit, OnDestroy{
         this.jobs = data;
       });
     });
-
     this.fetchJobs();
   }
 
   fetchJobs(): void {
     this.userService.getJobs(this.userService.userID).subscribe(data => {
       this.jobs = data;
+      console.log(this.jobs);
+      
     });
   }
 

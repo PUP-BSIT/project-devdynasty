@@ -64,7 +64,7 @@ export class AppliedJobListComponent implements OnInit, OnDestroy {
       title: job.Title,
       company: job.Description,
       location: job.Location,
-      salary: `$ ${job.Rate}`,
+      salary: `${job.Rate}`,
       date: job.Date,
       highlighted: false,
       icon: 'assets/Job_Page/globe_icon.png',
