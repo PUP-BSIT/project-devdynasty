@@ -67,10 +67,11 @@ mat-error {
 }
 
 .image-container {
-    width: 50%;
+    width: 60%;
     height: 100vh;
     background: url('/assets/login-half-bg.png') no-repeat center center;
     background-size: cover;
+    margin-left: 20px;
 }
 
 .image-container img {

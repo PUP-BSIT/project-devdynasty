@@ -14,6 +14,12 @@
 .job-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #bb3d31;
+    color: white; 
+}
+  
+.job-item:hover .job-info p {
+    color: white;
 }
 
 .job-info h2 {
@@ -65,7 +71,9 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    color: #ca2213;
+    color: #e3d000;
+    font-weight: bold;
+    font-size: 13px;
 }
 
 .job-location-inline mat-icon,
