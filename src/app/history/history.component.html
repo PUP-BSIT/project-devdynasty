@@ -1,14 +1,25 @@
-<div class="history-details-container">
-  <app-sidebar></app-sidebar>
-  <div class="history-header-container">
-    <app-header-dashboard>
-      <h1>HISTORY</h1>
-      <span welcome>Hi, {{ userName }}</span>
-      <img profile_picture [src]="userPhoto" alt="User Image">
-    </app-header-dashboard>
-    <div class="search-container">
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [(opened)]="isSidebarOpened">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content [ngClass]="{'full-width': !isSidebarOpened}">
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="toggleSidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="header-container">
+          <h1>HISTORY</h1>
+          <div class="user-info">
+            <span welcome>Hi, {{ userName }}!</span>
+            <img profile_picture [src]="userPhoto" alt="User Image">
+          </div>
+        </div>
+    </mat-toolbar>
+  <div class="search-container">
       <app-search-content></app-search-content>
-    </div>
-    <app-withdrawn-jobs-list></app-withdrawn-jobs-list>
+  </div>  
+  <div>
+      <app-withdrawn-jobs-list></app-withdrawn-jobs-list>
   </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

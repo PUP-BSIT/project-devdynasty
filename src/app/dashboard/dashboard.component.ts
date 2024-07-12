@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     this.userPhoto = 
       `https://pupconnect.online/pup_connect_backend/${this.userService.userPhoto}`;
   } 
+  
   toggleSidebar() {
     this.isSidebarOpened = !this.isSidebarOpened;
   } 

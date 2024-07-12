@@ -1,25 +1,31 @@
 <div class="history-content">
-    @if (withdrawnJobs.length > 0) {
-      @for (job of withdrawnJobs; track $index) {
-        <div class="job-item">
+  @if (withdrawnJobs.length) {
+    @for (job of withdrawnJobs; track job.id) {
+      <mat-card class="job-item" [ngClass]="{ highlighted: job.UserID }">
+        <mat-card-content>
           <div class="job-info">
-            <h2>{{ job.Title }}</h2>
-            <p>{{ job.Description }}</p>
+            <h2 mat-line>{{ job.Title }}</h2>
+            <p mat-line>{{ job.Description }}</p>
           </div>
-          <div class="job-location">
-            <img src="assets/Job_Page/globe_icon.png" alt="Location Icon">
-            <span>{{ job.Location }}</span>
+          <div class="job-details-inline">
+            <div class="job-location-inline">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ job.Location }}</span>
+            </div>
+            <div class="job-rate-inline">
+              <img src="assets/Job_Page/money_icon.png" alt="Salary Icon"
+                   class="salary-icon">
+              <span>{{ job.Rate }}</span>
+            </div>
+            <div class="job-action-inline">
+              <span>{{ job.WithdrawnDate }}</span>
+            </div>
           </div>
-          <div class="job-action">
-            <img src="assets/Job_Page/money_icon.png" 
-              alt="Salary Icon" class="salary-icon">
-            <span>{{ job.Rate }}</span>
-            <span>{{ job.WithdrawnDate }}</span>
-          </div>
-        </div>
-      }
-    } @else {
-      <p>No History Available</p>
+        </mat-card-content>
+      </mat-card>
     }
+  } @else {
+    <div class="results">No History Available</div>
+  }
 </div>
   

@@ -12,6 +12,8 @@ export class HistoryComponent implements OnInit {
   userPhoto: string | undefined;
   withdrawnJobs: any[] = []; 
 
+  isSidebarOpened: boolean = false;
+
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -29,4 +31,8 @@ export class HistoryComponent implements OnInit {
       });
     }
   }
+
+  toggleSidebar() {
+    this.isSidebarOpened = !this.isSidebarOpened;
+  } 
 }
