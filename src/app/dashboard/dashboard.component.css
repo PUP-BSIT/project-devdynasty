@@ -1,41 +1,117 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
-}
-
-.job-details-container {
+mat-sidenav-container {
     height: 100vh;
-    width: 100%;
-    background: url('/assets/Job_Page/Background_JobPage.png') 
-        no-repeat center center / cover;
     display: flex;
-}
-
-.sidebar {
+  }
+  
+  mat-sidenav {
     width: 300px;
-    min-width: 100px;
-}
-
-.content {
+    background: url('/assets/Job_Page/Background_JobPage.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+  }
+  
+  mat-sidenav-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: width 0.3s ease;
+  }
+  
+  mat-sidenav-content.full-width {
+    width: 100% !important;
+  }
+  
+  mat-toolbar {
+    background-color: transparent;
+    color: black;
+  }
+  
+  .header-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-grow: 1;
-    padding-top: 100px;
-    overflow-y: auto;
-}
-
-span {
-    margin-left: 10px;
-    margin-right: 40px;
-    font-size: 25px;
-    color: #ffffff;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-}
-
-img {
+    flex-wrap: wrap;
+  }
+  
+  .header-container h1 {
+    flex: 1;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+    min-width: 150px;
+  }
+  
+  .user-info {
+    display: flex;
+    padding: 5px 10px 5px 10px;
+    align-items: center;
+    background-color: #ffc324;
+    margin-top: 10px;
+  }
+  
+  .user-info span {
+    margin-right: 10px;
+    font-size: 1rem;
+  }
+  
+  .user-info img {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
-}
+  }
+  
+  @media (min-width: 768px) {
+    .user-info {
+      margin-left: 40px;
+      margin-top: 0;
+    }
+  
+    .user-info span {
+      font-size: 1.2rem;
+    }
+  
+    .user-info img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  
+  @media (max-width: 767.98px) {
+    .header-container {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-top: 3.5rem;
+    }
+  
+    .header-container h1 {
+      margin: 10px 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  
+    .user-info {
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 10px;
+      max-width: 320px;
+      z-index: 1;
+    }
+  
+    .user-info span {
+      font-size: 0.9rem;
+    }
+  
+    .user-info img {
+      width: 35px;
+      height: 35px;
+    }
+  
+    .search-container {
+      margin-top: 70px;
+    }
+  }
+  

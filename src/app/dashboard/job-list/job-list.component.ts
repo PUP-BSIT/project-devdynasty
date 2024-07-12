@@ -43,7 +43,7 @@ export class JobListComponent implements OnInit, OnDestroy{
       target.classList.add('clicked');
     }
     this.dialogRef = this.dialog.open(this.jobDialogTemplate, {
-      width: '400px',
+      width: '700px',
       height: '470px',
       data: { job }
     });
