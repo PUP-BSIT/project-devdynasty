@@ -1,20 +1,25 @@
 <div class="search-bar">
-    <div class="search-input">
-        <img src="assets/Job_Page/search_icon.png" alt="Search Icon">
-        <input 
-            type="text" 
-            class="search" 
-            placeholder="Search" (input)="onSearch($event)">
-    </div>
-    <select class="filter-btn" (change)="onFilterChange($event)">
-        <option value="">All Job Types</option>
-        <option value="programming">Programming</option>
-        <option value="accounting">Accounting</option>
-        <option value="tutor">Tutor</option>
-        <option value="videography">Videography</option>
-        <option value="editing">Editing</option>
-        <option value="writing">Writing</option>
-        <option value="engineering">Engineering</option>
-        <option value="others">Others</option>
-      </select>
+    <mat-form-field appearance="fill" class="search-input">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search" (input)="onSearch($event)">
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="filter-btn">
+      <mat-label>All Job Types</mat-label>
+      <mat-select (change)="onFilterChange($event)">
+        <mat-option value="">All Job Types</mat-option>
+        <mat-option value="programming">Programming</mat-option>
+        <mat-option value="accounting">Accounting</mat-option>
+        <mat-option value="tutor">Tutor</mat-option>
+        <mat-option value="videography">Videography</mat-option>
+        <mat-option value="editing">Editing</mat-option>
+        <mat-option value="writing">Writing</mat-option>
+        <mat-option value="engineering">Engineering</mat-option>
+        <mat-option value="others">Others</mat-option>
+      </mat-select>
+    </mat-form-field>
 </div>
+  

@@ -1,55 +1,75 @@
 <div class="job-list">
     @if (jobs.length) {
-        @for (job of jobs; track $index) {
-        <div class="job-item"
-            [ngClass]="{'highlighted': job.UserID}">
+      @for (job of jobs; track job.id) {
+        <mat-card class="job-item" [ngClass]="{ highlighted: job.UserID }">
+          <mat-card-content>
             <div class="job-info">
-                <h2>{{ job.Title }}</h2>
-                <p>{{ job.Description }}</p>
+              <h2 mat-line>{{ job.Title }}</h2>
+              <p mat-line>{{ job.Description }}</p>
             </div>
-            <div class="job-location">
-                <img src="assets/Job_Page/globe_icon.png" alt="Location Icon">
+            <div class="job-details-inline">
+              <div class="job-location-inline">
+                <mat-icon>location_on</mat-icon>
                 <span>{{ job.Location }}</span>
-            </div>
-            <div class="job-action">
-                <img src="assets/Job_Page/money_icon.png" alt="Salary Icon"
-                    class="salary-icon">
+              </div>
+              <div class="job-rate-inline">
+                <img src="assets/peso_icon.svg" alt="Peso Icon" 
+                    class="peso-icon">
                 <span>{{ job.Rate }}</span>
-                <button (click)="openJobPostDialog(job, $event.target)">
-                    APPLY NOW!
+              </div>
+              <div class="job-action-inline">
+                <button mat-raised-button class="apply-button" 
+                        (click)="openJobPostDialog(job, $event.target)">
+                  APPLY NOW!
                 </button>
+              </div>
             </div>
-        </div>
-        }    
-    }
-    @else {
-    <div class="results">No Jobs Available</div>
+          </mat-card-content>
+        </mat-card>
+      }
+    } @else {
+      <div class="results">No Jobs Available</div>
     }
 </div>
 
 <ng-template #jobDialogTemplate let-data>
-    <h2 mat-dialog-title>JOB DETAILS</h2>
-    <div mat-dialog-content>
-      <h3>Job ID</h3>
-      <p>{{ data.job.JobID }}</p>
-      <h3>Client</h3>
-      <p>{{ data.job.name }}</p>
-      <h3>Job Title</h3>
-      <p>{{ data.job.Title }}</p>
-      <h3>Job Type</h3>
-      <p>{{ data.job.JobType }}</p>
-      <h3>Description</h3>
-      <p>{{ data.job.Description }}</p>
-      <h3>Location</h3>
-      <p>{{ data.job.Location }}</p>
-      <h3>Rate</h3>
-      <p>{{ data.job.Rate }}</p>
+    <div class="job-dialog-header">
+      <h2 mat-dialog-title>JOB DETAILS</h2>
     </div>
-    <div mat-dialog-actions align="end">
+    <div class="job-dialog-content">
+      <div class="job-detail">
+        <h3>Client</h3>
+        <p>{{ data.job.name }}</p>
+      </div>
+      <div class="job-detail">
+        <h3>Job Title</h3>
+        <p>{{ data.job.Title }}</p>
+      </div>
+      <div class="job-detail">
+        <h3>Job Type</h3>
+        <p>{{ data.job.JobType }}</p>
+      </div>
+      <div class="job-detail">
+        <h3>Description</h3>
+        <p>{{ data.job.Description }}</p>
+      </div>
+      <div class="job-detail">
+        <h3>Location</h3>
+        <p>{{ data.job.Location }}</p>
+      </div>
+      <div class="job-detail">
+        <h3>Rate</h3>
+        <p>{{ data.job.Rate }}</p>
+      </div>
+    </div>
+    <div mat-dialog-actions align="end" class="job-dialog-actions">
       <button mat-button (click)="closeDialog()">Cancel</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial
-        (click)="onApplyClick(data.job.JobID)">
+      <button mat-raised-button class="confirm-button" 
+            [mat-dialog-close]="true" cdkFocusInitial 
+            (click)="onApplyClick(data.job.JobID)">
         Confirm
       </button>
     </div>
 </ng-template>
+  
+  

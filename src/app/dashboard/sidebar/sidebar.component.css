@@ -37,6 +37,7 @@ mat-list-item {
 mat-list-item span {
   color: white !important;
   font-weight: bold;
+  font-family: 'Poppins';
   font-size: 18px;
 }
 
