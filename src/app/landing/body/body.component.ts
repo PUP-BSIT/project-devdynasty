@@ -24,6 +24,6 @@ export class BodyComponent implements OnInit {
     this.renderer.addClass(container, 'fade-in');
     setTimeout(() => {
       this.renderer.removeClass(container, 'fade-in');
-    }, 1500); // Duration should match the animation duration
+    }, 1500);
   }
 }
