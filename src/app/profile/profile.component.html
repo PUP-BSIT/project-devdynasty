@@ -1,22 +1,3 @@
-<!-- <div class="profile-page">
-    <div class="sidebar-container">
-      <app-sidebar></app-sidebar>
-    </div>
-    <div class="profile-content">
-        <app-profile-header></app-profile-header>
-        <div class="profile-main">
-          @if (userDetails) {
-            <app-head-profile [dataFromParent]="userDetails">
-            </app-head-profile>
-          }
-          @if (userDetails) {
-            <app-description [dataFromParent]="userDetails">
-            </app-description>
-          }
-        </div>
-    </div>
-</div> -->
-
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" [(opened)]="isSidebarOpened">
     <app-sidebar></app-sidebar>
@@ -33,7 +14,8 @@
         <app-head-profile [dataFromParent]="userDetails"></app-head-profile>
       }
       @if (userDetails) {
-        <app-description [dataFromParent]="userDetails" [ngClass]="{'full-width': !isSidebarOpened}"></app-description>
+        <app-description [dataFromParent]="userDetails" 
+            [ngClass]="{'full-width': !isSidebarOpened}"></app-description>
       }
     </div>
   </mat-sidenav-content>

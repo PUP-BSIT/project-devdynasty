@@ -33,6 +33,9 @@ mat-card-header {
 
 .full-width {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .signup-card .signup-button {
@@ -40,8 +43,9 @@ mat-card-header {
     background-color: #fbc02d;
 }
 
-mat-error {
-    display: inline;
+.error-message-container {
+    display: flex;
+    flex-direction: column;
 }
 
 .login-link {
@@ -88,4 +92,3 @@ mat-error {
       display: none;
     }
 }
-  

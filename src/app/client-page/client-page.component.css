@@ -1,53 +1,196 @@
-.client-page-container {
+mat-sidenav-container {
     height: 100vh;
-    width: 100%;
-    background: url('/assets/Job_Page/Background_JobPage.png') 
-        no-repeat center center / cover;
-}
-
-.client-header-container {
-    margin-left: 300px;
-}
-
-.job-post-form-container {
-    margin-left: 460px;
-}
-
-.job-post-form-container {
-    width: 100%;
-    max-width: 900px;
-}
-
-.job-post-feed-container {
-    width: 100%;
-    max-width: 800px;
-    margin-top: 20px
-}
-
-app-job-post-form, app-job-post-feed {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-span {
-    margin-left: 10px;
-    margin-right: 40px;
-    font-size: 25px;
-    color: #ffffff;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-}
-
-img {
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-}
-
-.main-content {
     display: flex;
-    width: calc(50% - 200px);
+}
+
+mat-sidenav {
+    width: 300px;
+    background: url('/assets/Job_Page/Background_JobPage.png') no-repeat center center;
+    background-size: cover;
+    color: white;
+}
+
+mat-sidenav-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
-    box-sizing: border-box;
-    position: relative;
+    transition: width 0.3s ease;
+}
+
+mat-sidenav-content.full-width {
+    width: 100% !important;
+}
+
+mat-toolbar {
+    background-color: transparent;
+    color: black;
+}
+
+.header-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+.header-container h1 {
+    flex: 1;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 900;
+    min-width: 150px;
+}
+
+.user-info {
+    display: flex;
+    padding: 5px 10px 5px 10px;
+    align-items: center;
+    background-color: #ffc324;
+    margin-top: 10px;
+}
+
+.user-info span {
+    margin-right: 10px;
+    font-size: 1rem;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.job-post-form-container {
+    width: 100%;
+    margin: 20px;
+}
+
+.job-post-form-container button {
+    background-color: #ffc324;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.job-cards-wrapper {
+    width: calc(100% - 400px); /* Adjust width based on sidebar */
+    transition: width 0.3s ease;
+}
+
+.applicants-wrapper {
+    width: 400px;
+    transition: width 0.3s ease;
+}
+
+.applicants-sidebar {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.applicants-sidebar h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.applicants-sidebar h4 {
+    font-size: 1.2em;
+    color: #a93226;
+    margin-bottom: 15px;
+}
+
+.applicant {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.applicant h5 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.applicant a {
+    padding: 10px 15px;
+    color: white;
+    background-color: #ffc300;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+
+.applicant a:hover {
+    background-color: #ffb700;
+}
+
+.applicant button {
+    padding: 10px 15px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.applicant button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 1200px) {
+    .job-cards-wrapper {
+        width: calc(100% - 350px);
+    }
+
+    .applicants-wrapper {
+        width: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .job-cards-wrapper {
+        width: calc(100% - 300px);
+    }
+
+    .applicants-wrapper {
+        width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .job-cards-wrapper,
+    .applicants-wrapper {
+        width: 100%;
+    }
+
+    .applicants-sidebar {
+        margin-top: 20px;
+    }
 }

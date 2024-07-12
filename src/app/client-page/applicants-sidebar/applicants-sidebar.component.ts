@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges} from '@angular/core';
+import { Component, Input, OnChanges, Inject} from '@angular/core';
 
 @Component({
   selector: 'app-applicants-sidebar',
@@ -38,4 +38,5 @@ export class ApplicantsSidebarComponent implements OnChanges{
   closeProfileModal(): void {
     this.selectedApplicant = null;
   }
+
 }

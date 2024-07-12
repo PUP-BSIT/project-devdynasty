@@ -29,6 +29,8 @@ export class JobPostFeedComponent implements OnInit {
     this.userService.getJobsByUser(userID).subscribe(data => {
       if (Array.isArray(data)) {
         this.jobs = data;
+        console.log(this.jobs);
+        
       }
     });
   }
